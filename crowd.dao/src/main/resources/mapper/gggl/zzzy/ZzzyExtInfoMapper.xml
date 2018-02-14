@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.zzzy.ZzzyExtInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.zzzy.ZzzyExtInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="BCSM" property="bcsm" jdbcType="VARCHAR" />
+    <result column="GGDLFS" property="ggdlfs" jdbcType="VARCHAR" />
+    <result column="DLZSLJ" property="dlzslj" jdbcType="VARCHAR" />
+    <result column="SCTULJ" property="sctulj" jdbcType="VARCHAR" />
+    <result column="DSZY_ID" property="dszyId" jdbcType="VARCHAR" />
+    <result column="SFXZHY" property="sfxzhy" jdbcType="VARCHAR" />
+    <result column="HY" property="hy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, BCSM, GGDLFS, DLZSLJ, SCTULJ, DSZY_ID, SFXZHY, HY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_zzzy_ext
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_zzzy_ext
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.zzzy.ZzzyExtInfo" >
+    insert into t_advert_gggl_zzzy_ext (WID, BCSM, GGDLFS, 
+      DLZSLJ, SCTULJ, DSZY_ID, 
+      SFXZHY, HY)
+    values (#{wid,jdbcType=VARCHAR}, #{bcsm,jdbcType=VARCHAR}, #{ggdlfs,jdbcType=VARCHAR}, 
+      #{dlzslj,jdbcType=VARCHAR}, #{sctulj,jdbcType=VARCHAR}, #{dszyId,jdbcType=VARCHAR}, 
+      #{sfxzhy,jdbcType=VARCHAR}, #{hy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.zzzy.ZzzyExtInfo" >
+    insert into t_advert_gggl_zzzy_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="bcsm != null" >
+        BCSM,
+      </if>
+      <if test="ggdlfs != null" >
+        GGDLFS,
+      </if>
+      <if test="dlzslj != null" >
+        DLZSLJ,
+      </if>
+      <if test="sctulj != null" >
+        SCTULJ,
+      </if>
+      <if test="dszyId != null" >
+        DSZY_ID,
+      </if>
+      <if test="sfxzhy != null" >
+        SFXZHY,
+      </if>
+      <if test="hy != null" >
+        HY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsm != null" >
+        #{bcsm,jdbcType=VARCHAR},
+      </if>
+      <if test="ggdlfs != null" >
+        #{ggdlfs,jdbcType=VARCHAR},
+      </if>
+      <if test="dlzslj != null" >
+        #{dlzslj,jdbcType=VARCHAR},
+      </if>
+      <if test="sctulj != null" >
+        #{sctulj,jdbcType=VARCHAR},
+      </if>
+      <if test="dszyId != null" >
+        #{dszyId,jdbcType=VARCHAR},
+      </if>
+      <if test="sfxzhy != null" >
+        #{sfxzhy,jdbcType=VARCHAR},
+      </if>
+      <if test="hy != null" >
+        #{hy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.zzzy.ZzzyExtInfo" >
+    update t_advert_gggl_zzzy_ext
+    <set >
+      <if test="bcsm != null" >
+        BCSM = #{bcsm,jdbcType=VARCHAR},
+      </if>
+      <if test="ggdlfs != null" >
+        GGDLFS = #{ggdlfs,jdbcType=VARCHAR},
+      </if>
+      <if test="dlzslj != null" >
+        DLZSLJ = #{dlzslj,jdbcType=VARCHAR},
+      </if>
+      <if test="sctulj != null" >
+        SCTULJ = #{sctulj,jdbcType=VARCHAR},
+      </if>
+      <if test="dszyId != null" >
+        DSZY_ID = #{dszyId,jdbcType=VARCHAR},
+      </if>
+      <if test="sfxzhy != null" >
+        SFXZHY = #{sfxzhy,jdbcType=VARCHAR},
+      </if>
+      <if test="hy != null" >
+        HY = #{hy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.zzzy.ZzzyExtInfo" >
+    update t_advert_gggl_zzzy_ext
+    set BCSM = #{bcsm,jdbcType=VARCHAR},
+      GGDLFS = #{ggdlfs,jdbcType=VARCHAR},
+      DLZSLJ = #{dlzslj,jdbcType=VARCHAR},
+      SCTULJ = #{sctulj,jdbcType=VARCHAR},
+      DSZY_ID = #{dszyId,jdbcType=VARCHAR},
+      SFXZHY = #{sfxzhy,jdbcType=VARCHAR},
+      HY = #{hy,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,81 @@
+.main-wrap-down{
+    width: 100%;
+    background: #FFF;
+    overflow-x: hidden;
+    max-width: 1280px;
+    margin: 60px auto 0;
+}
+.floor{
+    width: 100%;
+    padding-top: 85px;
+    position: relative;
+    margin-left: 80px;
+}
+.floor img{
+    position: absolute;
+    top:85px;
+}
+.floor .main-content{
+    margin-bottom: 70px;
+    margin-left: 160px;
+}
+.floor .main-content h2{
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+.floor .main-content p{
+    color:#666;
+    width: 690px;
+    line-height: 24px;
+}
+.btn-group{
+    margin-top: 70px;
+}
+.btn-group button{
+    background: #f3cb13;
+    width: 130px;
+    height: 35px;
+    border-radius: 16px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 15px;
+    color: #333333;
+    font-weight: bold;
+}
+.footer-img{
+    width: 100%;
+    max-width: 1920px;
+    margin: 20px auto 0;
+    height: 258px;
+    background: url("../../images/train/jianpan.png") no-repeat;
+    background-size: 100% 100%;
+}
+/*ä¾§è¾¹å¯¼èˆªæ */
+#aside{
+    width: 140px;
+    height: 120px;
+    position: fixed;
+    right: 100px;
+    top:460px;
+    z-index: 3;
+    margin-right:2%;
+}
+#aside li{
+    height: 24px;
+    margin-right:-40px;
+    line-height: 24px;
+    cursor: pointer;
+    color: #333;
+    padding-left: 20px;
+    box-sizing: border-box;
+   
+}
+
+#aside li.active{
+    color: #000;
+    background: #e7e6eb;
+    border-left: 4px solid #1e293f;
+}

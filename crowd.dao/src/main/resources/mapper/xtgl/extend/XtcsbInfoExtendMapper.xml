@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.xtgl.extend.XtcsbInfoExtendMapper" >
+ <resultMap id="BaseResultMap" type="com.pope.advert.entity.xtgl.XtcsbInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="CSMC" property="csmc" jdbcType="VARCHAR" />
+    <result column="CSZ" property="csz" jdbcType="VARCHAR" />
+    <result column="CSSM" property="cssm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, CSMC, CSZ, CSSM
+  </sql>
+  
+  <resultMap id="BaseDisplayResultMap" type="com.pope.advert.entity.xtgl.extend.XtcsbInfoExtend"  
+  extends="BaseResultMap"></resultMap>
+  <sql id="sqlWhere">
+  		<if test='wid!=null and wid!=""'>
+  			AND t_advert_xtgl_xtcsb.WID=#{wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='csmc!=null and csmc!=""'>
+  			AND t_advert_xtgl_xtcsb.CSMC=#{csmc,jdbcType=VARCHAR}
+  		</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseDisplayResultMap" parameterType="com.pope.advert.entity.xtgl.extend.XtcsbInfoExtend">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		FROM t_advert_xtgl_xtcsb t_advert_xtgl_xtcsb 
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		order by wid
+  </select>
+  
+</mapper>

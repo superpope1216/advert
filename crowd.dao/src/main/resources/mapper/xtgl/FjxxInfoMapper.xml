@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.xtgl.FjxxInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.xtgl.FjxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="WJLJ" property="wjlj" jdbcType="VARCHAR" />
+    <result column="WJMC" property="wjmc" jdbcType="VARCHAR" />
+    <result column="WJXSMC" property="wjxsmc" jdbcType="VARCHAR" />
+    <result column="SCRID" property="scrid" jdbcType="VARCHAR" />
+    <result column="SCRXM" property="scrxm" jdbcType="VARCHAR" />
+    <result column="SCSJ" property="scsj" jdbcType="DATE" />
+    <result column="SCRIP" property="scrip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, WJLJ, WJMC, WJXSMC, SCRID, SCRXM, SCSJ, SCRIP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_xtgl_fjxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_xtgl_fjxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.xtgl.FjxxInfo" >
+    insert into t_advert_xtgl_fjxx (WID, WJLJ, WJMC, 
+      WJXSMC, SCRID, SCRXM, 
+      SCSJ, SCRIP)
+    values (#{wid,jdbcType=VARCHAR}, #{wjlj,jdbcType=VARCHAR}, #{wjmc,jdbcType=VARCHAR}, 
+      #{wjxsmc,jdbcType=VARCHAR}, #{scrid,jdbcType=VARCHAR}, #{scrxm,jdbcType=VARCHAR}, 
+      #{scsj,jdbcType=DATE}, #{scrip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.xtgl.FjxxInfo" >
+    insert into t_advert_xtgl_fjxx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="wjlj != null" >
+        WJLJ,
+      </if>
+      <if test="wjmc != null" >
+        WJMC,
+      </if>
+      <if test="wjxsmc != null" >
+        WJXSMC,
+      </if>
+      <if test="scrid != null" >
+        SCRID,
+      </if>
+      <if test="scrxm != null" >
+        SCRXM,
+      </if>
+      <if test="scsj != null" >
+        SCSJ,
+      </if>
+      <if test="scrip != null" >
+        SCRIP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="wjlj != null" >
+        #{wjlj,jdbcType=VARCHAR},
+      </if>
+      <if test="wjmc != null" >
+        #{wjmc,jdbcType=VARCHAR},
+      </if>
+      <if test="wjxsmc != null" >
+        #{wjxsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="scrid != null" >
+        #{scrid,jdbcType=VARCHAR},
+      </if>
+      <if test="scrxm != null" >
+        #{scrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="scsj != null" >
+        #{scsj,jdbcType=DATE},
+      </if>
+      <if test="scrip != null" >
+        #{scrip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.xtgl.FjxxInfo" >
+    update t_advert_xtgl_fjxx
+    <set >
+      <if test="wjlj != null" >
+        WJLJ = #{wjlj,jdbcType=VARCHAR},
+      </if>
+      <if test="wjmc != null" >
+        WJMC = #{wjmc,jdbcType=VARCHAR},
+      </if>
+      <if test="wjxsmc != null" >
+        WJXSMC = #{wjxsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="scrid != null" >
+        SCRID = #{scrid,jdbcType=VARCHAR},
+      </if>
+      <if test="scrxm != null" >
+        SCRXM = #{scrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="scsj != null" >
+        SCSJ = #{scsj,jdbcType=DATE},
+      </if>
+      <if test="scrip != null" >
+        SCRIP = #{scrip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.xtgl.FjxxInfo" >
+    update t_advert_xtgl_fjxx
+    set WJLJ = #{wjlj,jdbcType=VARCHAR},
+      WJMC = #{wjmc,jdbcType=VARCHAR},
+      WJXSMC = #{wjxsmc,jdbcType=VARCHAR},
+      SCRID = #{scrid,jdbcType=VARCHAR},
+      SCRXM = #{scrxm,jdbcType=VARCHAR},
+      SCSJ = #{scsj,jdbcType=DATE},
+      SCRIP = #{scrip,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

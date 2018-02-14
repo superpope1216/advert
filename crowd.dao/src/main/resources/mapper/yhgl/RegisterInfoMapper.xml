@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.yhgl.RegisterInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.yhgl.RegisterInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YHM" property="yhm" jdbcType="VARCHAR" />
+    <result column="MM" property="mm" jdbcType="VARCHAR" />
+    <result column="SJH" property="sjh" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="CZSJ" property="czsj" jdbcType="VARCHAR" />
+    <result column="CZIP" property="czip" jdbcType="VARCHAR" />
+    <result column="adminFlag" property="adminFlag" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YHM, MM, SJH, EMAIL, CZSJ, CZIP,admin_Flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_yhjbxx_register
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_yhjbxx_register
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.yhgl.RegisterInfo" >
+    insert into t_advert_yhjbxx_register (WID, YHM, MM, 
+      SJH, EMAIL, CZSJ, CZIP,admin_Flag
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{yhm,jdbcType=VARCHAR}, #{mm,jdbcType=VARCHAR}, 
+      #{sjh,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{czsj,jdbcType=VARCHAR}, #{czip,jdbcType=VARCHAR}
+      ,#{adminFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.yhgl.RegisterInfo" >
+    insert into t_advert_yhjbxx_register
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="yhm != null" >
+        YHM,
+      </if>
+      <if test="mm != null" >
+        MM,
+      </if>
+      <if test="sjh != null" >
+        SJH,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="czsj != null" >
+        CZSJ,
+      </if>
+      <if test="czip != null" >
+        CZIP,
+      </if>
+      <if test="adminFlag!=null">
+      	admin_Flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhm != null" >
+        #{yhm,jdbcType=VARCHAR},
+      </if>
+      <if test="mm != null" >
+        #{mm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjh != null" >
+        #{sjh,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="czsj != null" >
+        #{czsj,jdbcType=VARCHAR},
+      </if>
+      <if test="czip != null" >
+        #{czip,jdbcType=VARCHAR},
+      </if>
+      <if test="adminFlag!=null">
+      	#{adminFlag,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.yhgl.RegisterInfo" >
+    update t_advert_yhjbxx_register
+    <set >
+      <if test="yhm != null" >
+        YHM = #{yhm,jdbcType=VARCHAR},
+      </if>
+      <if test="mm != null" >
+        MM = #{mm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjh != null" >
+        SJH = #{sjh,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="czsj != null" >
+        CZSJ = #{czsj,jdbcType=VARCHAR},
+      </if>
+      <if test="czip != null" >
+        CZIP = #{czip,jdbcType=VARCHAR},
+      </if>
+      <if test="adminFlag!=null">
+      	admin_Flag=#{admin_Flag,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.yhgl.RegisterInfo" >
+    update t_advert_yhjbxx_register
+    set YHM = #{yhm,jdbcType=VARCHAR},
+      MM = #{mm,jdbcType=VARCHAR},
+      SJH = #{sjh,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      CZSJ = #{czsj,jdbcType=VARCHAR},
+      CZIP = #{czip,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

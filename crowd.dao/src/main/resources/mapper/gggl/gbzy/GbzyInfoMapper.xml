@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.gbzy.GbzyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.gbzy.GbzyInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="TV_ID" property="tvId" jdbcType="VARCHAR" />
+    <result column="ADVERT_TYPE" property="advertType" jdbcType="VARCHAR" />
+    <result column="SHZT" property="shzt" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+    <result column="CJIP" property="cjip" jdbcType="VARCHAR" />
+    <result column="REGISTER_ID" property="registerId" jdbcType="VARCHAR" />
+    <result column="DATASTATUS" property="datastatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, AREA, CITY, TV_ID, ADVERT_TYPE, SHZT, CJSJ, CJIP, REGISTER_ID, DATASTATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_gbzy
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_gbzy
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.gbzy.GbzyInfo" >
+    insert into t_advert_gggl_gbzy (WID, AREA, CITY, 
+      TV_ID, ADVERT_TYPE, SHZT, 
+      CJSJ, CJIP, REGISTER_ID, 
+      DATASTATUS)
+    values (#{wid,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{tvId,jdbcType=VARCHAR}, #{advertType,jdbcType=VARCHAR}, #{shzt,jdbcType=VARCHAR}, 
+      #{cjsj,jdbcType=VARCHAR}, #{cjip,jdbcType=VARCHAR}, #{registerId,jdbcType=VARCHAR}, 
+      #{datastatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.gbzy.GbzyInfo" >
+    insert into t_advert_gggl_gbzy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="tvId != null" >
+        TV_ID,
+      </if>
+      <if test="advertType != null" >
+        ADVERT_TYPE,
+      </if>
+      <if test="shzt != null" >
+        SHZT,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="cjip != null" >
+        CJIP,
+      </if>
+      <if test="registerId != null" >
+        REGISTER_ID,
+      </if>
+      <if test="datastatus != null" >
+        DATASTATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="tvId != null" >
+        #{tvId,jdbcType=VARCHAR},
+      </if>
+      <if test="advertType != null" >
+        #{advertType,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="registerId != null" >
+        #{registerId,jdbcType=VARCHAR},
+      </if>
+      <if test="datastatus != null" >
+        #{datastatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.gbzy.GbzyInfo" >
+    update t_advert_gggl_gbzy
+    <set >
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="tvId != null" >
+        TV_ID = #{tvId,jdbcType=VARCHAR},
+      </if>
+      <if test="advertType != null" >
+        ADVERT_TYPE = #{advertType,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        CJIP = #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="registerId != null" >
+        REGISTER_ID = #{registerId,jdbcType=VARCHAR},
+      </if>
+      <if test="datastatus != null" >
+        DATASTATUS = #{datastatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.gbzy.GbzyInfo" >
+    update t_advert_gggl_gbzy
+    set AREA = #{area,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      TV_ID = #{tvId,jdbcType=VARCHAR},
+      ADVERT_TYPE = #{advertType,jdbcType=VARCHAR},
+      SHZT = #{shzt,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=VARCHAR},
+      CJIP = #{cjip,jdbcType=VARCHAR},
+      REGISTER_ID = #{registerId,jdbcType=VARCHAR},
+      DATASTATUS = #{datastatus,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

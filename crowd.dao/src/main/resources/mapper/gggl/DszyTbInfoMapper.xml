@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.DszyTbInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.DszyTbInfo" >
+    <id column="wid" property="wid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="BHPD" property="bhpd" jdbcType="VARCHAR" />
+    <result column="BCSM_BM" property="bcsmBm" jdbcType="VARCHAR" />
+    <result column="BCSM_NUM" property="bcsmNum" jdbcType="INTEGER" />
+    <result column="FIVE_HAS" property="fiveHas" jdbcType="VARCHAR" />
+    <result column="FIVE_MONEY" property="fiveMoney" jdbcType="DECIMAL" />
+    <result column="SEVENT_HAS" property="seventHas" jdbcType="VARCHAR" />
+    <result column="SEVENT_MONEY" property="seventMoney" jdbcType="DECIMAL" />
+    <result column="TEN_HAS" property="tenHas" jdbcType="VARCHAR" />
+    <result column="TEN_MONEY" property="tenMoney" jdbcType="DECIMAL" />
+    <result column="Fifteen_has" property="fifteenHas" jdbcType="VARCHAR" />
+    <result column="Fifteen_money" property="fifteenMoney" jdbcType="DECIMAL" />
+    <result column="Twenty_has" property="twentyHas" jdbcType="VARCHAR" />
+    <result column="Twenty_money" property="twentyMoney" jdbcType="DECIMAL" />
+    <result column="Twenty_five_has" property="twentyFiveHas" jdbcType="VARCHAR" />
+    <result column="Twenty_five_money" property="twentyFiveMoney" jdbcType="DECIMAL" />
+    <result column="Thirty_has" property="thirtyHas" jdbcType="VARCHAR" />
+    <result column="Thirty_money" property="thirtyMoney" jdbcType="DECIMAL" />
+    <result column="Forty_five_has" property="fortyFiveHas" jdbcType="VARCHAR" />
+    <result column="Forty_five_money" property="fortyFiveMoney" jdbcType="DECIMAL" />
+    <result column="sixty_has" property="sixtyHas" jdbcType="VARCHAR" />
+    <result column="sixty_money" property="sixtyMoney" jdbcType="DECIMAL" />
+    <result column="DSZY_ID" property="dszyId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    wid, NAME, BHPD, BCSM_BM, BCSM_NUM, FIVE_HAS, FIVE_MONEY, SEVENT_HAS, SEVENT_MONEY, 
+    TEN_HAS, TEN_MONEY, Fifteen_has, Fifteen_money, Twenty_has, Twenty_money, Twenty_five_has, 
+    Twenty_five_money, Thirty_has, Thirty_money, Forty_five_has, Forty_five_money, sixty_has, 
+    sixty_money, DSZY_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_dszy_tb
+    where wid = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_dszy_tb
+    where wid = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.DszyTbInfo" >
+    insert into t_advert_gggl_dszy_tb (wid, NAME, BHPD, 
+      BCSM_BM, BCSM_NUM, FIVE_HAS, 
+      FIVE_MONEY, SEVENT_HAS, SEVENT_MONEY, 
+      TEN_HAS, TEN_MONEY, Fifteen_has, 
+      Fifteen_money, Twenty_has, Twenty_money, 
+      Twenty_five_has, Twenty_five_money, Thirty_has, 
+      Thirty_money, Forty_five_has, Forty_five_money, 
+      sixty_has, sixty_money, DSZY_ID)
+    values (#{wid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{bhpd,jdbcType=VARCHAR}, 
+      #{bcsmBm,jdbcType=VARCHAR}, #{bcsmNum,jdbcType=INTEGER}, #{fiveHas,jdbcType=VARCHAR}, 
+      #{fiveMoney,jdbcType=DECIMAL}, #{seventHas,jdbcType=VARCHAR}, #{seventMoney,jdbcType=DECIMAL}, 
+      #{tenHas,jdbcType=VARCHAR}, #{tenMoney,jdbcType=DECIMAL}, #{fifteenHas,jdbcType=VARCHAR}, 
+      #{fifteenMoney,jdbcType=DECIMAL}, #{twentyHas,jdbcType=VARCHAR}, #{twentyMoney,jdbcType=DECIMAL}, 
+      #{twentyFiveHas,jdbcType=VARCHAR}, #{twentyFiveMoney,jdbcType=DECIMAL}, #{thirtyHas,jdbcType=VARCHAR}, 
+      #{thirtyMoney,jdbcType=DECIMAL}, #{fortyFiveHas,jdbcType=VARCHAR}, #{fortyFiveMoney,jdbcType=DECIMAL}, 
+      #{sixtyHas,jdbcType=VARCHAR}, #{sixtyMoney,jdbcType=DECIMAL}, #{dszyId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.DszyTbInfo" >
+    insert into t_advert_gggl_dszy_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        wid,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="bhpd != null" >
+        BHPD,
+      </if>
+      <if test="bcsmBm != null" >
+        BCSM_BM,
+      </if>
+      <if test="bcsmNum != null" >
+        BCSM_NUM,
+      </if>
+      <if test="fiveHas != null" >
+        FIVE_HAS,
+      </if>
+      <if test="fiveMoney != null" >
+        FIVE_MONEY,
+      </if>
+      <if test="seventHas != null" >
+        SEVENT_HAS,
+      </if>
+      <if test="seventMoney != null" >
+        SEVENT_MONEY,
+      </if>
+      <if test="tenHas != null" >
+        TEN_HAS,
+      </if>
+      <if test="tenMoney != null" >
+        TEN_MONEY,
+      </if>
+      <if test="fifteenHas != null" >
+        Fifteen_has,
+      </if>
+      <if test="fifteenMoney != null" >
+        Fifteen_money,
+      </if>
+      <if test="twentyHas != null" >
+        Twenty_has,
+      </if>
+      <if test="twentyMoney != null" >
+        Twenty_money,
+      </if>
+      <if test="twentyFiveHas != null" >
+        Twenty_five_has,
+      </if>
+      <if test="twentyFiveMoney != null" >
+        Twenty_five_money,
+      </if>
+      <if test="thirtyHas != null" >
+        Thirty_has,
+      </if>
+      <if test="thirtyMoney != null" >
+        Thirty_money,
+      </if>
+      <if test="fortyFiveHas != null" >
+        Forty_five_has,
+      </if>
+      <if test="fortyFiveMoney != null" >
+        Forty_five_money,
+      </if>
+      <if test="sixtyHas != null" >
+        sixty_has,
+      </if>
+      <if test="sixtyMoney != null" >
+        sixty_money,
+      </if>
+       <if test="dszyId != null" >
+        DSZY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bhpd != null" >
+        #{bhpd,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsmBm != null" >
+        #{bcsmBm,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsmNum != null" >
+        #{bcsmNum,jdbcType=INTEGER},
+      </if>
+      <if test="fiveHas != null" >
+        #{fiveHas,jdbcType=VARCHAR},
+      </if>
+      <if test="fiveMoney != null" >
+        #{fiveMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="seventHas != null" >
+        #{seventHas,jdbcType=VARCHAR},
+      </if>
+      <if test="seventMoney != null" >
+        #{seventMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tenHas != null" >
+        #{tenHas,jdbcType=VARCHAR},
+      </if>
+      <if test="tenMoney != null" >
+        #{tenMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="fifteenHas != null" >
+        #{fifteenHas,jdbcType=VARCHAR},
+      </if>
+      <if test="fifteenMoney != null" >
+        #{fifteenMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="twentyHas != null" >
+        #{twentyHas,jdbcType=VARCHAR},
+      </if>
+      <if test="twentyMoney != null" >
+        #{twentyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="twentyFiveHas != null" >
+        #{twentyFiveHas,jdbcType=VARCHAR},
+      </if>
+      <if test="twentyFiveMoney != null" >
+        #{twentyFiveMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="thirtyHas != null" >
+        #{thirtyHas,jdbcType=VARCHAR},
+      </if>
+      <if test="thirtyMoney != null" >
+        #{thirtyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="fortyFiveHas != null" >
+        #{fortyFiveHas,jdbcType=VARCHAR},
+      </if>
+      <if test="fortyFiveMoney != null" >
+        #{fortyFiveMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="sixtyHas != null" >
+        #{sixtyHas,jdbcType=VARCHAR},
+      </if>
+      <if test="sixtyMoney != null" >
+        #{sixtyMoney,jdbcType=DECIMAL},
+      </if>
+        <if test="dszyId != null" >
+        #{dszyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.DszyTbInfo" >
+    update t_advert_gggl_dszy_tb
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bhpd != null" >
+        BHPD = #{bhpd,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsmBm != null" >
+        BCSM_BM = #{bcsmBm,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsmNum != null" >
+        BCSM_NUM = #{bcsmNum,jdbcType=INTEGER},
+      </if>
+      <if test="fiveHas != null" >
+        FIVE_HAS = #{fiveHas,jdbcType=VARCHAR},
+      </if>
+      <if test="fiveMoney != null" >
+        FIVE_MONEY = #{fiveMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="seventHas != null" >
+        SEVENT_HAS = #{seventHas,jdbcType=VARCHAR},
+      </if>
+      <if test="seventMoney != null" >
+        SEVENT_MONEY = #{seventMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tenHas != null" >
+        TEN_HAS = #{tenHas,jdbcType=VARCHAR},
+      </if>
+      <if test="tenMoney != null" >
+        TEN_MONEY = #{tenMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="fifteenHas != null" >
+        Fifteen_has = #{fifteenHas,jdbcType=VARCHAR},
+      </if>
+      <if test="fifteenMoney != null" >
+        Fifteen_money = #{fifteenMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="twentyHas != null" >
+        Twenty_has = #{twentyHas,jdbcType=VARCHAR},
+      </if>
+      <if test="twentyMoney != null" >
+        Twenty_money = #{twentyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="twentyFiveHas != null" >
+        Twenty_five_has = #{twentyFiveHas,jdbcType=VARCHAR},
+      </if>
+      <if test="twentyFiveMoney != null" >
+        Twenty_five_money = #{twentyFiveMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="thirtyHas != null" >
+        Thirty_has = #{thirtyHas,jdbcType=VARCHAR},
+      </if>
+      <if test="thirtyMoney != null" >
+        Thirty_money = #{thirtyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="fortyFiveHas != null" >
+        Forty_five_has = #{fortyFiveHas,jdbcType=VARCHAR},
+      </if>
+      <if test="fortyFiveMoney != null" >
+        Forty_five_money = #{fortyFiveMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="sixtyHas != null" >
+        sixty_has = #{sixtyHas,jdbcType=VARCHAR},
+      </if>
+      <if test="sixtyMoney != null" >
+        sixty_money = #{sixtyMoney,jdbcType=DECIMAL},
+      </if>
+        <if test="dszyId != null" >
+        DSZY_ID = #{dszyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wid = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.DszyTbInfo" >
+    update t_advert_gggl_dszy_tb
+    set NAME = #{name,jdbcType=VARCHAR},
+      BHPD = #{bhpd,jdbcType=VARCHAR},
+      BCSM_BM = #{bcsmBm,jdbcType=VARCHAR},
+      BCSM_NUM = #{bcsmNum,jdbcType=INTEGER},
+      FIVE_HAS = #{fiveHas,jdbcType=VARCHAR},
+      FIVE_MONEY = #{fiveMoney,jdbcType=DECIMAL},
+      SEVENT_HAS = #{seventHas,jdbcType=VARCHAR},
+      SEVENT_MONEY = #{seventMoney,jdbcType=DECIMAL},
+      TEN_HAS = #{tenHas,jdbcType=VARCHAR},
+      TEN_MONEY = #{tenMoney,jdbcType=DECIMAL},
+      Fifteen_has = #{fifteenHas,jdbcType=VARCHAR},
+      Fifteen_money = #{fifteenMoney,jdbcType=DECIMAL},
+      Twenty_has = #{twentyHas,jdbcType=VARCHAR},
+      Twenty_money = #{twentyMoney,jdbcType=DECIMAL},
+      Twenty_five_has = #{twentyFiveHas,jdbcType=VARCHAR},
+      Twenty_five_money = #{twentyFiveMoney,jdbcType=DECIMAL},
+      Thirty_has = #{thirtyHas,jdbcType=VARCHAR},
+      Thirty_money = #{thirtyMoney,jdbcType=DECIMAL},
+      Forty_five_has = #{fortyFiveHas,jdbcType=VARCHAR},
+      Forty_five_money = #{fortyFiveMoney,jdbcType=DECIMAL},
+      sixty_has = #{sixtyHas,jdbcType=VARCHAR},
+      sixty_money = #{sixtyMoney,jdbcType=DECIMAL},
+        DSZY_ID = #{dszyId,jdbcType=VARCHAR}
+    where wid = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

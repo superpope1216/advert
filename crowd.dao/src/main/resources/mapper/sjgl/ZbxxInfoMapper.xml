@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.sjgl.ZbxxInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.sjgl.ZbxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="KSSJ" property="kssj" jdbcType="VARCHAR" />
+    <result column="JSSJ" property="jssj" jdbcType="VARCHAR" />
+    <result column="IMGID" property="imgid" jdbcType="VARCHAR" />
+    <result column="ZTNR" property="ztnr" jdbcType="VARCHAR" />
+    <result column="MTFL" property="mtfl" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="XGSJ" property="xgsj" jdbcType="VARCHAR" />
+    <result column="SHZT" property="shzt" jdbcType="VARCHAR" />
+    <result column="SHSJ" property="shsj" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pope.advert.entity.sjgl.ZbxxInfo" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, TITLE, KSSJ, JSSJ, IMGID, ZTNR, MTFL, CJSJ, YHID, XGSJ, SHZT, SHSJ
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_advert_sjgl_zbxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_sjgl_zbxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.sjgl.ZbxxInfo" >
+    insert into t_advert_sjgl_zbxx (WID, TITLE, KSSJ, 
+      JSSJ, IMGID, ZTNR, 
+      MTFL, CJSJ, YHID, XGSJ, 
+      SHZT, SHSJ, CONTENT
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{kssj,jdbcType=VARCHAR}, 
+      #{jssj,jdbcType=VARCHAR}, #{imgid,jdbcType=VARCHAR}, #{ztnr,jdbcType=VARCHAR}, 
+      #{mtfl,jdbcType=VARCHAR}, #{cjsj,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, #{xgsj,jdbcType=VARCHAR}, 
+      #{shzt,jdbcType=VARCHAR}, #{shsj,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.sjgl.ZbxxInfo" >
+    insert into t_advert_sjgl_zbxx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="kssj != null" >
+        KSSJ,
+      </if>
+      <if test="jssj != null" >
+        JSSJ,
+      </if>
+      <if test="imgid != null" >
+        IMGID,
+      </if>
+      <if test="ztnr != null" >
+        ZTNR,
+      </if>
+      <if test="mtfl != null" >
+        MTFL,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="yhid != null" >
+        YHID,
+      </if>
+      <if test="xgsj != null" >
+        XGSJ,
+      </if>
+      <if test="shzt != null" >
+        SHZT,
+      </if>
+      <if test="shsj != null" >
+        SHSJ,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="kssj != null" >
+        #{kssj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssj != null" >
+        #{jssj,jdbcType=VARCHAR},
+      </if>
+      <if test="imgid != null" >
+        #{imgid,jdbcType=VARCHAR},
+      </if>
+      <if test="ztnr != null" >
+        #{ztnr,jdbcType=VARCHAR},
+      </if>
+      <if test="mtfl != null" >
+        #{mtfl,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null" >
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xgsj != null" >
+        #{xgsj,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="shsj != null" >
+        #{shsj,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.sjgl.ZbxxInfo" >
+    update t_advert_sjgl_zbxx
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="kssj != null" >
+        KSSJ = #{kssj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssj != null" >
+        JSSJ = #{jssj,jdbcType=VARCHAR},
+      </if>
+      <if test="imgid != null" >
+        IMGID = #{imgid,jdbcType=VARCHAR},
+      </if>
+      <if test="ztnr != null" >
+        ZTNR = #{ztnr,jdbcType=VARCHAR},
+      </if>
+      <if test="mtfl != null" >
+        MTFL = #{mtfl,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null" >
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="xgsj != null" >
+        XGSJ = #{xgsj,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="shsj != null" >
+        SHSJ = #{shsj,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pope.advert.entity.sjgl.ZbxxInfo" >
+    update t_advert_sjgl_zbxx
+    set TITLE = #{title,jdbcType=VARCHAR},
+      KSSJ = #{kssj,jdbcType=VARCHAR},
+      JSSJ = #{jssj,jdbcType=VARCHAR},
+      IMGID = #{imgid,jdbcType=VARCHAR},
+      ZTNR = #{ztnr,jdbcType=VARCHAR},
+      MTFL = #{mtfl,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=VARCHAR},
+      YHID = #{yhid,jdbcType=VARCHAR},
+      XGSJ = #{xgsj,jdbcType=VARCHAR},
+      SHZT = #{shzt,jdbcType=VARCHAR},
+      SHSJ = #{shsj,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.sjgl.ZbxxInfo" >
+    update t_advert_sjgl_zbxx
+    set TITLE = #{title,jdbcType=VARCHAR},
+      KSSJ = #{kssj,jdbcType=VARCHAR},
+      JSSJ = #{jssj,jdbcType=VARCHAR},
+      IMGID = #{imgid,jdbcType=VARCHAR},
+      ZTNR = #{ztnr,jdbcType=VARCHAR},
+      MTFL = #{mtfl,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=VARCHAR},
+      YHID = #{yhid,jdbcType=VARCHAR},
+      XGSJ = #{xgsj,jdbcType=VARCHAR},
+      SHZT = #{shzt,jdbcType=VARCHAR},
+      SHSJ = #{shsj,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.yhgl.extend.RegisterInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.yhgl.extend.RegisterInfoExtend"
+   extends="com.pope.advert.dao.yhgl.RegisterInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_yhjbxx_register.WID, t_advert_yhjbxx_register.YHM, 
+    t_advert_yhjbxx_register.MM, t_advert_yhjbxx_register.SJH, 
+    t_advert_yhjbxx_register.EMAIL, t_advert_yhjbxx_register.CZSJ, 
+    t_advert_yhjbxx_register.CZIP
+  </sql>
+  <sql id="sqlWhere">
+  	<if test="query!=null">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_yhjbxx_register.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.yhm!=null and query.yhm!=""'>
+  			AND t_advert_yhjbxx_register.YHM=#{query.yhm,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.mm!=null and query.mm!=""'>
+  			AND t_advert_yhjbxx_register.MM=#{query.mm,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.sjh!=null and query.sjh!=""'>
+  			AND t_advert_yhjbxx_register.SJH=#{query.sjh,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" parameterType="com.pope.advert.entity.dto.QueryCondition" 
+  resultMap="BaseResultMap">
+  	SELECT 
+  	<include refid="Base_Column_List"/>
+  	from t_advert_yhjbxx_register
+  	<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  </select>
+ 
+</mapper>

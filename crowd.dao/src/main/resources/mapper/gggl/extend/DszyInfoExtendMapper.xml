@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.extend.DszyInfoExtendMapper">
+	<resultMap id="BaseResultMap"
+		type="com.pope.advert.entity.gggl.extend.DszyInfoExtend" extends="com.pope.advert.dao.gggl.DszyInfoMapper.BaseResultMap">
+	</resultMap>
+	<sql id="Base_Column_List">
+		t_advert_gggl_dszy.WID, t_advert_gggl_dszy.AREA,
+		t_advert_gggl_dszy.CITY,
+		t_advert_gggl_dszy.TV_ID,
+		t_advert_gggl_dszy.ADVERT_TYPE,
+		t_advert_gggl_dszy.SHZT,
+		t_advert_gggl_dszy.CJSJ, t_advert_gggl_dszy.CJIP,
+		t_advert_gggl_dszy.REGISTER_ID
+	</sql>
+
+	<sql id="sqlFrom">
+		SELECT C.*,D.lbmc AS dst_display,E.lbmc as
+		ggxs_display,f.lbmc as
+		shzt_display,h.LBMC as gglx_display,t_advert_yhjbxx_company.name as
+		companyName,tArea.lbmc as area_display,tCity.lbmc as city_display
+		  FROM (
+		SELECT '2' as
+		gglx,a.datastatus,A.wid,A.tv_id,a.register_id,A.AREA,A.CITY,A.advert_type,A.shzt,A.cjsj,B.name,B.jg
+		as jg FROM
+		t_advert_gggl_dszy A,V_ADVERT_GGGL_DSZY_EXTEND B
+		WHERE
+		A.WID=B.DSZY_ID) C LEFT JOIN T_ADVERT_SJZD_DST D ON C.TV_ID=D.lbdm
+		left join T_ADVERT_SJZD_GGXS e on c.ADVERT_TYPE=e.lbdm
+		left join
+		t_advert_sjzd_shzt f on c.SHZT=f.lbdm
+		left join t_advert_sjzd_gglx h on
+		c.gglx=h.LBDM
+		LEFT JOIN T_ADVERT_SJZD_XZQH tArea ON C.AREA=tArea.LBDM
+		LEFT JOIN T_ADVERT_SJZD_XZQH tCity ON C.CITY=tCity.LBDM
+		left join t_advert_yhjbxx_company on
+		c.register_id=t_advert_yhjbxx_company.register_id
+	</sql>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test="query.dszyInfoExtend!=null">
+				<if test='query.dszyInfoExtend.area!=null and query.dszyInfoExtend.area!=""'>
+					 AND G.AREA=#{query.dszyInfoExtend.area,jdbcType=VARCHAR}
+				</if>
+				<if test='query.dszyInfoExtend.city!=null and query.dszyInfoExtend.city!=""'>
+					 AND G.city=#{query.dszyInfoExtend.city,jdbcType=VARCHAR}
+				</if>
+				<if test='query.dszyInfoExtend.tvId!=null and query.dszyInfoExtend.tvId!=""'>
+					 AND G.TV_ID=#{query.dszyInfoExtend.tvId,jdbcType=VARCHAR}
+				</if>
+				<if test='query.dszyInfoExtend.advertType!=null and query.dszyInfoExtend.advertType!=""'>
+					 AND G.ADVERT_TYPE=#{query.dszyInfoExtend.advertType,jdbcType=VARCHAR}
+				</if>
+			</if>
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		order by 
+		<choose>
+			<when test="orderBy!=null">
+				<foreach collection="orderBy" item="item" close=" " open=" " separator=",">
+					 $(item)
+				</foreach>
+			</when>
+			<otherwise>
+				g.cjsj desc
+			</otherwise>
+		</choose>
+	</sql>
+	<select id="selectDisplayByCondtion" resultType="map"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		SELECT * FROM (
+		<include refid="sqlFrom" />
+		) G
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		<include refid="sqlOrder"/>
+	</select>
+	<select id="selectDisplayViewByCondition" resultType="map">
+		SELECT * FROM (
+		<include refid="sqlFrom" />
+		) G
+		where g.datastatus='1'
+		<if test="condition!=null and condition!=''">
+			AND (g.name like concat('%',
+			#{condition,jdbcType=VARCHAR},'%')
+			or g.DST_DISPLAY like concat('%',
+			#{condition,jdbcType=VARCHAR},'%'))
+		</if>
+		<if test='registerId!=null and registerId!=""'>
+			AND G.REGISTER_ID=#{registerId,jdbcType=VARCHAR}
+		</if>
+		ORDER BY G.CJSJ DESC
+	</select>
+</mapper>

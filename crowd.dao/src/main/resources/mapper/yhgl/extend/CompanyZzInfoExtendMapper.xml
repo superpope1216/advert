@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.yhgl.extend.CompanyZzInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.yhgl.extend.CompanyZzInfoExtend" 
+  extends="com.pope.advert.dao.yhgl.CompanyZzInfoMapper.BaseResultMap">
+    <result column="zzlxDisplay" property="zzlxDisplay" jdbcType="VARCHAR" />
+    <result column="shztDisplay" property="shztDisplay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_yhgl_company_zz.WID, t_advert_yhgl_company_zz.ZZLX, 
+    t_advert_yhgl_company_zz.ZZLOG, t_advert_yhgl_company_zz.REGISTER_ID, 
+    t_advert_yhgl_company_zz.CJSJ, t_advert_yhgl_company_zz.CJIP, 
+    t_advert_yhgl_company_zz.UPDATE_TIME, t_advert_yhgl_company_zz.SHZT, 
+    t_advert_yhgl_company_zz.UPDATE_IP, t_advert_yhgl_company_zz.DATASTATUS
+  </sql>
+  <sql id="sqlWhere">
+  	<if test='query!=null'>
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_yhgl_company_zz.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.zzlx!=null and query.zzlx!=""'>
+  			AND t_advert_yhgl_company_zz.ZZLX=#{query.zzlx,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.registerId!=null and query.registerId!=""'>
+  			AND t_advert_yhgl_company_zz.REGISTER_ID=#{query.registerId,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.shzt!=null and query.shzt!=""'>
+  			AND t_advert_yhgl_company_zz.shzt=#{query.shzt,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <sql id="sqlOrder">
+  	order by 
+  	<choose>
+  		<when test="orderBy!=null">
+  			<foreach collection="orderBy" item="item" close=" " open=" " separator=",">
+  				${item}	
+  			</foreach>
+  		</when>
+  		<otherwise>
+  			t_advert_yhgl_company_zz.UPDATE_TIME desc
+  		</otherwise>
+  	</choose>
+  </sql>
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap" parameterType="com.pope.advert.entity.dto.QueryCondition" >
+    select 
+    <include refid="Base_Column_List" />
+    ,T_ADVERT_SJZD_COMPANY_ZZLX.lbmc as zzlxDisplay
+    ,T_ADVERT_SJZD_SHZT.lbmc as shztDisplay
+    from t_advert_yhgl_company_zz 
+    left join T_ADVERT_SJZD_COMPANY_ZZLX on T_ADVERT_SJZD_COMPANY_ZZLX.lbdm=t_advert_yhgl_company_zz.zzlx
+    left join T_ADVERT_SJZD_SHZT on T_ADVERT_SJZD_SHZT.lbdm=t_advert_yhgl_company_zz.shzt
+    <where>
+    	t_advert_yhgl_company_zz.datastatus='1'
+    	<include refid="sqlWhere"/>
+    </where>
+    <include refid="sqlOrder"/>
+  </select>
+  <update id="updateByCondition" parameterType="com.pope.advert.entity.yhgl.CompanyZzInfo">
+    update t_advert_yhgl_company_zz
+    <set >
+      <if test="zzlx != null" >
+        ZZLX = #{zzlx,jdbcType=VARCHAR},
+      </if>
+      <if test="zzlog != null" >
+        ZZLOG = #{zzlog,jdbcType=VARCHAR},
+      </if>
+      <if test="registerId != null" >
+        REGISTER_ID = #{registerId,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        CJIP = #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="updateIp != null" >
+        UPDATE_IP = #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="datastatus != null" >
+        DATASTATUS = #{datastatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR} AND REGISTER_ID=#{registerId,jdbcType=VARCHAR}
+  </update>
+</mapper>

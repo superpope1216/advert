@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+
+.crowd-col-center {
+	float: none !important;
+	display: block !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.breadcrumb {
+	padding: 8px 10px;
+	margin-bottom: 22px;
+	list-style: none;
+	background-color: transparent;
+	border-radius: 3px
+}
+
+.breadcrumb>li {
+	display: inline-block
+}
+
+.breadcrumb>li+li:before {
+	padding: 0 5px;
+	color: #62a8ea;
+	content: "/\00a0"
+}
+
+.breadcrumb>.active {
+	color: #76838f
+}
+
+.mytable .tag-default{
+	background: #fff !important;
+}
+
+.queryActive{
+	background:#4e97d9 !important;
+	padding:1px 10px !important;
+	color:#fff !important;
+}

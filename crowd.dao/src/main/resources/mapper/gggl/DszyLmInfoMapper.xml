@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.DszyLmInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.DszyLmInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PD_ID" property="pdId" jdbcType="VARCHAR" />
+    <result column="dllm" property="dllm" jdbcType="VARCHAR" />
+    <result column="QSC_ZK" property="qscZk" jdbcType="DECIMAL" />
+    <result column="FIVE_ZK" property="fiveZk" jdbcType="DECIMAL" />
+    <result column="TEN_ZK" property="tenZk" jdbcType="DECIMAL" />
+    <result column="FIVETEEN_ZK" property="fiveteenZk" jdbcType="DECIMAL" />
+    <result column="TWENTY_ZK" property="twentyZk" jdbcType="DECIMAL" />
+    <result column="THIRTY_ZK" property="thirtyZk" jdbcType="DECIMAL" />
+     <result column="DSZY_ID" property="dszyId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, NAME, PD_ID, QSC_ZK, FIVE_ZK, TEN_ZK, FIVETEEN_ZK, TWENTY_ZK, THIRTY_ZK, DSZY_ID,dllm
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_dszy_lm
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_dszy_lm
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.DszyLmInfo" >
+    insert into t_advert_gggl_dszy_lm (WID, NAME, PD_ID, 
+      QSC_ZK, FIVE_ZK, TEN_ZK, 
+      FIVETEEN_ZK, TWENTY_ZK, THIRTY_ZK, DSZY_ID,dllm
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{pdId,jdbcType=VARCHAR}, 
+      #{qscZk,jdbcType=DECIMAL}, #{fiveZk,jdbcType=DECIMAL}, #{tenZk,jdbcType=DECIMAL}, 
+      #{fiveteenZk,jdbcType=DECIMAL}, #{twentyZk,jdbcType=DECIMAL}, #{thirtyZk,jdbcType=DECIMAL}, #{dszyId,jdbcType=VARCHAR}
+      ,#{dllm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.DszyLmInfo" >
+    insert into t_advert_gggl_dszy_lm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="pdId != null" >
+        PD_ID,
+      </if>
+      <if test="qscZk != null" >
+        QSC_ZK,
+      </if>
+      <if test="fiveZk != null" >
+        FIVE_ZK,
+      </if>
+      <if test="tenZk != null" >
+        TEN_ZK,
+      </if>
+      <if test="fiveteenZk != null" >
+        FIVETEEN_ZK,
+      </if>
+      <if test="twentyZk != null" >
+        TWENTY_ZK,
+      </if>
+      <if test="thirtyZk != null" >
+        THIRTY_ZK,
+      </if>
+       <if test="dszyId != null" >
+        DSZY_ID,
+      </if>
+      <if test="dllm!=null">
+      	dllm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pdId != null" >
+        #{pdId,jdbcType=VARCHAR},
+      </if>
+      <if test="qscZk != null" >
+        #{qscZk,jdbcType=DECIMAL},
+      </if>
+      <if test="fiveZk != null" >
+        #{fiveZk,jdbcType=DECIMAL},
+      </if>
+      <if test="tenZk != null" >
+        #{tenZk,jdbcType=DECIMAL},
+      </if>
+      <if test="fiveteenZk != null" >
+        #{fiveteenZk,jdbcType=DECIMAL},
+      </if>
+      <if test="twentyZk != null" >
+        #{twentyZk,jdbcType=DECIMAL},
+      </if>
+      <if test="thirtyZk != null" >
+        #{thirtyZk,jdbcType=DECIMAL},
+      </if>
+       <if test="dszyId != null" >
+        #{dszyId,jdbcType=VARCHAR},
+      </if>
+      <if test="dllm!=null">
+      	#{dllm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.DszyLmInfo" >
+    update t_advert_gggl_dszy_lm
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pdId != null" >
+        PD_ID = #{pdId,jdbcType=VARCHAR},
+      </if>
+      <if test="qscZk != null" >
+        QSC_ZK = #{qscZk,jdbcType=DECIMAL},
+      </if>
+      <if test="fiveZk != null" >
+        FIVE_ZK = #{fiveZk,jdbcType=DECIMAL},
+      </if>
+      <if test="tenZk != null" >
+        TEN_ZK = #{tenZk,jdbcType=DECIMAL},
+      </if>
+      <if test="fiveteenZk != null" >
+        FIVETEEN_ZK = #{fiveteenZk,jdbcType=DECIMAL},
+      </if>
+      <if test="twentyZk != null" >
+        TWENTY_ZK = #{twentyZk,jdbcType=DECIMAL},
+      </if>
+      <if test="thirtyZk != null" >
+        THIRTY_ZK = #{thirtyZk,jdbcType=DECIMAL},
+      </if>
+       <if test="dszyId != null" >
+        DSZY_ID = #{dszyId,jdbcType=VARCHAR},
+      </if>
+      <if test="dllm!=null">
+      	dllm=#{dllm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.DszyLmInfo" >
+    update t_advert_gggl_dszy_lm
+    set NAME = #{name,jdbcType=VARCHAR},
+      PD_ID = #{pdId,jdbcType=VARCHAR},
+      QSC_ZK = #{qscZk,jdbcType=DECIMAL},
+      FIVE_ZK = #{fiveZk,jdbcType=DECIMAL},
+      TEN_ZK = #{tenZk,jdbcType=DECIMAL},
+      FIVETEEN_ZK = #{fiveteenZk,jdbcType=DECIMAL},
+      TWENTY_ZK = #{twentyZk,jdbcType=DECIMAL},
+      THIRTY_ZK = #{thirtyZk,jdbcType=DECIMAL},
+       DSZY_ID = #{dszyId,jdbcType=VARCHAR},
+       dllm=#{dllm,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

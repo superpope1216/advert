@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.bzzy.BzzyJyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.bzzy.BzzyJyInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="bzzy_Id" property="bzzyId" jdbcType="VARCHAR" />
+    <result column="DYJG" property="dyjg" jdbcType="DECIMAL" />
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, NAME, DYJG,bzzy_Id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_bzzy_jy
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_bzzy_jy
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.bzzy.BzzyJyInfo" >
+    insert into t_advert_gggl_bzzy_jy (WID, NAME, DYJG,bzzy_Id
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{dyjg,jdbcType=DECIMAL},#{bzzyId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.bzzy.BzzyJyInfo" >
+    insert into t_advert_gggl_bzzy_jy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="dyjg != null" >
+        DYJG,
+      </if>
+      <if test="bzzyId!=null">
+      	BZZY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dyjg != null" >
+        #{dyjg,jdbcType=DECIMAL},
+      </if>
+      <if test="bzzyId!=null">
+      	#{bzzyId,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.bzzy.BzzyJyInfo" >
+    update t_advert_gggl_bzzy_jy
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dyjg != null" >
+        DYJG = #{dyjg,jdbcType=DECIMAL},
+      </if>
+      <if test="bzzyId!=null">
+      	bzzy_Id=#{bzzyId,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.bzzy.BzzyJyInfo" >
+    update t_advert_gggl_bzzy_jy
+    set NAME = #{name,jdbcType=VARCHAR},
+      DYJG = #{dyjg,jdbcType=DECIMAL},
+      bzzy_Id=#{bzzyId,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

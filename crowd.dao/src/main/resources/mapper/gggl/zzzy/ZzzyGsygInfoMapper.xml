@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.zzzy.ZzzyGsygInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.zzzy.ZzzyGsygInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ZK" property="zk" jdbcType="DECIMAL" />
+    <result column="ZZZY_ID" property="zzzyId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, NAME, ZK, ZZZY_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_zzzy_gsyg
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_zzzy_gsyg
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.zzzy.ZzzyGsygInfo" >
+    insert into t_advert_gggl_zzzy_gsyg (WID, NAME, ZK, 
+      ZZZY_ID)
+    values (#{wid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{zk,jdbcType=DECIMAL}, 
+      #{zzzyId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.zzzy.ZzzyGsygInfo" >
+    insert into t_advert_gggl_zzzy_gsyg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="zk != null" >
+        ZK,
+      </if>
+      <if test="zzzyId != null" >
+        ZZZY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="zk != null" >
+        #{zk,jdbcType=DECIMAL},
+      </if>
+      <if test="zzzyId != null" >
+        #{zzzyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.zzzy.ZzzyGsygInfo" >
+    update t_advert_gggl_zzzy_gsyg
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="zk != null" >
+        ZK = #{zk,jdbcType=DECIMAL},
+      </if>
+      <if test="zzzyId != null" >
+        ZZZY_ID = #{zzzyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.zzzy.ZzzyGsygInfo" >
+    update t_advert_gggl_zzzy_gsyg
+    set NAME = #{name,jdbcType=VARCHAR},
+      ZK = #{zk,jdbcType=DECIMAL},
+      ZZZY_ID = #{zzzyId,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

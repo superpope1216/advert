@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.pope.advert.dao.dictionary.extend.DictionaryInfoExtendMapper">
+	<resultMap id="BaseResultMap"
+		type="com.pope.advert.entity.dictionary.DictionaryInfo">
+		<id column="WID" property="wid" jdbcType="VARCHAR" />
+		<result column="LBDM" property="lbdm" jdbcType="VARCHAR" />
+		<result column="LBMC" property="lbmc" jdbcType="VARCHAR" />
+		<result column="SFSY" property="sfsy" jdbcType="INTEGER" />
+		<result column="PX" property="px" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		WID, LBDM, LBMC, SFSY, PX
+	</sql>
+	<select id="selectAllByTable" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ${tableName}
+		order by PX ASC
+	</select>
+
+	<select id="selectBmByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dictionary.DictionaryInfo">
+		SELECT WID,BM AS LBDM,MC AS LBMC,SFSY,PX
+		FROM ${tableName}
+		where sfsy=1
+		<if test="dictionary!=null">
+			<if test='dictionary.wid!=null and dictionary.wid!=""'>
+				AND WID=#{dictionary.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='dictionary.bm!=null and dictionary.bm!=""'>
+				AND BM=#{dictionary.lbdm,jdbcType=VARCHAR}
+			</if>
+		</if>
+		order by px
+	</select>
+	<select id="selectFbxxByCondition" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT WID,FBBH AS LBDM,FBMC AS LBMC,'1' AS SFSY,'1' AS PX
+		FROM
+		T_CROWD_XMGL_FB
+		<where>
+			<if test='xmbh!=null and xmbh!=""'>
+				AND XMBH=#{xmbh,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by XMBH
+	</select>
+
+	<select id="selectByCondtion" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dictionary.DictionaryInfo">
+		select
+		<include refid="Base_Column_List" />
+		from ${tableName}
+		where sfsy=1
+		<if test="dictionary!=null">
+
+			<if test='dictionary.wid!=null and dictionary.wid!=""'>
+				and WID =#{dictionary.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='dictionary.lbdm!=null and dictionary.lbdm!=""'>
+				and LBDM =#{dictionary.lbdm,jdbcType=VARCHAR}
+			</if>
+
+		</if>
+
+		order by PX ASC
+	</select>
+	
+	<select id="selectRwxsByBm" parameterType="java.lang.String" resultType="map">
+		SELECT * FROM t_Crowd_Sjzd_Rwxs WHERE LBDM=#{bm,jdbcType=VARCHAR} and sfsy=1
+	</select>
+	
+	<select id="selectAreaByClassify" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_sjzd_xzqh
+		where cc=#{classifyId,jdbcType=VARCHAR}
+		and sfsy=1
+		order by px
+	</select>
+	
+	<select id="selectAreaByParent" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_sjzd_xzqh
+		where ls=#{parentBm,jdbcType=VARCHAR}
+		and sfsy=1
+		order by px
+	</select>
+	<select id="selectDst" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_sjzd_dst
+		where area_id=#{areaBm,jdbcType=VARCHAR}
+		and sfsy=1
+		order by px 
+	</select>
+	<select id="selectSdpdByDst" parameterType="java.lang.String" resultMap="BaseResultMap">
+		
+		select
+		<include refid="Base_Column_List" />
+		from t_crowd_sjzd_sdpd
+		where dst_bm=#{dstBm,jdbcType=VARCHAR}
+		and sfsy=1
+		order by px 
+	</select>
+	<select id="selectDllmByPdbm"  parameterType="java.lang.String" resultMap="BaseResultMap">
+		
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_sjzd_dllm
+		where pdId=#{pdId,jdbcType=VARCHAR}
+		and sfsy=1
+		order by px 
+	</select>
+	<select id="selectGbdstByAreabm" parameterType="java.lang.String" resultMap="BaseResultMap">
+		
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_sjzd_gbdst
+		where area_bm=#{areaBm,jdbcType=VARCHAR}
+		and sfsy=1
+		order by px 
+	</select>
+	
+	<select id="selectGbdstpdByGbdstBm" parameterType="java.lang.String" resultMap="BaseResultMap">
+		
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_sjzd_gbdstpd
+		where gbdst_BM=#{gbdstBm,jdbcType=VARCHAR}
+		and sfsy=1
+		order by px 
+	</select>
+	
+	
+	<select id="selectByAreaBm" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ${tableName}
+		where area_Bm=#{areaBm,jdbcType=VARCHAR}
+		order by PX ASC
+	</select>
+</mapper>

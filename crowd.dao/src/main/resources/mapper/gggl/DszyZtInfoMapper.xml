@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.DszyZtInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.DszyZtInfo" >
+    <id column="wid" property="wid" jdbcType="VARCHAR" />
+     <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="ztpd_bm" property="ztpdBm" jdbcType="VARCHAR" />
+    <result column="sjd_bm" property="sjdBm" jdbcType="VARCHAR" />
+    <result column="bcsc" property="bcsc" jdbcType="DECIMAL" />
+    <result column="ggjg" property="ggjg" jdbcType="DECIMAL" />
+    <result column="DSZY_ID" property="dszyId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    wid, name,ztpd_bm, sjd_bm, bcsc, ggjg, DSZY_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_dszy_zt
+    where wid = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_dszy_zt
+    where wid = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.DszyZtInfo" >
+    insert into t_advert_gggl_dszy_zt (wid, name,ztpd_bm, sjd_bm, 
+      bcsc, ggjg)
+    values (#{wid,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}, #{ztpdBm,jdbcType=VARCHAR}, #{sjdBm,jdbcType=VARCHAR}, 
+      #{bcsc,jdbcType=DECIMAL}, #{ggjg,jdbcType=DECIMAL}, #{dszyId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.DszyZtInfo" >
+    insert into t_advert_gggl_dszy_zt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        wid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="ztpdBm != null" >
+        ztpd_bm,
+      </if>
+      <if test="sjdBm != null" >
+        sjd_bm,
+      </if>
+      <if test="bcsc != null" >
+        bcsc,
+      </if>
+      <if test="ggjg != null" >
+        ggjg,
+      </if>
+      <if test="dszyId != null" >
+        DSZY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+       <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ztpdBm != null" >
+        #{ztpdBm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjdBm != null" >
+        #{sjdBm,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsc != null" >
+        #{bcsc,jdbcType=DECIMAL},
+      </if>
+      <if test="ggjg != null" >
+        #{ggjg,jdbcType=DECIMAL},
+      </if>
+      <if test="dszyId != null" >
+        #{dszyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.DszyZtInfo" >
+    update t_advert_gggl_dszy_zt
+    <set >
+      <if test="ztpdBm != null" >
+        ztpd_bm = #{ztpdBm,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sjdBm != null" >
+        sjd_bm = #{sjdBm,jdbcType=VARCHAR},
+      </if>
+      <if test="bcsc != null" >
+        bcsc = #{bcsc,jdbcType=DECIMAL},
+      </if>
+      <if test="ggjg != null" >
+        ggjg = #{ggjg,jdbcType=DECIMAL},
+      </if>
+       <if test="dszyId != null" >
+        DSZY_ID = #{dszyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wid = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.DszyZtInfo" >
+    update t_advert_gggl_dszy_zt
+    set ztpd_bm = #{ztpdBm,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+      sjd_bm = #{sjdBm,jdbcType=VARCHAR},
+      bcsc = #{bcsc,jdbcType=DECIMAL},
+      ggjg = #{ggjg,jdbcType=DECIMAL},
+      DSZY_ID = #{dszyId,jdbcType=VARCHAR}
+    where wid = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

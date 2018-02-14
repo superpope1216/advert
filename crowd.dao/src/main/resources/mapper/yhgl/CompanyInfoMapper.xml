@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.yhgl.CompanyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.yhgl.CompanyInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ADDR" property="addr" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="XIAN" property="xian" jdbcType="VARCHAR" />
+    <result column="LXR" property="lxr" jdbcType="VARCHAR" />
+    <result column="ZW" property="zw" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="GDDH" property="gddh" jdbcType="VARCHAR" />
+    <result column="WZDZ" property="wzdz" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+    <result column="CJIP" property="cjip" jdbcType="VARCHAR" />
+    <result column="SUPPLY_SHZT" property="supplyShzt" jdbcType="VARCHAR" />
+    <result column="FLAG" property="flag" jdbcType="VARCHAR" />
+    <result column="REGISTER_ID" property="registerId" jdbcType="VARCHAR" />
+    <result column="BUY_SHZT" property="buyShzt" jdbcType="VARCHAR" />
+    <result column="SJH" property="sjh" jdbcType="VARCHAR" />
+    <result column="CZH" property="czh" jdbcType="VARCHAR" />
+    <result column="GSXZ" property="gsxz" jdbcType="VARCHAR" />
+    <result column="NYYE" property="nyye" jdbcType="VARCHAR" />
+    <result column="GSJJ" property="gsjj" jdbcType="VARCHAR" />
+    <result column="GSLOG" property="gslog" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_MAN" property="updateMan" jdbcType="VARCHAR" />
+    <result column="sfybz" property="sfybz" jdbcType="VARCHAR" />
+    <result column="lng" property="lng" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, NAME, ADDR, AREA, CITY, XIAN, LXR, ZW, QQ, GDDH, WZDZ, CJSJ, CJIP, SUPPLY_SHZT, 
+    FLAG, REGISTER_ID, BUY_SHZT, SJH, CZH, GSXZ, NYYE, GSJJ, GSLOG, UPDATE_TIME, UPDATE_MAN,
+    sfybz,lng,lat
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_yhjbxx_company
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_yhjbxx_company
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.yhgl.CompanyInfo" >
+    insert into t_advert_yhjbxx_company (WID, NAME, ADDR, 
+      AREA, CITY, XIAN, LXR, 
+      ZW, QQ, GDDH, WZDZ, 
+      CJSJ, CJIP, SUPPLY_SHZT, 
+      FLAG, REGISTER_ID, BUY_SHZT, 
+      SJH, CZH, GSXZ, NYYE, 
+      GSJJ, GSLOG, UPDATE_TIME, 
+      UPDATE_MAN,sfybz,lng,lat)
+    values (#{wid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{xian,jdbcType=VARCHAR}, #{lxr,jdbcType=VARCHAR}, 
+      #{zw,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{gddh,jdbcType=VARCHAR}, #{wzdz,jdbcType=VARCHAR}, 
+      #{cjsj,jdbcType=VARCHAR}, #{cjip,jdbcType=VARCHAR}, #{supplyShzt,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=VARCHAR}, #{registerId,jdbcType=VARCHAR}, #{buyShzt,jdbcType=VARCHAR}, 
+      #{sjh,jdbcType=VARCHAR}, #{czh,jdbcType=VARCHAR}, #{gsxz,jdbcType=VARCHAR}, #{nyye,jdbcType=VARCHAR}, 
+      #{gsjj,jdbcType=VARCHAR}, #{gslog,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+      #{updateMan,jdbcType=VARCHAR},#{sfybz,jdbcType=VARCHAR},#{lng,jdbcType=VARCHAR},#{lat,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.yhgl.CompanyInfo" >
+    insert into t_advert_yhjbxx_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="addr != null" >
+        ADDR,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="xian != null" >
+        XIAN,
+      </if>
+      <if test="lxr != null" >
+        LXR,
+      </if>
+      <if test="zw != null" >
+        ZW,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="gddh != null" >
+        GDDH,
+      </if>
+      <if test="wzdz != null" >
+        WZDZ,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="cjip != null" >
+        CJIP,
+      </if>
+      <if test="supplyShzt != null" >
+        SUPPLY_SHZT,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+      <if test="registerId != null" >
+        REGISTER_ID,
+      </if>
+      <if test="buyShzt != null" >
+        BUY_SHZT,
+      </if>
+      <if test="sjh != null" >
+        SJH,
+      </if>
+      <if test="czh != null" >
+        CZH,
+      </if>
+      <if test="gsxz != null" >
+        GSXZ,
+      </if>
+      <if test="nyye != null" >
+        NYYE,
+      </if>
+      <if test="gsjj != null" >
+        GSJJ,
+      </if>
+      <if test="gslog != null" >
+        GSLOG,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updateMan != null" >
+        UPDATE_MAN,
+      </if>
+      <if test='sfybz!=null'>
+      	sfybz,
+      </if>
+      <if test='lng!=null'>
+      	lng,
+      </if>
+      <if test='lat!=null'>
+      	lat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="xian != null" >
+        #{xian,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr != null" >
+        #{lxr,jdbcType=VARCHAR},
+      </if>
+      <if test="zw != null" >
+        #{zw,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="gddh != null" >
+        #{gddh,jdbcType=VARCHAR},
+      </if>
+      <if test="wzdz != null" >
+        #{wzdz,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyShzt != null" >
+        #{supplyShzt,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="registerId != null" >
+        #{registerId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyShzt != null" >
+        #{buyShzt,jdbcType=VARCHAR},
+      </if>
+      <if test="sjh != null" >
+        #{sjh,jdbcType=VARCHAR},
+      </if>
+      <if test="czh != null" >
+        #{czh,jdbcType=VARCHAR},
+      </if>
+      <if test="gsxz != null" >
+        #{gsxz,jdbcType=VARCHAR},
+      </if>
+      <if test="nyye != null" >
+        #{nyye,jdbcType=VARCHAR},
+      </if>
+      <if test="gsjj != null" >
+        #{gsjj,jdbcType=VARCHAR},
+      </if>
+      <if test="gslog != null" >
+        #{gslog,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateMan != null" >
+        #{updateMan,jdbcType=VARCHAR},
+      </if>
+       <if test='sfybz!=null'>
+      	#{sfybz,jdbcType=VARCHAR},
+      </if>
+      <if test='lng!=null'>
+      	#{lng,jdbcType=VARCHAR},
+      </if>
+      <if test='lat!=null'>
+      	#{lat,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.yhgl.CompanyInfo" >
+    update t_advert_yhjbxx_company
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        ADDR = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="xian != null" >
+        XIAN = #{xian,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr != null" >
+        LXR = #{lxr,jdbcType=VARCHAR},
+      </if>
+      <if test="zw != null" >
+        ZW = #{zw,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="gddh != null" >
+        GDDH = #{gddh,jdbcType=VARCHAR},
+      </if>
+      <if test="wzdz != null" >
+        WZDZ = #{wzdz,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        CJIP = #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyShzt != null" >
+        SUPPLY_SHZT = #{supplyShzt,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="registerId != null" >
+        REGISTER_ID = #{registerId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyShzt != null" >
+        BUY_SHZT = #{buyShzt,jdbcType=VARCHAR},
+      </if>
+      <if test="sjh != null" >
+        SJH = #{sjh,jdbcType=VARCHAR},
+      </if>
+      <if test="czh != null" >
+        CZH = #{czh,jdbcType=VARCHAR},
+      </if>
+      <if test="gsxz != null" >
+        GSXZ = #{gsxz,jdbcType=VARCHAR},
+      </if>
+      <if test="nyye != null" >
+        NYYE = #{nyye,jdbcType=VARCHAR},
+      </if>
+      <if test="gsjj != null" >
+        GSJJ = #{gsjj,jdbcType=VARCHAR},
+      </if>
+      <if test="gslog != null" >
+        GSLOG = #{gslog,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateMan != null" >
+        UPDATE_MAN = #{updateMan,jdbcType=VARCHAR},
+      </if>
+       <if test='sfybz!=null'>
+      sfybz=	#{sfybz,jdbcType=VARCHAR},
+      </if>
+      <if test='lng!=null'>
+      lng=	#{lng,jdbcType=VARCHAR},
+      </if>
+      <if test='lat!=null'>
+      lat=	#{lat,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.yhgl.CompanyInfo" >
+    update t_advert_yhjbxx_company
+    set NAME = #{name,jdbcType=VARCHAR},
+      ADDR = #{addr,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      XIAN = #{xian,jdbcType=VARCHAR},
+      LXR = #{lxr,jdbcType=VARCHAR},
+      ZW = #{zw,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      GDDH = #{gddh,jdbcType=VARCHAR},
+      WZDZ = #{wzdz,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=VARCHAR},
+      CJIP = #{cjip,jdbcType=VARCHAR},
+      SUPPLY_SHZT = #{supplyShzt,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=VARCHAR},
+      REGISTER_ID = #{registerId,jdbcType=VARCHAR},
+      BUY_SHZT = #{buyShzt,jdbcType=VARCHAR},
+      SJH = #{sjh,jdbcType=VARCHAR},
+      CZH = #{czh,jdbcType=VARCHAR},
+      GSXZ = #{gsxz,jdbcType=VARCHAR},
+      NYYE = #{nyye,jdbcType=VARCHAR},
+      GSJJ = #{gsjj,jdbcType=VARCHAR},
+      GSLOG = #{gslog,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      UPDATE_MAN = #{updateMan,jdbcType=VARCHAR},
+      sfybz=	#{sfybz,jdbcType=VARCHAR},
+      lng=	#{lng,jdbcType=VARCHAR},
+      lat=	#{lat,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

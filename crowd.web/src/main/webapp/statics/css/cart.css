@@ -1,0 +1,79 @@
+/*cart*/
+.cart-list table{margin-bottom:0px;}
+.cart-list table td{vertical-align:middle!important;}
+.cart-list table td a.avatar{width:80px;}
+.cart-list table td a.avatar img{border-radius:0px;}
+.cart-list table td h4.media-heading{font-size:14px;margin-top:5px;}
+/*.cart-list table td h4.media-heading a{ text-decoration:none; }*/
+.cart-list table td .cart-remove{font-size:20px;color:#CCD5DB;}
+.cart-list .bootstrap-touchspin .input-group-btn:first-child>.btn{margin-right:-3px;}
+.cart-list .bootstrap-touchspin .input-group-btn:last-child>.btn{margin-left:-2px;}
+.cart-total{padding-top:20px;padding-bottom:20px;}
+.cart-total .total-val{font-size:20px;}
+.cart-total a.btn{display:block;margin-top:10px;}
+@media (min-width:480px){
+	.cart-total .total-val{font-size:24px;}
+	.cart-total a.btn{display:inline-block;margin-top:0px;}
+}
+@media (min-width:992px){
+	.cart-total .cartall{margin-left:20px;}
+}
+@media (max-width:991px){
+	.cart-list .buynum{width:auto;max-width:100px;margin: auto;}
+	.cart-list .buynum .bootstrap-touchspin .input-group-btn .btn{padding:0 5px;height:25px;}
+	.cart-list .buynum .buynum-input{height:25px;}
+}
+/* 购物车列表-手机端 */
+@media (max-width:767px){
+	.cart-mobile .cart-remove{font-size:22px;color:#CCD5DB;}
+	.cart-mobile .media-left{width: 30%;}
+	.cart-mobile .shop-para{min-height: 1.5em;}
+	.cart-mobile .cart-remove{margin-top: -5px;}
+}
+@media (max-width:479px){
+	.cart-mobile:not(:first-child){margin-top: 15px;}
+	.cart-mobile .buynum{max-width:90px;}
+	.cart-mobile .cart-remove{font-size: 18px;margin-top: 0;}
+}
+@media (max-width:399px){
+	.cart-mobile:not(:first-child){margin-top: 10px;}
+	.cart-mobile .media{padding: 0 !important;}
+	.cart-mobile .media-heading{font-size: 14px;}
+	.cart-mobile .buynum{max-width:70px;}
+	.cart-mobile .shop-para,.cart-mobile .shop-purchase{font-size: 12px;}
+}
+
+/* 购物车-没有商品 */
+.cart-not i.icon{font-size:120px;}
+.cart-not .cart-not-title{font-size:25px;}
+@media (min-width:992px){
+	.cart-not .cart-not-title{font-size:35px;}
+}
+@media (max-width:991px){
+	.cart-not .iconbox{margin-bottom:20px;}
+}
+/* 购物车-优惠券 */
+.shop-cart .shoppro-discount>label{font-size: 16px;}
+@media (min-width:768px){
+	.shop-cart .shoppro-discount{margin: 0;margin-bottom: 5px;}
+	.shop-cart .shoppro-discount>label{width: 100px;text-align: center;}
+}
+@media (max-width:767px){
+	.shop-cart .shoppro-discount{margin-bottom: 10px;}
+}
+
+/*tocar*/
+.tocar-info .media-left{display:table-cell!important;}
+.tocar-info a.btn{width:auto;display:inline-block;}
+.tocar-btn-body{margin-top:20px;}
+@media (min-width:768px){
+	.tocar-btn-body{margin-top:40px;}
+}
+@media (max-width:349px){
+	.tocar-info a.btn{width:100%;display:block;margin-bottom:10px;}
+}
+
+/* 更多产品 */
+@media (max-width:767px){
+	.moregoods-list li{padding:0 5px;margin-bottom:10px;}
+}

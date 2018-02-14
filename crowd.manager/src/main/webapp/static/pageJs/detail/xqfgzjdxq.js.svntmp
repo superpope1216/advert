@@ -1,0 +1,86 @@
+$(document).ready(function() {
+
+	 var userManage = {  
+	            getQueryCondition : function(data) {  
+	                var param = {};  
+	                //组装排序参数   
+	                if (data.order&&data.order.length&&data.order[0]) {  
+	                    switch (data.order[0].column) {  
+	                    case 0:  
+	                        param.orderColumn = "XM";//数据库列名称  
+	                        break;  
+	                    case 1:  
+	                        param.orderColumn = "YFB";//数据库列名称  
+	                        break;  
+	                    case 2:  
+	                        param.orderColumn = "DSH";//数据库列名称  
+	                        break;  
+	                    case 3:  
+	                        param.orderColumn = "ZBZ";//数据库列名称  
+	                        break;  
+	                    case 4:  
+	                        param.orderColumn = "KFZ";//数据库列名称  
+	                        break;  
+	                    case 5:  
+	                        param.orderColumn = "YSZ";//数据库列名称  
+	                        break;  
+	                    default:  
+	                        param.orderColumn = "YWC";//数据库列名称  
+	                        break;  
+	                    }  
+	                    //排序方式asc或者desc  
+	                    param.orderDir = data.order[0].dir;  
+	                }  
+	                param.id = $("#id-search").val();//查询条件  
+	                param.name = $("#name-search").val();//查询条件  
+	                param.status = $("#status-search").val();//查询条件  
+	                //组装分页参数  
+	                param.pageNum=parseInt(data.start)/parseInt(data.length)+1;
+	                console.log("data.start"+data.start);
+	                console.log("param.pageNum"+param.pageNum);
+	                console.log("data.length"+data.length);
+	                param.pageSize = data.length;  
+	                param.draw = data.draw;  
+	                console.log("data.length"+data.length);
+	                return param;  
+	            }
+	        };  
+	
+	
+	 $('#example').DataTable($.extend(true,{},DATATABLE_CONSTANT.DATA_TABLES.DEFAULT_OPTION,{
+		/* "sAjaxSource":'../detail/queryList.do',
+		 "fnServerData":function(sSource, aoData, fnCallback){
+			 var param = userManage.getQueryCondition(aoData);  
+			 doPostBack(sSource,param,function(data){
+			  	  var dataSources={};
+			  	  dataSources.draw=data.draw;
+			  	  dataSources.data=data.datas;
+			  	  dataSources.recordsTotal = data.pageInfo.totalSize;//返回数据全部记录，对象属性为固定格式不可更改，影响表格信息显示
+			  	  dataSources.recordsFiltered = data.pageInfo.totalSize;
+			  	  fnCallback(dataSources);
+			    });
+		 },*/
+		 ajax:function(data,callback,setting){
+			 console.log("data"+JSON.stringify(data)); 
+			 var param = userManage.getQueryCondition(data);  
+			 doPostBack("../detail/queryList.do",param,function(data){
+			  	  var dataSources={};
+			  	  dataSources.draw=data.draw;
+			  	  dataSources.data=data.datas;
+			  	  dataSources.recordsTotal = data.pageInfo.totalSize;//返回数据全部记录，对象属性为固定格式不可更改，影响表格信息显示
+			  	  dataSources.recordsFiltered = data.pageInfo.totalSize;
+			    	callback(dataSources);
+			    });
+		 },
+		 columns: [  
+	                {data: "XM"},  
+	                {data: "YFB"},  
+	                {data: "DSH"},  	
+	                {data: "ZBZ"},  
+	                {data: "KFZ"},  
+	                {data: "YSZ"}, 
+	                {data: "YWC"}
+	           ]
+	    }));
+	
+});

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.gbzy.GbzyQtInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.gbzy.GbzyQtInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="GBPD_BM" property="gbpdBm" jdbcType="VARCHAR" />
+    <result column="ZT_MONEY" property="ztMoney" jdbcType="DECIMAL" />
+    <result column="LB_MONEY" property="lbMoney" jdbcType="DECIMAL" />
+    <result column="GM_MONEY" property="gmMoney" jdbcType="DECIMAL" />
+    <result column="TY_MONEY" property="tyMoney" jdbcType="DECIMAL" />
+    <result column="ZDBS_MONEY" property="zdbsMoney" jdbcType="DECIMAL" />
+    <result column="GBZY_BM" property="gbzyBm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, NAME, GBPD_BM, ZT_MONEY, LB_MONEY, GM_MONEY, TY_MONEY, ZDBS_MONEY, GBZY_BM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_gbzy_qt
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_gbzy_qt
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.gbzy.GbzyQtInfo" >
+    insert into t_advert_gggl_gbzy_qt (WID, NAME, GBPD_BM, 
+      ZT_MONEY, LB_MONEY, GM_MONEY, 
+      TY_MONEY, ZDBS_MONEY, GBZY_BM
+      )
+    values (#{wid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gbpdBm,jdbcType=VARCHAR}, 
+      #{ztMoney,jdbcType=DECIMAL}, #{lbMoney,jdbcType=DECIMAL}, #{gmMoney,jdbcType=DECIMAL}, 
+      #{tyMoney,jdbcType=DECIMAL}, #{zdbsMoney,jdbcType=DECIMAL}, #{gbzyBm,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.gbzy.GbzyQtInfo" >
+    insert into t_advert_gggl_gbzy_qt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="gbpdBm != null" >
+        GBPD_BM,
+      </if>
+      <if test="ztMoney != null" >
+        ZT_MONEY,
+      </if>
+      <if test="lbMoney != null" >
+        LB_MONEY,
+      </if>
+      <if test="gmMoney != null" >
+        GM_MONEY,
+      </if>
+      <if test="tyMoney != null" >
+        TY_MONEY,
+      </if>
+      <if test="zdbsMoney != null" >
+        ZDBS_MONEY,
+      </if>
+      <if test="gbzyBm != null" >
+        GBZY_BM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gbpdBm != null" >
+        #{gbpdBm,jdbcType=VARCHAR},
+      </if>
+      <if test="ztMoney != null" >
+        #{ztMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="lbMoney != null" >
+        #{lbMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="gmMoney != null" >
+        #{gmMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tyMoney != null" >
+        #{tyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="zdbsMoney != null" >
+        #{zdbsMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="gbzyBm != null" >
+        #{gbzyBm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.gbzy.GbzyQtInfo" >
+    update t_advert_gggl_gbzy_qt
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gbpdBm != null" >
+        GBPD_BM = #{gbpdBm,jdbcType=VARCHAR},
+      </if>
+      <if test="ztMoney != null" >
+        ZT_MONEY = #{ztMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="lbMoney != null" >
+        LB_MONEY = #{lbMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="gmMoney != null" >
+        GM_MONEY = #{gmMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tyMoney != null" >
+        TY_MONEY = #{tyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="zdbsMoney != null" >
+        ZDBS_MONEY = #{zdbsMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="gbzyBm != null" >
+        GBZY_BM = #{gbzyBm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.gbzy.GbzyQtInfo" >
+    update t_advert_gggl_gbzy_qt
+    set NAME = #{name,jdbcType=VARCHAR},
+      GBPD_BM = #{gbpdBm,jdbcType=VARCHAR},
+      ZT_MONEY = #{ztMoney,jdbcType=DECIMAL},
+      LB_MONEY = #{lbMoney,jdbcType=DECIMAL},
+      GM_MONEY = #{gmMoney,jdbcType=DECIMAL},
+      TY_MONEY = #{tyMoney,jdbcType=DECIMAL},
+      ZDBS_MONEY = #{zdbsMoney,jdbcType=DECIMAL},
+      GBZY_BM = #{gbzyBm,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

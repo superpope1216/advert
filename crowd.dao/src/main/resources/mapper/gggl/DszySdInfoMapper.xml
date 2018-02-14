@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.DszySdInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.DszySdInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="TV_PD" property="tvPd" jdbcType="VARCHAR" />
+    <result column="HJSD_ZK" property="hjsdZk" jdbcType="DECIMAL" />
+    <result column="FHJSD_ZK" property="fhjsdZk" jdbcType="DECIMAL" />
+    <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+    <result column="CJIP" property="cjip" jdbcType="VARCHAR" />
+    <result column="DSZY_ID" property="dszyId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, NAME, TV_PD, HJSD_ZK, FHJSD_ZK, CJSJ, CJIP, DSZY_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_dszy_sd
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_dszy_sd
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.DszySdInfo" >
+    insert into t_advert_gggl_dszy_sd (WID, NAME, TV_PD, 
+      HJSD_ZK, FHJSD_ZK, CJSJ, 
+      CJIP, DSZY_ID)
+    values (#{wid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{tvPd,jdbcType=VARCHAR}, 
+      #{hjsdZk,jdbcType=DECIMAL}, #{fhjsdZk,jdbcType=DECIMAL}, #{cjsj,jdbcType=VARCHAR}, 
+      #{cjip,jdbcType=VARCHAR}, #{dszyId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.DszySdInfo" >
+    insert into t_advert_gggl_dszy_sd
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="tvPd != null" >
+        TV_PD,
+      </if>
+      <if test="hjsdZk != null" >
+        HJSD_ZK,
+      </if>
+      <if test="fhjsdZk != null" >
+        FHJSD_ZK,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="cjip != null" >
+        CJIP,
+      </if>
+      <if test="dszyId != null" >
+        DSZY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tvPd != null" >
+        #{tvPd,jdbcType=VARCHAR},
+      </if>
+      <if test="hjsdZk != null" >
+        #{hjsdZk,jdbcType=DECIMAL},
+      </if>
+      <if test="fhjsdZk != null" >
+        #{fhjsdZk,jdbcType=DECIMAL},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="dszyId != null" >
+        #{dszyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.DszySdInfo" >
+    update t_advert_gggl_dszy_sd
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tvPd != null" >
+        TV_PD = #{tvPd,jdbcType=VARCHAR},
+      </if>
+      <if test="hjsdZk != null" >
+        HJSD_ZK = #{hjsdZk,jdbcType=DECIMAL},
+      </if>
+      <if test="fhjsdZk != null" >
+        FHJSD_ZK = #{fhjsdZk,jdbcType=DECIMAL},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        CJIP = #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="dszyId != null" >
+        DSZY_ID = #{dszyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.DszySdInfo" >
+    update t_advert_gggl_dszy_sd
+    set NAME = #{name,jdbcType=VARCHAR},
+      TV_PD = #{tvPd,jdbcType=VARCHAR},
+      HJSD_ZK = #{hjsdZk,jdbcType=DECIMAL},
+      FHJSD_ZK = #{fhjsdZk,jdbcType=DECIMAL},
+      CJSJ = #{cjsj,jdbcType=VARCHAR},
+      CJIP = #{cjip,jdbcType=VARCHAR},
+      DSZY_ID = #{dszyId,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

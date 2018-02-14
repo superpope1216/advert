@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.sjgl.SjxxInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.sjgl.SjxxInfo">
+  	<id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="KSSJ" property="kssj" jdbcType="VARCHAR" />
+    <result column="JSSJ" property="jssj" jdbcType="VARCHAR" />
+    <result column="IMGID" property="imgid" jdbcType="VARCHAR" />
+    <result column="ZTNR" property="ztnr" jdbcType="VARCHAR" />
+    <result column="MTFL" property="mtfl" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="XGSJ" property="xgsj" jdbcType="VARCHAR" />
+    <result column="SHZT" property="shzt" jdbcType="VARCHAR" />
+    <result column="SHSJ" property="shsj" jdbcType="VARCHAR" />
+    <result column="sjlx" property="sjlx" jdbcType="VARCHAR" />
+    <result column="sjlxDisplay" property="sjlxDisplay" jdbcType="VARCHAR" />
+  	<result column="shztDisplay" property="shztDisplay" jdbcType="VARCHAR" />
+  	<result column="companyName" property="companyName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pope.advert.entity.sjgl.SjxxInfo" extends="BaseResultMap" >
+  		<result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    v_advert_sjgl_sjxx.WID, v_advert_sjgl_sjxx.TITLE, v_advert_sjgl_sjxx.KSSJ, v_advert_sjgl_sjxx.JSSJ, 
+    v_advert_sjgl_sjxx.IMGID, v_advert_sjgl_sjxx.ZTNR, v_advert_sjgl_sjxx.MTFL,
+     v_advert_sjgl_sjxx.CJSJ, v_advert_sjgl_sjxx.YHID, v_advert_sjgl_sjxx.XGSJ
+     ,v_advert_sjgl_sjxx.SHZT, v_advert_sjgl_sjxx.SHSJ,v_advert_sjgl_sjxx.sjlx
+  </sql>
+  <sql id="Blob_Column_List" >
+    v_advert_sjgl_sjxx.CONTENT
+  </sql>
+  <sql id="sqlWhere">
+  	<if test='query!=null'>
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND v_advert_sjgl_sjxx.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.title!=null and query.title!=""'>
+  			AND v_advert_sjgl_sjxx.TITLE like concat('%',#{query.title,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test='query.kssj!=null and query.kssj!=""'>
+  			AND v_advert_sjgl_sjxx.KSSJ=#{query.kssj,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.jssj!=null and query.jssj!=""'>
+  			AND v_advert_sjgl_sjxx.jssj=#{query.jssj,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.mtfl!=null and query.mtfl!=""'>
+  			AND v_advert_sjgl_sjxx.mtfl=#{query.mtfl,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.yhid!=null and query.yhid!=""'>
+  			AND v_advert_sjgl_sjxx.yhid=#{query.yhid,jdbcType=VARCHAR}
+  		</if>
+  			<if test='query.shzt!=null and query.shzt!=""'>
+  			AND v_advert_sjgl_sjxx.shzt=#{query.shzt,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.sjlx!=null and query.sjlx!=""'>
+  			AND v_advert_sjgl_sjxx.sjlx=#{query.sjlx,jdbcType=VARCHAR}
+  		</if>
+  		
+  	</if>
+  </sql>
+  <sql id="sqlOrder">
+  	order by 
+  	<choose>
+  		<when test="orderBy!=null">
+  			<foreach collection="orderBy" item="item" open=" " close=" " separator=",">
+  				${item}
+  			</foreach>
+  		</when>
+  		<otherwise>
+  			v_advert_sjgl_sjxx.xgsj desc
+  		</otherwise>
+  	</choose>
+  	<if test='orderBy!=null'>
+  	</if>
+  </sql>
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap"
+  parameterType="com.pope.advert.entity.dto.QueryCondition">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		<if test='query.needCompanyInfo!=null and query.needCompanyInfo==true'>
+  			,t_advert_yhjbxx_company.NAME AS companyName
+  		</if>
+  		,t_advert_sjzd_sjgl_shzt.lbmc as shztDisplay
+  		,T_ADVERT_SJZD_SJLX.lbmc as sjlxDisplay
+  		FROM v_advert_sjgl_sjxx
+  		<if test='query.needCompanyInfo!=null and query.needCompanyInfo==true'>
+  			LEFT JOIN t_advert_yhjbxx_company on t_advert_yhjbxx_company.wid=v_advert_sjgl_sjxx.yhid
+  		</if>
+  		LEFT JOIN t_advert_sjzd_sjgl_shzt ON t_advert_sjzd_sjgl_shzt.LBDM=v_advert_sjgl_sjxx.SHZT
+  		LEFT JOIN T_ADVERT_SJZD_SJLX ON T_ADVERT_SJZD_SJLX.LBDM=v_advert_sjgl_sjxx.SJLX
+  		<where>
+  			<include refid="sqlWhere"></include>
+  		</where>
+  		<include refid="sqlOrder"/>
+  </select>
+</mapper>

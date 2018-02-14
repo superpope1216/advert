@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>crowd</groupId>
+    <artifactId>crowd.root</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../crowd.root</relativePath>
+  </parent>
+   <packaging>jar</packaging>
+  <modelVersion>4.0.0</modelVersion> 
+  <artifactId>crowd.dao</artifactId> 
+   <name>crowd.dao</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>crowd</groupId>
+      <artifactId>crowd.entity</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+   <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <!--默认打包排除env文件夹-->
+            </resource>
+        </resources>
+    </build>
+</project>

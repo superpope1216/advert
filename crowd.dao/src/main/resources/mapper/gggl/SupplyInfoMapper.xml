@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.SupplyInfoMapper" >
+	<select id="selectByCondition" parameterType="com.pope.advert.entity.dto.QueryCondition" resultType="map">
+		SELECT * FROM V_ADVERT_GGGL_SUPPLY
+		<where>
+			<if test='query!=null'>
+				<if test='query.wid!=null and query.wid!=""'>
+					AND WID=#{query.wid,jdbcType=VARCHAR}
+				</if>
+				<if test='query.gglx!=null and query.gglx!=""'>
+					AND GGLX=#{query.gglx,jdbcType=VARCHAR}
+				</if>
+				<if test='query.tvId!=null and query.tvId!=""'>
+					AND TV_ID=#{query.tvId,jdbcType=VARCHAR}
+				</if>
+				<if test='query.area!=null and query.area!=""'>
+					AND AREA=#{query.area,jdbcType=VARCHAR}
+				</if>
+				<if test='query.city!=null and query.city!=""'>
+					AND CITY=#{query.city,jdbcType=VARCHAR}
+				</if>
+				<if test='query.advertType!=null and query.advertType!=""'>
+					AND ADVERT_TYPE=#{query.advertType,jdbcType=VARCHAR}
+				</if>
+				<if test='query.shzt!=null and query.shzt!=""'>
+					AND SHZT=#{query.shzt,jdbcType=VARCHAR}
+				</if>
+				<if test='query.registerId!=null and query.registerId!=""'>
+					AND register_Id=#{query.registerId,jdbcType=VARCHAR}
+				</if>
+				<if test='query.name!=null and query.name!=""'>
+					AND NAME LIKE CONCAT(',',#{query.name,jdbcType=VARCHAR},',')
+				</if>
+			</if>
+		</where>
+		order by cjsj desc
+	</select>
+</mapper>

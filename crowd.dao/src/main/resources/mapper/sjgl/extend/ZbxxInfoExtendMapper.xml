@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.sjgl.extend.ZbxxInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.sjgl.extend.ZbxxInfoExtend" 
+  extends="com.pope.advert.dao.sjgl.ZbxxInfoMapper.BaseResultMap">
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pope.advert.entity.sjgl.extend.ZbxxInfoExtend" extends="com.pope.advert.dao.sjgl.ZbxxInfoMapper.ResultMapWithBLOBs" >
+   
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_sjgl_zbxx.WID, t_advert_sjgl_zbxx.TITLE, 
+    t_advert_sjgl_zbxx.KSSJ, t_advert_sjgl_zbxx.JSSJ, 
+    t_advert_sjgl_zbxx.IMGID, t_advert_sjgl_zbxx.ZTNR, 
+    t_advert_sjgl_zbxx.MTFL,
+     t_advert_sjgl_zbxx.CJSJ, t_advert_sjgl_zbxx.YHID, t_advert_sjgl_zbxx.XGSJ
+     ,t_advert_sjgl_zbxx.SHZT, t_advert_sjgl_zbxx.SHSJ
+  </sql>
+  <sql id="Blob_Column_List" >
+    t_advert_sjgl_zbxx.CONTENT
+  </sql>
+   <sql id="sqlWhere">
+  	<if test='query!=null'>
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_sjgl_zbxx.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.title!=null and query.title!=""'>
+  			AND t_advert_sjgl_zbxx.TITLE like concat('%',#{query.title,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test='query.kssj!=null and query.kssj!=""'>
+  			AND t_advert_sjgl_zbxx.KSSJ=#{query.kssj,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.jssj!=null and query.jssj!=""'>
+  			AND t_advert_sjgl_zbxx.jssj=#{query.jssj,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.mtfl!=null and query.mtfl!=""'>
+  			AND t_advert_sjgl_zbxx.mtfl=#{query.mtfl,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.yhid!=null and query.yhid!=""'>
+  			AND t_advert_sjgl_zbxx.yhid=#{query.yhid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.shzt!=null and query.shzt!=""'>
+  			AND t_advert_sjgl_zbxx.shzt=#{query.shzt,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <sql id="sqlOrder">
+  	order by 
+  	<choose>
+  		<when test="orderBy!=null">
+  			<foreach collection="orderBy" item="item" open=" " close=" " separator=",">
+  				${item}
+  			</foreach>
+  		</when>
+  		<otherwise>
+  			t_advert_sjgl_zbxx.xgsj desc
+  		</otherwise>
+  	</choose>
+  	<if test='orderBy!=null'>
+  	</if>
+  </sql>
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap"
+  parameterType="com.pope.advert.entity.dto.QueryCondition">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  			<if test='query.needCompanyInfo!=null and query.needCompanyInfo==true'>
+  			,t_advert_yhjbxx_company.NAME AS companyName
+  		</if>
+  		,t_advert_sjzd_sjgl_shzt.lbmc as shztDisplay
+  		FROM t_advert_sjgl_zbxx
+  		<if test='query.needCompanyInfo!=null and query.needCompanyInfo==true'>
+  			LEFT JOIN t_advert_yhjbxx_company on t_advert_yhjbxx_company.wid=t_advert_sjgl_zbxx.yhid
+  		</if>
+  		LEFT JOIN t_advert_sjzd_sjgl_shzt ON t_advert_sjzd_sjgl_shzt.LBDM=t_advert_sjgl_zbxx.SHZT
+  		<where>
+  			<include refid="sqlWhere"></include>
+  		</where>
+  		<include refid="sqlOrder"/>
+  </select>
+</mapper>
