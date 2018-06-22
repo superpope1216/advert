@@ -6,13 +6,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pope.advert.common.code.DictionaryEnum;
+import com.pope.advert.common.exception.ServiceException;
 import com.pope.advert.dao.dictionary.extend.DictionaryInfoExtendMapper;
 import com.pope.advert.entity.dictionary.DictionaryInfo;
 import com.pope.advert.entity.log.CustomOperateLog;
 import com.pope.advert.service.dictionary.DictionaryService;
 import com.pope.advert.service.dto.DataResult;
-import com.wisedu.crowd.common.code.DictionaryEnum;
-import com.wisedu.crowd.common.exception.ServiceException;
 
 @Service("dictionaryService")
 public class DictionaryServiceImpl implements DictionaryService {
@@ -85,6 +85,34 @@ public class DictionaryServiceImpl implements DictionaryService {
 	public DataResult<List<DictionaryInfo>> selectByAreaBm(String tableName, String areaBm, CustomOperateLog log)
 			throws ServiceException {
 		return DataResult.success(dictionaryInfoExtendMapper.selectByAreaBm(tableName,areaBm));
+	}
+
+	@Override
+	public DataResult<List<DictionaryInfo>> selectZsfsByZsxt(String zsxt, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(dictionaryInfoExtendMapper.selectZsfsByZsxt(zsxt));
+	}
+
+	@Override
+	public DataResult<List<DictionaryInfo>> selectZsccByZsxt(String zsxt, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(dictionaryInfoExtendMapper.selectZsccByZsxt(zsxt));
+	}
+
+	@Override
+	public DataResult<List<DictionaryInfo>> selectHwzyQyByGglx(String gglx, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(dictionaryInfoExtendMapper.selectHwzyQyByGglx(gglx));
+	}
+
+	@Override
+	public DataResult<List<DictionaryInfo>> selectHwzyXsByGglx(String gglx, CustomOperateLog log)
+			throws ServiceException {
+		return DataResult.success(dictionaryInfoExtendMapper.selectHwzyXsByGglx(gglx));
+	}
+	@Override
+	public DataResult<List<DictionaryInfo>> selectHwzyGgxx(String gglx,String area,String city,String xian,CustomOperateLog log) throws ServiceException{
+		return DataResult.success(dictionaryInfoExtendMapper.selectHwzyGgxx(gglx,area,city,xian));
 	}
 
 }

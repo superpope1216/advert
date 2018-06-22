@@ -164,7 +164,7 @@ border-color
 							data-bv-remote="false" data-bv-remote-url=""
 							data-bv-remote-message="手机号已存在" data-bv-notempty="true"
 							data-bv-notempty-message="此项不能为空" data-bv-stringlength="true"
-							data-bv-stringlength-max="20" data-bv-stringlength-message="" />
+							data-bv-stringlength-max="20" data-bv-stringlength-message="" data-bv-regexp="true" data-bv-regexp-regexp="^1[34578]\d{9}$" data-bv-regexp-message="请输入正确的手机号格式"/>
 
 					</div>
 				</div>
@@ -193,7 +193,8 @@ border-color
 							placeholder="电子邮箱" data-bv-remote="false" data-bv-remote-url=""
 							data-bv-remote-message="电子邮箱已存在" data-bv-notempty="true"
 							data-bv-notempty-message="此项不能为空" data-bv-stringlength="true"
-							data-bv-stringlength-max="40" />
+							data-bv-stringlength-max="40" data-bv-regexp="true" data-bv-regexp-regexp="^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$"
+				data-bv-regexp-message="请输入正确的邮箱格式"/>
 
 					</div>
 				</div>
@@ -360,11 +361,12 @@ border-color
 			<form class="form-register met-form form-horizontal" method="post"
 				action="" role="form" id="formCompany">
 				<input type="hidden" name="flag" value="1" />
+				<input type="hidden" name="wid" value=""/>
 				<input type="hidden" name="sfybz" value="0"/>
 				<input type="hidden" name="lng" value=""/>
 				<input type="hidden" name="lat" value=""/>
 				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">公司名称</label>
+					<label for="firstname" class="col-sm-2 control-label">公司名称<span style="color:red">*</span></label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="name"
 							placeholder="填写营业执照上的公司全称，真实齐全的公司名称增" data-bv-notempty="true"
@@ -372,7 +374,7 @@ border-color
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">公司地区</label>
+					<label for="firstname" class="col-sm-2 control-label">公司地区<span style="color:red">*</span></label>
 					<div class="col-sm-10">
 						<div class="col-sm-4" style="padding-left:0px;">
 							<select class="form-control " name="area" required
@@ -400,29 +402,29 @@ border-color
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">经营地址</label>
+					<label for="firstname" class="col-sm-2 control-label">经营地址<span style="color:red">*</span></label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="addr"
+						<input type="text" class="form-control" name="addr" 
 							placeholder="请填写实际的经营地址" data-bv-notempty="true"
 							data-bv-notempty-message="此项不能为空">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">标注</label>
+					<label for="firstname" class="col-sm-2 control-label">标注<span style="color:red">*</span></label>
 					<div class="col-sm-10">
 						<button type="button" id="btnBz" class="btn btn-default" style="color:red;"><i class="fa fa-close fa-lg"></i>未标注</button>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">联系人</label>
+					<label for="firstname" class="col-sm-2 control-label">联系人<span style="color:red">*</span></label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="lxr"
+						<input type="text" class="form-control" name="lxr" 
 							placeholder="建议填写真实姓名，赢取信任和机会" data-bv-notempty="true"
 							data-bv-notempty-message="此项不能为空">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">固定电话</label>
+					<label for="firstname" class="col-sm-2 control-label">固定电话<span style="color:red">*</span></label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="gddh"
 							placeholder="非常重要，真实无误电话增加咨询量" data-bv-notempty="true"
@@ -430,7 +432,7 @@ border-color
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label">QQ号码</label>
+					<label for="firstname" class="col-sm-2 control-label">QQ号码<span style="color:red">*</span></label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="qq"
 							placeholder="随时随地在线沟通，不错过任何商机" data-bv-notempty="true"
@@ -444,8 +446,16 @@ border-color
 							placeholder="真实可访问，便于潜在客户获取信息">
 					</div>
 				</div>
-				<button class="btn btn-lg btn-primary btn-block" type="button"
-					id="btnSaveCompany">提交并开通广告商铺</button>
+				<c:choose>
+					<c:when test="${'1' eq flag}">
+						<button class="btn btn-lg btn-primary btn-block" type="button"
+					id="btnSaveCompany">提交并开通广告商铺</button>		
+					</c:when>
+					<c:otherwise>
+						<button class="btn btn-lg btn-primary btn-block" type="button"
+					id="btnSaveCompany">提交并完善企业信息</button>
+					</c:otherwise>
+				</c:choose>
 			</form>
 		</div>
 		<div class="container" id="divStep4" style="display: none;">
@@ -455,7 +465,8 @@ border-color
 						src="<%=request.getContextPath()%>/statics/images/advert/reg16_c01.gif">
 				</div>
 				<div class="col-xs-12 text-center"
-					style="color: #AE1F23; font-size: 22px;">恭喜您资料完善成功！</div>
+					style="color: #AE1F23; font-size: 22px;">恭喜您资料完善成功，请耐心等待管理员的审核！<span style="margin-left:5px;color:#000000;font-size:12px"><a href="<%=request.getContextPath()%>/login/index">跳转进入首页</a></span></div>
+					
 			</div>
 		</div>
 	</div>
@@ -484,6 +495,8 @@ border-color
 		<script type="text/javascript">
 			var page_type = "register";
 			var flag="${flag}";
+			var isBuy=${isBuy};
+			var isSupply=${isSupply};
 		</script>
 		<%@ include file="/jsp/bottom.jsp"%>
 		<%@ include file="/jsp/footer/footer_bq.jsp"%>

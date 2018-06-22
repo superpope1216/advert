@@ -11,11 +11,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.pope.advert.common.code.CompanyClassifyEnum;
+import com.pope.advert.common.code.HttpCodeEnum;
+import com.pope.advert.common.code.ShztEnum;
 import com.pope.advert.entity.yhgl.CompanyInfo;
 import com.pope.advert.service.dto.DataResult;
-import com.wisedu.crowd.common.code.CompanyClassifyEnum;
-import com.wisedu.crowd.common.code.HttpCodeEnum;
-import com.wisedu.crowd.common.code.ShztEnum;
 import com.wisedu.crowd.common.util.ConstantsUtil;
 
 public class AuthBuyInterceptor implements HandlerInterceptor {
@@ -68,7 +68,16 @@ public class AuthBuyInterceptor implements HandlerInterceptor {
 		   AuthLoginAnnotation auth=methodHandler.getMethodAnnotation(AuthLoginAnnotation.class);
 	        
 	        if(auth==null){
-	        	return true;
+	        	AuthBuyAnnotation authIsBuyAnnotation=methodHandler.getMethodAnnotation(AuthBuyAnnotation.class);
+	        	if(authIsBuyAnnotation==null){
+	        		return true;
+	        	}else{
+	        		if (request.getSession().getAttribute(ConstantsUtil.SESSION_YHJBXX) != null) {
+		    			return true;
+		    		}else{
+		    			return false;
+		    		}
+	        	}
 	        }else{
 	        	if (request.getSession().getAttribute(ConstantsUtil.SESSION_YHJBXX) != null) {
 	    			return true;

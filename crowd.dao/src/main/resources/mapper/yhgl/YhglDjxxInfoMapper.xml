@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.yhgl.YhglDjxxInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.yhgl.YhglDjxxInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="DJ" property="dj" jdbcType="VARCHAR" />
+    <result column="KSSJ" property="kssj" jdbcType="VARCHAR" />
+    <result column="JSSJ" property="jssj" jdbcType="VARCHAR" />
+    <result column="SYTS" property="syts" jdbcType="INTEGER" />
+    <result column="ZTS" property="zts" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="yhzt" property="yhzt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YHID, DJ, KSSJ, JSSJ, SYTS, ZTS, version, yhzt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_yhjbxx_djxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_yhjbxx_djxx
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.yhgl.YhglDjxxInfo" >
+    insert into t_advert_yhjbxx_djxx (WID, YHID, DJ, 
+      KSSJ, JSSJ, SYTS, ZTS, 
+      version, yhzt)
+    values (#{wid,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, #{dj,jdbcType=VARCHAR}, 
+      #{kssj,jdbcType=VARCHAR}, #{jssj,jdbcType=VARCHAR}, #{syts,jdbcType=INTEGER}, #{zts,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER}, #{yhzt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.yhgl.YhglDjxxInfo" >
+    insert into t_advert_yhjbxx_djxx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="yhid != null" >
+        YHID,
+      </if>
+      <if test="dj != null" >
+        DJ,
+      </if>
+      <if test="kssj != null" >
+        KSSJ,
+      </if>
+      <if test="jssj != null" >
+        JSSJ,
+      </if>
+      <if test="syts != null" >
+        SYTS,
+      </if>
+      <if test="zts != null" >
+        ZTS,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="yhzt != null" >
+        yhzt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null" >
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="dj != null" >
+        #{dj,jdbcType=VARCHAR},
+      </if>
+      <if test="kssj != null" >
+        #{kssj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssj != null" >
+        #{jssj,jdbcType=VARCHAR},
+      </if>
+      <if test="syts != null" >
+        #{syts,jdbcType=INTEGER},
+      </if>
+      <if test="zts != null" >
+        #{zts,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="yhzt != null" >
+        #{yhzt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.yhgl.YhglDjxxInfo" >
+    update t_advert_yhjbxx_djxx
+    <set >
+      <if test="yhid != null" >
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="dj != null" >
+        DJ = #{dj,jdbcType=VARCHAR},
+      </if>
+      <if test="kssj != null" >
+        KSSJ = #{kssj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssj != null" >
+        JSSJ = #{jssj,jdbcType=VARCHAR},
+      </if>
+      <if test="syts != null" >
+        SYTS = #{syts,jdbcType=INTEGER},
+      </if>
+      <if test="zts != null" >
+        ZTS = #{zts,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="yhzt != null" >
+        yhzt = #{yhzt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.yhgl.YhglDjxxInfo" >
+    update t_advert_yhjbxx_djxx
+    set YHID = #{yhid,jdbcType=VARCHAR},
+      DJ = #{dj,jdbcType=VARCHAR},
+      KSSJ = #{kssj,jdbcType=VARCHAR},
+      JSSJ = #{jssj,jdbcType=VARCHAR},
+      SYTS = #{syts,jdbcType=INTEGER},
+      ZTS = #{zts,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      yhzt = #{yhzt,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

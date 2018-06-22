@@ -5,6 +5,10 @@
 define(function(require, exports, module) {
 	var $$ = jQuery = require('jquery');
 	require('plugins/vendor/bootstrap/validator/entrance');
+	require('plugins/vendor/upload/jquery.form');
+	require('plugins/vendor/upload/imageUploader');
+	require('plugins/vendor/upload/uploaderFile');
+	require('plugins/vendor/jquery-bootstrup-newsScroll/js/jquery.bootstrap.newsbox');
 	$('#formDlxx [name="kssj"]').datepicker({
 	    language: 'zh-CN',
 	    autoclose:true,
@@ -22,19 +26,41 @@ define(function(require, exports, module) {
 	$("#btnSupply").click(function(){
 		window.location.href=basePath+"/hzglView/index";
 	});
-	var xqwdfjidUploader=new Uploader({id:"imgidDiv",maxSize:1024*1024*10,propExplain:"(请上传需求文档附件)",uploadedFunc:function(data){
-        if(true){
-      //  $("#xqwdfjid").val(xqwdfjidUploader.params.value);
-        $("#formDlxx [name='imgid']").val(xqwdfjidUploader.params.value);
-        }
-     }});
+	function sctpUploader(wid){
+		$("#sctuljuploadBtn").ajaxImageUpload({
+			url: basePath+'/attr/upload', //上传的服务器地址
+		    data: { },
+		    wid:wid,
+		    id:"sctuljUploadBox",
+		    maxNum: 1, //允许上传图片数量
+		    hidenInputName:'', // 上传成功后追加的隐藏input名，注意不要带[]，会自动带[]，不写默认和上传按钮的name相同
+		    zoom: true, //允许上传图片点击放大
+		    allowType: ["gif", "jpeg", "jpg", "bmp",'png'], //允许上传图片的类型
+		    maxSize :2, //允许上传图片的最大尺寸，单位M
+		    deleteCallBack:function(){
+		    	$("#formDlxx [name='imgid']").val("");
+		    },
+		    before: function () {
+		      
+		    },
+		    success:function(data){
+		    	$("#formDlxx [name='imgid']").val(data.fileWids);
+		        console.log(data);
+		    },
+		    error:function (e) {
+		        
+		        console.log(e);
+		    }
+		    	
+		});
+	}
 	$("#btnSaveCompany").click(function(){
 		var bootstrapValidator = $$('#formDlxx').data('bootstrapValidator');
 		bootstrapValidator.validate();
 		var datas=$('#formDlxx').serializeArray();
 		if (bootstrapValidator.isValid()) {
 			if (!UE.getEditor('txtContent').hasContents()){
-			    alert('请先填写代理内容正文!');
+			    alert('请先填写合作内容正文!');
 			    return;
 			}
 			if($("#formDlxx [name='imgid']").val()==""){
@@ -77,12 +103,13 @@ define(function(require, exports, module) {
 					 $("#formDlxx [name='jssj']").val(toStr(_data.jssj));
 					 $("#formDlxx [name='ztnr']").val(toStr(_data.ztnr));
 					 $("#formDlxx [name='imgid']").val(toStr(_data.imgid));
-					 if(_data.imgid){
-						 xqwdfjidUploader.setValue(_data.imgid);
-					 }
+					 
+					 sctpUploader(_data.imgid);
 					 UE.getEditor('txtContent').setContent(toStr(_data.content));
 				 } 
 			  });
+		  }else{
+			  sctpUploader(null);
 		  }
 	  }
 

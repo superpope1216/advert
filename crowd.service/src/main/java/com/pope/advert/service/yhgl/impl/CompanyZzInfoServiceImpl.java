@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.pope.advert.common.code.ShztEnum;
+import com.pope.advert.common.code.YesNoEnum;
+import com.pope.advert.common.exception.ServiceException;
 import com.pope.advert.dao.yhgl.CompanyZzInfoMapper;
 import com.pope.advert.dao.yhgl.extend.CompanyZzInfoExtendMapper;
 import com.pope.advert.entity.dto.QueryCondition;
@@ -17,9 +20,6 @@ import com.pope.advert.entity.yhgl.extend.CompanyInfoExtend;
 import com.pope.advert.entity.yhgl.extend.CompanyZzInfoExtend;
 import com.pope.advert.service.dto.DataResult;
 import com.pope.advert.service.yhgl.CompanyZzInfoService;
-import com.wisedu.crowd.common.code.ShztEnum;
-import com.wisedu.crowd.common.code.YesNoEnum;
-import com.wisedu.crowd.common.exception.ServiceException;
 import com.wisedu.crowd.common.util.DateUtil;
 import com.wisedu.crowd.common.util.PageUtil;
 import com.wisedu.crowd.common.util.StringUtil;
@@ -76,6 +76,7 @@ public class CompanyZzInfoServiceImpl implements CompanyZzInfoService{
 		companyZzInfo.setUpdateIp(log.getCustomIp());
 		companyZzInfo.setUpdateTime(DateUtil.getCurrentDateTimeStr());
 		companyZzInfo.setRegisterId(log.getUserId());
+		companyZzInfo.setCompanyId(log.getCompanyId());
 		companyZzInfo.setDatastatus(YesNoEnum.YES.getCode());
 		if(StringUtil.isEmpty(companyZzInfo.getWid())){
 			companyZzInfo.setWid(StringUtil.getUuId());
@@ -98,6 +99,19 @@ public class CompanyZzInfoServiceImpl implements CompanyZzInfoService{
 	public DataResult<Integer> updateByCondition(CompanyZzInfo companyZzInfo, CustomOperateLog log)
 			throws ServiceException {
 		return DataResult.success(companyZzInfoExtendMapper.updateByCondition(companyZzInfo));
+	}
+
+	@Override
+	public DataResult<Integer> sh(String wid, String shzt, CustomOperateLog log) throws ServiceException {
+		CompanyZzInfo saveCompanyZzInfo=new CompanyZzInfo();
+		saveCompanyZzInfo.setWid(wid);
+		saveCompanyZzInfo.setShzt(shzt);
+		return this.updateByPrimaryKeySelective(saveCompanyZzInfo, log);
+	}
+
+	@Override
+	public DataResult<Integer> deleteByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
+		return DataResult.success(companyZzInfoMapper.deleteByPrimaryKey(wid));
 	}
 
 }

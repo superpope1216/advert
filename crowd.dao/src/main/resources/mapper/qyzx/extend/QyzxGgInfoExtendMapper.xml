@@ -34,12 +34,15 @@
   			<if test='query.shzt!=null and query.shzt!=""'>
   			AND t_advert_qyzx_gg.shzt=#{query.shzt,jdbcType=VARCHAR}
   		</if>
+  		<if test='query.companyName!=null and query.companyName!=""'>
+  			AND t_advert_yhjbxx_company.name like concat('%',#{query.companyName,jdbcType=VARCHAR},'%')
+  		</if>
   	</if>
   </sql>
   <sql id="sqlOrder">
   	order by 
   	<choose>
-  		<when test="orderBy!=null">
+  		<when test="orderBy!=null and orderBy.size>0">
   			<foreach collection="orderBy" item="item" open=" " close=" " separator=",">
   				${item}
   			</foreach>
@@ -51,17 +54,18 @@
   	<if test='orderBy!=null'>
   	</if>
   </sql>
-  <select id="selectDisplayByCondition" resultMap="BaseResultMap"
+  <select id="selectDisplayByCondition" resultMap="ResultMapWithBLOBs"
   parameterType="com.pope.advert.entity.dto.QueryCondition">
   		SELECT 
   		<include refid="Base_Column_List"/>
+  		,<include refid="Blob_Column_List"/>
   		<if test='query.needCompanyInfo!=null and query.needCompanyInfo==true'>
   			,t_advert_yhjbxx_company.NAME AS companyName
   		</if>
   		,t_advert_sjzd_sjgl_shzt.lbmc as shztDisplay
   		FROM t_advert_qyzx_gg
   		<if test='query.needCompanyInfo!=null and query.needCompanyInfo==true'>
-  			LEFT JOIN t_advert_yhjbxx_company on t_advert_yhjbxx_company.wid=t_advert_qyzx_gg.yhid
+  			LEFT JOIN t_advert_yhjbxx_company on t_advert_yhjbxx_company.wid=t_advert_qyzx_gg.COMPANYID
   		</if>
   		LEFT JOIN t_advert_sjzd_sjgl_shzt ON t_advert_sjzd_sjgl_shzt.LBDM=t_advert_qyzx_gg.SHZT
   		<where>

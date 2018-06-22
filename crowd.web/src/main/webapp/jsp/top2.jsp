@@ -15,5 +15,7 @@
 <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/plugins/vendor/bootstrap/css/bootstrap.min.css'>
 <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/fonts/font-awesome/font-awesome.min.css'>
 <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/css/common.css'>
+<link rel='stylesheet' href='<%=request.getContextPath() %>/statics/plugins/vendor/alertify/3/alertify.core.css'>
+<link rel='stylesheet' href='<%=request.getContextPath() %>/statics/plugins/vendor/alertify/3/alertify.bootstrap.css'>
 
 </head>

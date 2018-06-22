@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pope.advert.common.code.AreaClassifyEnum;
+import com.pope.advert.common.code.DictionaryEnum;
+import com.pope.advert.common.code.YesNoEnum;
 import com.pope.advert.controller.BaseController;
 import com.pope.advert.entity.dto.PageInfo;
 import com.pope.advert.entity.yhgl.CompanyZzInfo;
@@ -19,9 +22,6 @@ import com.pope.advert.interceptor.AuthSupplyAnnotation;
 import com.pope.advert.service.dictionary.DictionaryService;
 import com.pope.advert.service.dto.DataResult;
 import com.pope.advert.service.yhgl.CompanyZzInfoService;
-import com.wisedu.crowd.common.code.AreaClassifyEnum;
-import com.wisedu.crowd.common.code.DictionaryEnum;
-import com.wisedu.crowd.common.code.YesNoEnum;
 import com.wisedu.crowd.common.util.ConditionUtil;
 import com.wisedu.crowd.common.util.StringUtil;
 

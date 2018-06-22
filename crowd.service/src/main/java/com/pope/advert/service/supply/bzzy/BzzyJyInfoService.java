@@ -1,12 +1,16 @@
 package com.pope.advert.service.supply.bzzy;
 
+import java.util.List;
+
+import com.pope.advert.common.exception.ServiceException;
+import com.pope.advert.entity.dto.QueryCondition;
 import com.pope.advert.entity.gggl.bzzy.BzzyExtInfo;
-import com.pope.advert.entity.gggl.bzzy.BzzyGsygInfo;
+import com.pope.advert.entity.gggl.bzzy.BzzyJyInfo;
 import com.pope.advert.entity.gggl.bzzy.BzzyInfo;
 import com.pope.advert.entity.gggl.bzzy.BzzyJyInfo;
+import com.pope.advert.entity.gggl.bzzy.extend.BzzyJyInfoExtend;
 import com.pope.advert.entity.log.CustomOperateLog;
 import com.pope.advert.service.dto.DataResult;
-import com.wisedu.crowd.common.exception.ServiceException;
 
 public interface BzzyJyInfoService {
 	  /**
@@ -34,5 +38,13 @@ public interface BzzyJyInfoService {
    DataResult<Integer> updateByPrimaryKeySelective(BzzyJyInfo record,CustomOperateLog log) throws ServiceException;
    
    DataResult<Integer> publishing(BzzyInfo bzzyInfo, BzzyJyInfo bzzyJyInfo, BzzyExtInfo bzzyExtInfo,
-			CustomOperateLog log) throws ServiceException;;
+			CustomOperateLog log) throws ServiceException;
+   
+
+   DataResult<List<BzzyJyInfoExtend>> selectByCondition(QueryCondition<BzzyJyInfoExtend> condition,
+			CustomOperateLog log) throws ServiceException;
+
+	DataResult<Integer> deleteByBzzyId(String bzzyId, CustomOperateLog log) throws ServiceException;
+	
+	DataResult<Integer> delete(String bzzyId, CustomOperateLog log) throws ServiceException;
 }

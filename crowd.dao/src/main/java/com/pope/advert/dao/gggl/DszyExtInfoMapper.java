@@ -1,6 +1,11 @@
 package com.pope.advert.dao.gggl;
 
+import java.util.List;
+
+import com.pope.advert.entity.dto.QueryCondition;
 import com.pope.advert.entity.gggl.DszyExtInfo;
+import com.pope.advert.entity.gggl.bzzy.extend.BzzyExtInfoExtend;
+import com.pope.advert.entity.gggl.extend.DszyExtInfoExtend;
 
 public interface DszyExtInfoMapper {
     /**
@@ -38,4 +43,6 @@ public interface DszyExtInfoMapper {
      * @mbggenerated 2017-12-21
      */
     int updateByPrimaryKey(DszyExtInfo record);
+    
+    
 }

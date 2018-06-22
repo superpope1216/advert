@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pope.advert.common.code.AreaClassifyEnum;
+import com.pope.advert.common.code.DictionaryEnum;
+import com.pope.advert.common.code.ShztEnum;
+import com.pope.advert.common.code.SupplyClassifyEnum;
 import com.pope.advert.controller.BaseController;
 import com.pope.advert.entity.dto.PageInfo;
 import com.pope.advert.entity.dto.QueryCondition;
@@ -19,9 +23,6 @@ import com.pope.advert.service.dictionary.DictionaryService;
 import com.pope.advert.service.dto.DataResult;
 import com.pope.advert.service.supply.DszyInfoService;
 import com.pope.advert.service.supply.SupplyInfoService;
-import com.wisedu.crowd.common.code.AreaClassifyEnum;
-import com.wisedu.crowd.common.code.DictionaryEnum;
-import com.wisedu.crowd.common.code.SupplyClassifyEnum;
 import com.wisedu.crowd.common.util.StringUtil;
 
 @Controller
@@ -32,10 +33,14 @@ public class SupplyBzzyCenterController extends BaseController{
 	@Autowired
 	private SupplyInfoService supplyInfoService;
 	@RequestMapping("index")
-	public ModelAndView index(String flag) throws Exception{
+	public ModelAndView index(String flag,String queryGgxs) throws Exception{
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("supplyview/bzzyCenter");
 		mv.addObject("flag", flag);
+		if(StringUtil.isEmpty(queryGgxs)){
+			queryGgxs="";
+		}
+		mv.addObject("queryGgxs",queryGgxs);
 		mv.addObject("area", dictionaryService.selectAreaByClassify(AreaClassifyEnum.AREA.getCode(), this.createCustomOperateLog()).getDatas());
 		mv.addObject("gglx", dictionaryService.selectByCondtion(DictionaryEnum.T_ADVERT_SJZD_GGLX, null));
 		mv.addObject("ggxs", dictionaryService.selectByCondtion(DictionaryEnum.T_ADVERT_SJZD_BZLX, null));
@@ -47,7 +52,7 @@ public class SupplyBzzyCenterController extends BaseController{
 	public DataResult<List<Map<String,Object>>> list(String ggxs,String areaBm,String cityBm,String dst,Integer pageSize,Integer pageNum) throws Exception{
 		SupplyInfo querySupplyInfo=new SupplyInfo();
 		querySupplyInfo.setGglx(SupplyClassifyEnum.BZGG.getCode());
-		
+		querySupplyInfo.setShzt(ShztEnum.YTG.getCode());
 		if(!StringUtil.isEmpty(ggxs)){
 			querySupplyInfo.setAdvertType(ggxs);
 		}
@@ -60,6 +65,7 @@ public class SupplyBzzyCenterController extends BaseController{
 		if(!StringUtil.isEmpty(dst)){
 			querySupplyInfo.setTvId(dst);
 		}
+		querySupplyInfo.setNeedHy(true);
 		QueryCondition<SupplyInfo> condition=new QueryCondition<SupplyInfo>();
 		condition.setPageInfo(new PageInfo(pageSize,pageNum));
 		condition.setQuery(querySupplyInfo);

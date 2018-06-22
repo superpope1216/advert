@@ -119,27 +119,13 @@
 								</h3>
 							</div>
 
-							<div class="row " style="margin-top: 20px;">
-								<ul class="nav nav-tabs nav-tabs-line">
-									<li class="nav-item active">
-										<a class="nav-link" data-toggle="tab" data-key="1" aria-expanded="true">
-											招标列表
-										</a>
-									</li>
-									<li class="nav-item ">
-										<a class="nav-link" data-toggle="tab" data-key="2" aria-expanded="true">
-											我的招标
-										</a>
-									</li>
-								</ul>
-								
-							</div>
+							
 							<div class="row" id="divDllb" style="margin-top:20px;">
 								<div id="divContent">
 								</div>
 								<div class="mypaging2 clearfix" id="pageContent"></div>
 							</div>
-							<div class="row" id="divWddl" style="margin-top:20px;display:none;">
+							<div class="row" id="divWddl" style="margin-top:20px;">
 								<table class="table table-hover mytable2">
 									<thead>
 										<tr>
@@ -147,7 +133,6 @@
 											<th style="width:100px;">招标开始时间</th>
 											<th style="width:100px;">招标结束时间</th>
 											<th style="width:100px;">状态</th>
-											<th style="width:100px;">点击量</th>
 											<th style="width:220px;">操作</th>
 										</tr>
 									</thead>

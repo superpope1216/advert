@@ -47,9 +47,15 @@ public class CustomOperateLog implements Serializable{
     
     private String companyId;
     
-
-	
-	
+    private boolean isAdmin;
+    
+    public boolean getIsAdmin(){
+    	return isAdmin;
+    }
+    
+    public void setIsAdmin(boolean isAdmin){
+    	this.isAdmin=isAdmin;
+    }
     
     public String getCompanyId() {
 		return companyId;

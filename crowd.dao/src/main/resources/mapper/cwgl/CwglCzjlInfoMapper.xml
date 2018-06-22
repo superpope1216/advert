@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.cwgl.CwglCzjlInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.cwgl.CwglCzjlInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="YHID" property="yhid" jdbcType="VARCHAR" />
+    <result column="DJ" property="dj" jdbcType="VARCHAR" />
+    <result column="KSSJ" property="kssj" jdbcType="VARCHAR" />
+    <result column="JSSJ" property="jssj" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="ZFZT" property="zfzt" jdbcType="VARCHAR" />
+    <result column="ZFBBH" property="zfbbh" jdbcType="VARCHAR" />
+    <result column="DDBH" property="ddbh" jdbcType="VARCHAR" />
+    <result column="NX" property="nx" jdbcType="INTEGER" />
+    <result column="JE" property="je" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, YHID, DJ, KSSJ, JSSJ, CJSJ, IP, ZFZT, ZFBBH, DDBH, NX, JE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_cwgl_czjl
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_cwgl_czjl
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.cwgl.CwglCzjlInfo" >
+    insert into t_advert_cwgl_czjl (WID, YHID, DJ, 
+      KSSJ, JSSJ, CJSJ, IP, 
+      ZFZT, ZFBBH, DDBH, 
+      NX, JE)
+    values (#{wid,jdbcType=VARCHAR}, #{yhid,jdbcType=VARCHAR}, #{dj,jdbcType=VARCHAR}, 
+      #{kssj,jdbcType=VARCHAR}, #{jssj,jdbcType=VARCHAR}, #{cjsj,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{zfzt,jdbcType=VARCHAR}, #{zfbbh,jdbcType=VARCHAR}, #{ddbh,jdbcType=VARCHAR}, 
+      #{nx,jdbcType=INTEGER}, #{je,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.cwgl.CwglCzjlInfo" >
+    insert into t_advert_cwgl_czjl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="yhid != null" >
+        YHID,
+      </if>
+      <if test="dj != null" >
+        DJ,
+      </if>
+      <if test="kssj != null" >
+        KSSJ,
+      </if>
+      <if test="jssj != null" >
+        JSSJ,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="ip != null" >
+        IP,
+      </if>
+      <if test="zfzt != null" >
+        ZFZT,
+      </if>
+      <if test="zfbbh != null" >
+        ZFBBH,
+      </if>
+      <if test="ddbh != null" >
+        DDBH,
+      </if>
+      <if test="nx != null" >
+        NX,
+      </if>
+      <if test="je != null" >
+        JE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="yhid != null" >
+        #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="dj != null" >
+        #{dj,jdbcType=VARCHAR},
+      </if>
+      <if test="kssj != null" >
+        #{kssj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssj != null" >
+        #{jssj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="zfzt != null" >
+        #{zfzt,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbbh != null" >
+        #{zfbbh,jdbcType=VARCHAR},
+      </if>
+      <if test="ddbh != null" >
+        #{ddbh,jdbcType=VARCHAR},
+      </if>
+      <if test="nx != null" >
+        #{nx,jdbcType=INTEGER},
+      </if>
+      <if test="je != null" >
+        #{je,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.cwgl.CwglCzjlInfo" >
+    update t_advert_cwgl_czjl
+    <set >
+      <if test="yhid != null" >
+        YHID = #{yhid,jdbcType=VARCHAR},
+      </if>
+      <if test="dj != null" >
+        DJ = #{dj,jdbcType=VARCHAR},
+      </if>
+      <if test="kssj != null" >
+        KSSJ = #{kssj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssj != null" >
+        JSSJ = #{jssj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="zfzt != null" >
+        ZFZT = #{zfzt,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbbh != null" >
+        ZFBBH = #{zfbbh,jdbcType=VARCHAR},
+      </if>
+      <if test="ddbh != null" >
+        DDBH = #{ddbh,jdbcType=VARCHAR},
+      </if>
+      <if test="nx != null" >
+        NX = #{nx,jdbcType=INTEGER},
+      </if>
+      <if test="je != null" >
+        JE = #{je,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.cwgl.CwglCzjlInfo" >
+    update t_advert_cwgl_czjl
+    set YHID = #{yhid,jdbcType=VARCHAR},
+      DJ = #{dj,jdbcType=VARCHAR},
+      KSSJ = #{kssj,jdbcType=VARCHAR},
+      JSSJ = #{jssj,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=VARCHAR},
+      IP = #{ip,jdbcType=VARCHAR},
+      ZFZT = #{zfzt,jdbcType=VARCHAR},
+      ZFBBH = #{zfbbh,jdbcType=VARCHAR},
+      DDBH = #{ddbh,jdbcType=VARCHAR},
+      NX = #{nx,jdbcType=INTEGER},
+      JE = #{je,jdbcType=DECIMAL}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

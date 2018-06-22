@@ -32,13 +32,9 @@ define(function(require, exports, module) {
 					html+="<tr>";
 					html+="<td>"+toStr(_data.title)+"</td>";
 					html+="<td>"+toStr(_data.shztDisplay)+"</td>";
-					html+="<td>0</td>";
 					html+="<td>";
-					html+='<button type="button" data-option="view" data-key="'+_data.wid+'" class="btn btn-link">详情</button>';
-					if(_data.shzt==0 || _data.shzt==3){
-						html+='|<button type="button" data-option="edit" data-key="'+_data.wid+'" class="btn btn-link">编辑</button>';
-						html+='|<button type="button" data-option="delete" data-key="'+_data.wid+'" class="btn btn-link">删除</button>';
-					}
+						html+='<button type="button" data-option="edit" data-key="'+_data.wid+'" class="btn btn-primary btn-xs"><i class="fa fa-pencil" data-original-title="" title=""></i></button>';
+						html+='<button type="button" data-option="delete" data-key="'+_data.wid+'" class="btn btn-danger btn-xs"><i class="fa fa-trash-o " data-original-title="" title=""></i></button>';
 					
 					html+="</td>";
 					html+="</tr>";

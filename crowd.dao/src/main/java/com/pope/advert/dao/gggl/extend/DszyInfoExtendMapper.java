@@ -7,11 +7,9 @@ import org.apache.ibatis.annotations.Param;
 
 import com.pope.advert.entity.dto.QueryCondition;
 import com.pope.advert.entity.gggl.SupplyCondition;
+import com.pope.advert.entity.gggl.extend.DszyInfoExtend;
 
 public interface DszyInfoExtendMapper {
-   
-	List<Map<String,Object>> selectDisplayViewByCondition(@Param("condition") String condition,@Param("registerId") String registerId);
 	
-	
-	List<Map<String,Object>> selectDisplayByCondtion(QueryCondition<SupplyCondition> condition);
+	List<DszyInfoExtend> selectDisplayByCondition(QueryCondition<DszyInfoExtend> condition);
 }

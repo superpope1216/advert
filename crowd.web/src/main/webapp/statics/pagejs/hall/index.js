@@ -109,8 +109,8 @@ $(document).ready(function() {
     }
     function pro_fun(res) {
         pro_cut_hgt = $('.product-class').outerHeight();
-       // $('.product-content').height(pro_cut_hgt);
-        $('.product-content').height(400);
+       //$('.product-content').height(pro_cut_hgt);
+        //$('.product-content').height(420);
         pro_num = Math.floor(pro_cut_hgt / (win_width >= 768 ? 70 : 60));
         pro_pad = Math.floor((pro_cut_hgt / pro_num - 40) / 2);
         pro_html_fun(pro_num);
@@ -125,7 +125,7 @@ $(document).ready(function() {
             var pro_len = Math.ceil(M['pro_all' + index].length / pro_num);
             $(this).width((pro_len <= pro_con ? pro_len: pro_con) * pro_list_width);
         });
-        $('.product-list a').css('padding-top', pro_pad).css('padding-bottom', pro_pad);
+        //$('.product-list a').css('padding-top', pro_pad).css('padding-bottom', pro_pad);
         if (!res) $(window).resize(function() {
             clearTimeout(M['pro_time']);
             M['pro_time'] = window.setTimeout(function() {
@@ -246,7 +246,7 @@ $(document).ready(function() {
         observeParents: true
     });
     $('.info-cut img[data-original]').lazyload();
-
+    try{
     M['foot_service'] = new Swiper('.foot-service', {
         wrapperClass: 'foot-service-wraper',
         slideClass: 'foot-service-slide',
@@ -257,7 +257,8 @@ $(document).ready(function() {
         observer: true,
         observeParents: true
     });
-
+    }catch(e){}
+    try{
     M['foot_nav'] = new Swiper('.foot-nav', {
         wrapperClass: 'foot-nav-wraper',
         slideClass: 'foot-nav-slide',
@@ -268,7 +269,8 @@ $(document).ready(function() {
         observer: true,
         observeParents: true
     });
-
+    }catch(e){}
+    try{
     new Swiper('.column-nav', {
         initialSlide: $('.column-li.active').index(),
         wrapperClass: 'column-ul',
@@ -283,6 +285,7 @@ $(document).ready(function() {
             $('.column-hover ul').removeClass('active');
         }
     });
+    }catch(e){}
     if ($('.column-hover').length > 0) {
         var navtime = '';
         $('.column-li').mouseover(function() {

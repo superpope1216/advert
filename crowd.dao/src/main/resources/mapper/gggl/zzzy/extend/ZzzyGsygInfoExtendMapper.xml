@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.zzzy.extend.ZzzyGsygInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.zzzy.extend.ZzzyGsygInfoExtend" 
+  extends="com.pope.advert.dao.gggl.zzzy.ZzzyGsygInfoMapper.BaseResultMap">
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_gggl_zzzy_gsyg.WID, 
+    t_advert_gggl_zzzy_gsyg.NAME, 
+    t_advert_gggl_zzzy_gsyg.ZK, 
+    t_advert_gggl_zzzy_gsyg.ZZZY_ID
+  </sql>
+  <sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND t_advert_gggl_zzzy_gsyg.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.zzzyId!=null and query.zzzyId!=""'>
+				AND t_advert_gggl_zzzy_gsyg.ZZZY_ID=#{query.zzzyId,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<select id="selectByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_gggl_zzzy_gsyg
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+	<delete id="deleteByZzzyId">
+		DELETE FROM t_advert_gggl_zzzy_gsyg WHERE ZZZY_ID=#{zzzyId,jdbcType=VARCHAR}
+	</delete>
+</mapper>

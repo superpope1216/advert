@@ -5,13 +5,15 @@
   extends="com.pope.advert.dao.yhgl.CompanyZzInfoMapper.BaseResultMap">
     <result column="zzlxDisplay" property="zzlxDisplay" jdbcType="VARCHAR" />
     <result column="shztDisplay" property="shztDisplay" jdbcType="VARCHAR" />
+    <result column="companyName" property="companyName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     t_advert_yhgl_company_zz.WID, t_advert_yhgl_company_zz.ZZLX, 
     t_advert_yhgl_company_zz.ZZLOG, t_advert_yhgl_company_zz.REGISTER_ID, 
     t_advert_yhgl_company_zz.CJSJ, t_advert_yhgl_company_zz.CJIP, 
     t_advert_yhgl_company_zz.UPDATE_TIME, t_advert_yhgl_company_zz.SHZT, 
-    t_advert_yhgl_company_zz.UPDATE_IP, t_advert_yhgl_company_zz.DATASTATUS
+    t_advert_yhgl_company_zz.UPDATE_IP, t_advert_yhgl_company_zz.DATASTATUS,
+    t_advert_yhgl_company_zz.COMPANY_ID
   </sql>
   <sql id="sqlWhere">
   	<if test='query!=null'>
@@ -27,6 +29,13 @@
   		<if test='query.shzt!=null and query.shzt!=""'>
   			AND t_advert_yhgl_company_zz.shzt=#{query.shzt,jdbcType=VARCHAR}
   		</if>
+  		<if test='query.companyId!=null and query.companyId!=""'>
+  			AND t_advert_yhgl_company_zz.companyId=#{query.companyId,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.companyName!=null and query.companyName!=""'>
+  			AND T_ADVERT_YHJBXX_COMPANY.NAME LIKE concat('%',#{query.companyName,jdbcType=VARCHAR},'%')
+  		</if>
+  		
   	</if>
   </sql>
   <sql id="sqlOrder">
@@ -45,11 +54,13 @@
   <select id="selectDisplayByCondition" resultMap="BaseResultMap" parameterType="com.pope.advert.entity.dto.QueryCondition" >
     select 
     <include refid="Base_Column_List" />
+    ,t_advert_yhjbxx_company.name as companyName
     ,T_ADVERT_SJZD_COMPANY_ZZLX.lbmc as zzlxDisplay
     ,T_ADVERT_SJZD_SHZT.lbmc as shztDisplay
     from t_advert_yhgl_company_zz 
     left join T_ADVERT_SJZD_COMPANY_ZZLX on T_ADVERT_SJZD_COMPANY_ZZLX.lbdm=t_advert_yhgl_company_zz.zzlx
     left join T_ADVERT_SJZD_SHZT on T_ADVERT_SJZD_SHZT.lbdm=t_advert_yhgl_company_zz.shzt
+    LEFT JOIN t_advert_yhjbxx_company ON t_advert_yhjbxx_company.WID=t_advert_yhgl_company_zz.COMPANY_ID
     <where>
     	t_advert_yhgl_company_zz.datastatus='1'
     	<include refid="sqlWhere"/>

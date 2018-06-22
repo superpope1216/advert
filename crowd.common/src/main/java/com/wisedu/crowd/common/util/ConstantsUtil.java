@@ -10,10 +10,17 @@ public class ConstantsUtil {
 	
 	public final static String SESSION_COMPANY="SESSION_COMPANY";
 	
+	public final static String 	SUPPLY_SHZT="SESSION_SUPPLY_SHZT";
+	
+	public final static String BUY_SHZT="SESSION_BUY_SHZT";
 	
 	public final static String IS_SUPPLY="SESSION_IS_SUPPLY";
 	
 	public final static String IS_BUY="SESSION_IS_BUY";
+	/**
+	 * 用户等级信息
+	 */
+	public final static String YHXX_DJXX="SESSION_YHXX_DJXX";
     
     /**
      * 手机验证码 标识

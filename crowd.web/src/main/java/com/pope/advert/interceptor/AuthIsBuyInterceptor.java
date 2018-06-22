@@ -11,9 +11,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.pope.advert.common.code.CompanyClassifyEnum;
+import com.pope.advert.common.code.HttpCodeEnum;
+import com.pope.advert.common.code.ShztEnum;
+import com.pope.advert.entity.yhgl.CompanyInfo;
 import com.pope.advert.service.dto.DataResult;
-import com.wisedu.crowd.common.code.HttpCodeEnum;
-import com.wisedu.crowd.common.code.ShztEnum;
 import com.wisedu.crowd.common.util.ConstantsUtil;
 
 public class AuthIsBuyInterceptor implements HandlerInterceptor {
@@ -42,12 +44,21 @@ public class AuthIsBuyInterceptor implements HandlerInterceptor {
 		}
         int errCode=-1;
         if(checkLogin(methodHandler,request)){
-        	boolean is_buy=(boolean)request.getSession().getAttribute(ConstantsUtil.IS_BUY);
-        	
-        	if(is_buy){
-        		return true;
+        	CompanyInfo com=(CompanyInfo)request.getSession().getAttribute(ConstantsUtil.SESSION_COMPANY);
+        	if(com!=null && (com.getFlag().equals(CompanyClassifyEnum.BUY.getCode()) ||com.getFlag().equals(CompanyClassifyEnum.BOTH.getCode()))){
+        		if(ShztEnum.DSH.getCode().equals(com.getBuyShzt())){
+        			errCode=HttpCodeEnum.BUY_SFRZ_PASSING.getCode();
+        		}else if(ShztEnum.WTG.getCode().equals(com.getBuyShzt())){
+        			errCode=HttpCodeEnum.BUY_SFRZ_NOT_PASS.getCode();
+        		}else if(ShztEnum.CG.getCode().equals(com.getBuyShzt())) {
+        			errCode=HttpCodeEnum.IS_NOT_BUY.getCode();
+        		}
+        		else{
+        			return true;
+        		}
+        	}else{
+        		errCode=HttpCodeEnum.IS_NOT_BUY.getCode();
         	}
-        	errCode=HttpCodeEnum.IS_NOT_BUY.getCode();
         }else{
         	errCode=HttpCodeEnum.NOT_LOGIN.getCode();
         	
@@ -65,7 +76,16 @@ public class AuthIsBuyInterceptor implements HandlerInterceptor {
 		   AuthLoginAnnotation auth=methodHandler.getMethodAnnotation(AuthLoginAnnotation.class);
 	        
 	        if(auth==null){
-	        	return true;
+	        	AuthIsBuyAnnotation authIsBuyAnnotation=methodHandler.getMethodAnnotation(AuthIsBuyAnnotation.class);
+	        	if(authIsBuyAnnotation==null){
+	        		return true;
+	        	}else{
+	        		if (request.getSession().getAttribute(ConstantsUtil.SESSION_YHJBXX) != null) {
+		    			return true;
+		    		}else{
+		    			return false;
+		    		}
+	        	}
 	        }else{
 	        	if (request.getSession().getAttribute(ConstantsUtil.SESSION_YHJBXX) != null) {
 	    			return true;

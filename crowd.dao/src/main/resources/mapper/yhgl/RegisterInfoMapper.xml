@@ -9,7 +9,7 @@
     <result column="EMAIL" property="email" jdbcType="VARCHAR" />
     <result column="CZSJ" property="czsj" jdbcType="VARCHAR" />
     <result column="CZIP" property="czip" jdbcType="VARCHAR" />
-    <result column="adminFlag" property="adminFlag" jdbcType="VARCHAR" />
+    <result column="admin_Flag" property="adminFlag" jdbcType="VARCHAR" />
     
   </resultMap>
   <sql id="Base_Column_List" >

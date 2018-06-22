@@ -145,4 +145,53 @@
 		where area_Bm=#{areaBm,jdbcType=VARCHAR}
 		order by PX ASC
 	</select>
+	
+	<select id="selectZsfsByZsxt" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_ADAVERT_SJZD_WLZY_FS
+		where xtdm=#{zsxt,jdbcType=VARCHAR}
+		order by PX ASC
+	</select>
+	
+	<select id="selectZsccByZsxt" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_ADAVERT_SJZD_WLZY_CC
+		where xtdm=#{zsxt,jdbcType=VARCHAR}
+		order by PX ASC
+	</select>
+	
+	<select id="selectHwzyQyByGglx" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		from T_ADVERT_SJZD_HWZY_QY
+		where zylx=#{gglx,jdbcType=VARCHAR}
+		order by PX ASC
+	</select>
+	<select id="selectHwzyXsByGglx" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		from T_ADVERT_SJZD_HWZY_XS
+		where zylx=#{gglx,jdbcType=VARCHAR}
+		order by PX ASC
+	</select>
+	<select id="selectHwzyGgxx"  resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		from T_ADVERT_SJZD_HWZY_XX
+		where zylx=#{gglx,jdbcType=VARCHAR}
+		<if test='area!=null'>
+			and area=#{area,jdbcType=VARCHAR}
+		</if>
+		<if test='city!=null and city!=""'>
+			and city=#{city,jdbcType=VARCHAR}
+		</if>
+		<if test='xian!=null and xian!=""'>
+			and xian=#{xian,jdbcType=VARCHAR}
+		</if>
+		order by PX ASC
+	</select>
 </mapper>

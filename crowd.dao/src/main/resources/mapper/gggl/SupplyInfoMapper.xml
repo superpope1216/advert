@@ -1,39 +1,77 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.pope.advert.dao.gggl.SupplyInfoMapper" >
-	<select id="selectByCondition" parameterType="com.pope.advert.entity.dto.QueryCondition" resultType="map">
-		SELECT * FROM V_ADVERT_GGGL_SUPPLY
-		<where>
-			<if test='query!=null'>
+	<select id="selectDszyByCondition" resultType="map">
+		select * from ${tableName}
+		where dszy_id=#{dszyId,jdbcType=VARCHAR}
+	</select>
+	
+	<delete id="deleteDszyByCondition">
+		DELETE FROM t_advert_gggl_dszy_ext
+		where DSZY_ID==#{dszyId,jdbcType=VARCHAR}
+	</delete>
+	<sql id="sqlWhere">
+		<if test='query!=null'>
 				<if test='query.wid!=null and query.wid!=""'>
-					AND WID=#{query.wid,jdbcType=VARCHAR}
+					AND V_ADVERT_GGGL_SUPPLY.WID=#{query.wid,jdbcType=VARCHAR}
 				</if>
 				<if test='query.gglx!=null and query.gglx!=""'>
-					AND GGLX=#{query.gglx,jdbcType=VARCHAR}
+					AND V_ADVERT_GGGL_SUPPLY.GGLX=#{query.gglx,jdbcType=VARCHAR}
 				</if>
 				<if test='query.tvId!=null and query.tvId!=""'>
-					AND TV_ID=#{query.tvId,jdbcType=VARCHAR}
+					AND V_ADVERT_GGGL_SUPPLY.TV_ID=#{query.tvId,jdbcType=VARCHAR}
 				</if>
 				<if test='query.area!=null and query.area!=""'>
-					AND AREA=#{query.area,jdbcType=VARCHAR}
+					AND V_ADVERT_GGGL_SUPPLY.AREA=#{query.area,jdbcType=VARCHAR}
 				</if>
 				<if test='query.city!=null and query.city!=""'>
-					AND CITY=#{query.city,jdbcType=VARCHAR}
+					AND V_ADVERT_GGGL_SUPPLY.CITY=#{query.city,jdbcType=VARCHAR}
 				</if>
 				<if test='query.advertType!=null and query.advertType!=""'>
-					AND ADVERT_TYPE=#{query.advertType,jdbcType=VARCHAR}
+					AND V_ADVERT_GGGL_SUPPLY.ADVERT_TYPE=#{query.advertType,jdbcType=VARCHAR}
 				</if>
 				<if test='query.shzt!=null and query.shzt!=""'>
-					AND SHZT=#{query.shzt,jdbcType=VARCHAR}
+					AND V_ADVERT_GGGL_SUPPLY.SHZT=#{query.shzt,jdbcType=VARCHAR}
 				</if>
 				<if test='query.registerId!=null and query.registerId!=""'>
-					AND register_Id=#{query.registerId,jdbcType=VARCHAR}
+					AND V_ADVERT_GGGL_SUPPLY.register_Id=#{query.registerId,jdbcType=VARCHAR}
 				</if>
 				<if test='query.name!=null and query.name!=""'>
-					AND NAME LIKE CONCAT(',',#{query.name,jdbcType=VARCHAR},',')
+					AND V_ADVERT_GGGL_SUPPLY.NAME LIKE CONCAT('%',#{query.name,jdbcType=VARCHAR},'%')
 				</if>
+				<if test='query.companyName!=null and query.companyName!=""'>
+					AND V_ADVERT_GGGL_SUPPLY.companyName LIKE CONCAT('%',#{query.companyName,jdbcType=VARCHAR},'%')
+				</if>
+				<if test='query.needHy!=null and query.needHy==true'>
+					AND t_advert_yhjbxx_djxx.yhzt IN ('1','2')
+				</if>
+				
 			</if>
+	</sql>
+	<select id="selectCountByCondition" parameterType="com.pope.advert.entity.dto.QueryCondition" resultType="int">
+		SELECT COUNT(0) FROM V_ADVERT_GGGL_SUPPLY
+		<where>
+			<include refid="sqlWhere"/>
 		</where>
-		order by cjsj desc
+	</select>
+	<select id="selectByCondition" parameterType="com.pope.advert.entity.dto.QueryCondition" resultType="map">
+		SELECT V_ADVERT_GGGL_SUPPLY.*,t_advert_sjzd_gglx.lbmc as gglx_display FROM V_ADVERT_GGGL_SUPPLY
+		LEFT JOIN t_advert_sjzd_gglx ON t_advert_sjzd_gglx.LBDM=V_ADVERT_GGGL_SUPPLY.GGLX
+		<if test='query.needHy!=null and query.needHy==true'>
+		LEFT JOIN t_advert_yhjbxx_djxx ON V_ADVERT_GGGL_SUPPLY.register_id=t_advert_yhjbxx_djxx.YHID
+LEFT JOIN t_advert_cwgl_djxx ON t_advert_yhjbxx_djxx.DJ=t_advert_cwgl_djxx.WID			
+		</if>
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+		<choose>
+			<when test="query.needHy!=null and query.needHy==true">
+				ORDER BY t_advert_cwgl_djxx.YXJB,V_ADVERT_GGGL_SUPPLY.cjsj DESC
+			</when>
+			<otherwise>
+				order by V_ADVERT_GGGL_SUPPLY.cjsj desc
+			</otherwise>
+		</choose>
+		
 	</select>
 </mapper>

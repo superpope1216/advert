@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.pope.advert.common.code.DictionaryEnum;
+import com.pope.advert.common.exception.ServiceException;
 import com.pope.advert.entity.dictionary.DictionaryInfo;
 import com.pope.advert.entity.log.CustomOperateLog;
 import com.pope.advert.service.dto.DataResult;
-import com.wisedu.crowd.common.code.DictionaryEnum;
-import com.wisedu.crowd.common.exception.ServiceException;
 
 public interface DictionaryService {
 
@@ -59,4 +59,16 @@ public interface DictionaryService {
 	DataResult<List<DictionaryInfo>> selectGbdstpdByGbdstBm(String gbdstBm,CustomOperateLog log) throws ServiceException;
 	
 	DataResult<List<DictionaryInfo>> selectByAreaBm(String tableName,String areaBm,CustomOperateLog log) throws ServiceException;
+	
+	
+	DataResult<List<DictionaryInfo>>  selectZsfsByZsxt(String zsxt,CustomOperateLog log) throws ServiceException;
+	
+	DataResult<List<DictionaryInfo>>  selectZsccByZsxt(String zsxt,CustomOperateLog log) throws ServiceException;
+	
+	
+	DataResult<List<DictionaryInfo>>  selectHwzyQyByGglx(String gglx,CustomOperateLog log) throws ServiceException;
+	
+	DataResult<List<DictionaryInfo>> selectHwzyXsByGglx( String gglx,CustomOperateLog log) throws ServiceException;
+	
+	DataResult<List<DictionaryInfo>> selectHwzyGgxx(String gglx,String area,String city,String xian,CustomOperateLog log) throws ServiceException;
 }

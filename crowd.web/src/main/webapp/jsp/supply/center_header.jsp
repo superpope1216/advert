@@ -11,6 +11,7 @@
 									<c:choose>
 										<c:when test="${data.lbdm == 1}">
 											<c:set var="icon" value="fa-files-o"></c:set>
+											<c:set var="url" value="supplyHwzyCenter"/>
 										</c:when>
 										<c:when test="${data.lbdm == 2}">
 											<c:set var="icon" value="fa-tv"></c:set>

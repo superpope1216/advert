@@ -4,11 +4,15 @@ define(function(require, exports, module) {
 	require('plugins/vendor/bootstrap/bootstrap.min');
 	if(page_type == 'login')require.async('pagejs/yhgl/login');
 	if(page_type == 'register')require.async('pagejs/yhgl/register');
+	if(page_type == 'resetPwd')require.async('pagejs/yhgl/resetPwd');
+	
 	if(page_type=='dszyPublishing')require.async('pagejs/gggl/dszy/publishing');
 	if(page_type=='gbzyPublishing')require.async('pagejs/gggl/gbzy/publishing');
 	if(page_type=='bzzyPublishing')require.async('pagejs/gggl/bzzy/publishing');
 	if(page_type=='zzzyPublishing')require.async('pagejs/gggl/zzzy/publishing');
 	if(page_type=='xmtzyPublishing')require.async('pagejs/gggl/xmtzy/publishing');
+	if(page_type=='hwzyPublishing')require.async('pagejs/gggl/hwzy/publishing');
+	if(page_type=='wlzyPublishing')require.async('pagejs/gggl/wlzy/publishing');
 	if(page_type=='supplyIndex')require.async('pagejs/gggl/index');
 	
 	if(page_type=='companyInfoView')require.async('pagejs/yhgl/yhxx/companyInfo');
@@ -27,4 +31,11 @@ define(function(require, exports, module) {
 	
 	if(page_type=='qyzxGgIndex') require.async('pagejs/qyzx/gg/index');
 	if(page_type=='qyzxGgEdit') require.async('pagejs/qyzx/gg/edit');
+	
+	
+	if(page_type=='buyQgView')require.async('pagejs/buy/qg/index');
+	if(page_type=='buyQgPublishing')require.async('pagejs/buy/qg/publishing');
+	
+	if(page_type=="cwglCzjl")require.async('pagejs/cwgl/czjl');
+	
 });

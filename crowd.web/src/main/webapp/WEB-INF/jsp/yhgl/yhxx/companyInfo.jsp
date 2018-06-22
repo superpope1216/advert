@@ -90,11 +90,14 @@
 							</div>
 							<div class="row my-mt-10">
 								<div class="well well-sm my-padding-12">提示：企业资料也是广告商铺展示资料，详细真实的商铺企业资料信息，是赢得广告买家客户信任的前提和基础。因此，请认真细致的填写您的资料，详细可信任的公司简介和清晰的LOGO，是您企业实力的展现。</div>
+								<div class="well well-sm my-padding-12"
+									style="color: red; font-weight: bold;">${msg}</div>
 								<form class="form-register met-form form-horizontal"
 									method="post" action="" role="form" id="formCompany">
 									<input type="hidden" name="wid" value="" />
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">公司名称</label>
+										<label for="firstname" class="col-sm-2 control-label">公司名称<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-8">
 												<input type="text" class="form-control" name="name"
@@ -105,7 +108,8 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">公司所在地</label>
+										<label for="firstname" class="col-sm-2 control-label">公司所在地<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-4">
 												<select class="form-control " name="area" required
@@ -132,7 +136,8 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">经营地址</label>
+										<label for="firstname" class="col-sm-2 control-label">经营地址<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-8">
 												<input type="text" class="form-control" name="addr"
@@ -142,7 +147,8 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">联系人</label>
+										<label for="firstname" class="col-sm-2 control-label">联系人<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-8">
 												<input type="text" class="form-control" name="lxr"
@@ -152,7 +158,8 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">固定电话</label>
+										<label for="firstname" class="col-sm-2 control-label">固定电话<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-8">
 												<input type="text" class="form-control" name="gddh"
@@ -162,7 +169,8 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">QQ号码</label>
+										<label for="firstname" class="col-sm-2 control-label">QQ号码<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-8">
 												<input type="text" class="form-control" name="qq"
@@ -172,11 +180,16 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">手机</label>
+										<label for="firstname" class="col-sm-2 control-label">手机<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-8">
 												<input type="text" class="form-control" name="sjh"
-													placeholder="请填写正确的手机号">
+													data-bv-notempty="true" data-bv-notempty-message="此项不能为空"
+													placeholder="请填写手机号" data-bv-notempty="true"
+													data-bv-regexp="true"
+													data-bv-regexp-regexp="^1[34578]\d{9}$"
+													data-bv-regexp-message="请输入正确的手机号格式">
 											</div>
 										</div>
 									</div>
@@ -200,7 +213,8 @@
 									</div>
 
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">公司性质</label>
+										<label for="firstname" class="col-sm-2 control-label">公司性质<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-8">
 												<select class="form-control " name="gsxz" required
@@ -215,10 +229,11 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">年营业额</label>
+										<label for="firstname" class="col-sm-2 control-label">年营业额<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-8">
-												<select class="form-control " name="nyye"
+												<select class="form-control " name="nyye" required
 													data-fv-notempty-message="此项不能为空">
 													<option value="">--请选择--</option>
 													<c:forEach items="${yyed}" var="data">
@@ -240,22 +255,28 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">商品LOG</label>
+										<label for="firstname" class="col-sm-2 control-label">商铺LOG<span
+											style="color: red">*</span></label>
 										<div class="col-sm-8">
 											<div class="well well-sm my-padding-12">注：商铺LOGO大小
 												160*160 像素，请尽量按尺寸修改</div>
-											<div id="sfzzmztjidUpload"
-												class="bh-l-inline sfz-icon-container pointed">
-												<i class="bh-file-img-plus">+</i> <img src=""
-													id="sfzzmztjidImg" class="sfzImg" />
+											<div class="upload-box" id="img1">
+												<div class="image-box clear">
+													<section class="upload-section">
+														<div class="upload-btn"></div>
+														<input type="file" name="file" class="upload-input"
+															id='js_uploadBtn' value="" />
+													</section>
+												</div>
 											</div>
-											<div id="sfzzmztjidBrower" class="uploadBrower"></div>
 											<input type="hidden" value="" name="gslog">
 										</div>
 									</div>
 									<div class="form-group">
-										<button class="btn btn-lg btn-primary" style="width: 200px;"
-											type="button" id="btnSaveCompany">马上修改提交</button>
+										<div style="margin-left: 25%; width: 75%;">
+											<button class="btn btn-lg btn-primary" style="width: 200px;"
+												type="button" id="btnSaveCompany">马上修改提交</button>
+										</div>
 									</div>
 
 								</form>

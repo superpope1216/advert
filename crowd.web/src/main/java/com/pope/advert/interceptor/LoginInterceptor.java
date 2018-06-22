@@ -11,9 +11,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.pope.advert.common.code.HttpCodeEnum;
+import com.pope.advert.common.code.ShztEnum;
 import com.pope.advert.service.dto.DataResult;
-import com.wisedu.crowd.common.code.HttpCodeEnum;
-import com.wisedu.crowd.common.code.ShztEnum;
 import com.wisedu.crowd.common.util.ConstantsUtil;
 
 public class LoginInterceptor implements HandlerInterceptor {
@@ -45,7 +45,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         	return true;
         }else{
         	errCode=HttpCodeEnum.NOT_LOGIN.getCode();
-        	
         }
 		//request.getRequestDispatcher("/login/index").forward(request, response);
         if (request.getHeader("Accept").contains("application/json")){

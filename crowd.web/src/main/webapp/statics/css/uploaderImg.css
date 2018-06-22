@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+
+.uploaderImg .uploadBrower {
+	width: 106px;
+	position: absolute;
+	top: 8px;
+	left: 166px;
+	visibility: hidden;
+}
+
+
+.uploaderImg .sfzImg {
+	/*    width: 303px; */
+	width:100%;
+	height:100%;
+	position: relative;
+	top: -105px;
+	z-index: -1;
+}
+
+.uploaderImg .bh-file-img-plus {
+	position: relative;
+	color: #bbb;
+	font-size: 60px;
+	display: block;
+	font-style: normal;
+	left: 40%;
+	top: 20%;
+}
+
+.uploaderImg img{
+	width:303px;
+	z-index:0px;
+	
+}
+.uploaderImg .sfz-icon-container {
+	width: 303px;
+	height: 193px;
+	background-color: #F3F3F3;
+	border: solid 1px #ddd;
+}
+.has-error .uploaderImg .sfz-icon-container{
+	border:1px solid #f96868 !important;
+}
+.has-success .uploaderImg .sfz-icon-container{
+	border:1px solid #46be8a !important;
+}
+
+.uploaderImg .uploadPosition {
+	border-radius: 52px;
+	vertical-align: middle;
+}

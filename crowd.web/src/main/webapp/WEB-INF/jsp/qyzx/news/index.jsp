@@ -124,7 +124,6 @@
 										<tr>
 											<th>标题</th>
 											<th style="width:100px;">状态</th>
-											<th style="width:100px;">点击量</th>
 											<th style="width:220px;">操作</th>
 										</tr>
 									</thead>

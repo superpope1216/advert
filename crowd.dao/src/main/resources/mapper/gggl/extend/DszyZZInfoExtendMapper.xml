@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.extend.DszyZZInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.extend.DszyZzInfoExtend"
+  extends="com.pope.advert.dao.gggl.DszyZZInfoMapper.BaseResultMap" >
+  <result column="sspdBmDisplay" property="sspdBmDisplay" jdbcType="VARCHAR" />
+  	<result column="sslmBmDisplay" property="sslmBmDisplay" jdbcType="VARCHAR" />
+  	<result column="ggjgBmDisplay" property="ggjgBmDisplay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_gggl_dszy_zz.wid, 
+    t_advert_gggl_dszy_zz.name, 
+    t_advert_gggl_dszy_zz.sspd_bm, 
+    t_advert_gggl_dszy_zz.sslm_bm, 
+    t_advert_gggl_dszy_zz.bcpc, 
+    t_advert_gggl_dszy_zz.ggjg_bm, 
+    t_advert_gggl_dszy_zz.ggjg_money, 
+    t_advert_gggl_dszy_zz.DSZY_ID
+  </sql>
+  <delete id="deleteByDszyId" >
+  	DELETE FROM t_advert_gggl_dszy_zz WHERE DSZY_ID=#{dszyId,jdbcType=VARCHAR}
+  </delete>
+  <sql id="sqlWhere">
+  	<if test='query!=null'>
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_gggl_dszy_zz.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.name!=null and query.name!=""'>
+  			AND t_advert_gggl_dszy_zz.NAME LIKE CONCAT('%',#{query.name,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test='query.dszyId!=null and query.dszyId!=""'>
+  			AND t_advert_gggl_dszy_zz.DSZY_ID=#{query.dszyId,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_SDPD.lbmc as sspdBmDisplay
+		,T_ADVERT_SJZD_DLLM.lbmc as sslmBmDisplay
+		,T_ADVERT_SJZD_GMGGJGPC.lbmc as ggjgBmDisplay
+		from t_advert_gggl_dszy_zz
+		left join T_CROWD_SJZD_SDPD on T_CROWD_SJZD_SDPD.lbdm=t_advert_gggl_dszy_zz.sspd_bm
+		left join T_ADVERT_SJZD_DLLM on T_ADVERT_SJZD_DLLM.lbdm=t_advert_gggl_dszy_zz.sslm_bm
+		left join T_ADVERT_SJZD_GMGGJGPC on T_ADVERT_SJZD_GMGGJGPC.lbdm=t_advert_gggl_dszy_zz.ggjg_bm
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+	</select>
+</mapper>

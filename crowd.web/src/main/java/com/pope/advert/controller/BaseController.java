@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.pope.advert.common.exception.ServiceException;
 import com.pope.advert.entity.log.CustomOperateLog;
 import com.pope.advert.entity.yhgl.extend.CompanyInfoExtend;
 import com.pope.advert.entity.yhgl.extend.RegisterInfoExtend;
@@ -17,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wisedu.crowd.common.exception.ServiceException;
 import com.wisedu.crowd.common.util.ConstantsUtil;
 import com.wisedu.crowd.common.util.DateUtil;
 
@@ -39,18 +40,22 @@ public class BaseController {
 	            response.setContentType("application/json;charset=UTF-8");
 	            if (exception instanceof ServiceException) {
 	            	ServiceException serviceException=(ServiceException)exception;
+	            	LOG.error("===="+serviceException.getCause());
 	                response.getWriter().append(JSONObject.toJSONString(DataResult.error(serviceException.getCode(),serviceException.getMessage())));
 	            } else {
+	            	LOG.error("===="+exception.getCause());
 	                response.getWriter().append(JSONObject.toJSONString(DataResult.error()));
 	            }
 	            response.getWriter().flush();
 	            response.getWriter().close();
 	        } else {
-	            String url = "/error/index";
+	            String url = "/error/index?errorCode=-10000";
+	            LOG.error("===="+exception.getCause());
 	            response.setCharacterEncoding("UTF-8");
 	            response.setContentType("text/html;charset=UTF-8");
+	            
 	            response.sendRedirect(request.getContextPath() + url);
-	        }
+    }
 	    }
 	    public CustomOperateLog createCustomOperateLog() throws Exception{
 	        CustomOperateLog customOperateLog=new CustomOperateLog();

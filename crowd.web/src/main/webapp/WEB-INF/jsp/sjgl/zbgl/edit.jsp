@@ -125,7 +125,8 @@
 									method="post" action="" role="form" id="formDlxx">
 									<input type="hidden" name="wid" value="" />
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">招标标题</label>
+										<label for="firstname" class="col-sm-2 control-label">招标标题<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-10">
 												<input type="text" class="form-control" name="title"
@@ -136,7 +137,8 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">招标开始时间</label>
+										<label for="firstname" class="col-sm-2 control-label">招标开始时间<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-4">
 												<input class="form-control datepicker" type="text"
@@ -148,7 +150,8 @@
 												value="">
 											</div>
 											<div class="col-sm-2">
-												招标结束时间
+												招标结束时间<span
+											style="color: red">*</span>
 											</div>
 											<div class="col-sm-4">
 												<input class="form-control datepicker" type="text"
@@ -162,16 +165,26 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">上传图片</label>
+										<label for="firstname" class="col-sm-2 control-label">上传图片<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-10">
-												<div id="imgidDiv" name="imgidDiv"></div>
+												<div class="upload-box" id="sctuljUploadBox">
+												<div class="image-box clear">
+													<section class="upload-section">
+														<div class="upload-btn"></div>
+														<input type="file" name="file" class="upload-input"
+															id='sctuljuploadBtn' value="" />
+													</section>
+												</div>
+												</div>
 												<input type="hidden" name="imgid">
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">招标内容正文</label>
+										<label for="firstname" class="col-sm-2 control-label">招标内容正文<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-10">
 												<input type="hidden" name="content">
@@ -181,7 +194,8 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">招标主题简介</label>
+										<label for="firstname" class="col-sm-2 control-label">招标主题简介<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-10">
 												<textarea class="form-control" cols="8" name="ztnr" placeholder="请输入招标主题简介"
@@ -189,9 +203,11 @@
 											</div>
 										</div>
 									</div>
-									<div class="form-group text-xs-center">
-										<button class="btn btn-lg btn-primary" style="width: 150px;"
+									<div class="form-group">
+									<div style="margin-left: 25%; width: 75%;">
+										<button class="btn btn-lg btn-primary" style="width: 200px;"
 											type="button" id="btnSaveCompany">马上发布</button>
+											</div>
 									</div>
 
 								</form>

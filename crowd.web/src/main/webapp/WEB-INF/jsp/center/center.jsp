@@ -1,4 +1,4 @@
-<%@page import="com.wisedu.crowd.common.code.CenterTypeEnum"%>
+<%@page import="com.pope.advert.common.code.CenterTypeEnum"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>

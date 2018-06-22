@@ -13,6 +13,16 @@ public class CompanyZzInfoExtend extends CompanyZzInfo implements Serializable {
 	private String zzlxDisplay;
 	
 	private String shztDisplay;
+	
+	private String companyName;
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
 	public String getZzlxDisplay() {
 		return zzlxDisplay;

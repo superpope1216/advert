@@ -1,12 +1,17 @@
 package com.pope.advert.service.supply;
 
+import java.util.List;
+
+import com.pope.advert.common.exception.ServiceException;
+import com.pope.advert.entity.dto.QueryCondition;
 import com.pope.advert.entity.gggl.DszyExtInfo;
 import com.pope.advert.entity.gggl.DszyInfo;
 import com.pope.advert.entity.gggl.DszyZzInfo;
+import com.pope.advert.entity.gggl.extend.DszyZtInfoExtend;
+import com.pope.advert.entity.gggl.extend.DszyZzInfoExtend;
 import com.pope.advert.entity.gggl.DszyZtInfo;
 import com.pope.advert.entity.log.CustomOperateLog;
 import com.pope.advert.service.dto.DataResult;
-import com.wisedu.crowd.common.exception.ServiceException;
 
 public interface DszyZzInfoService {
 	 /**
@@ -35,5 +40,11 @@ public interface DszyZzInfoService {
    DataResult<Integer> updateByPrimaryKeySelective(DszyZzInfo record,CustomOperateLog log) throws ServiceException;
    
    DataResult<Integer> publishing(DszyInfo dszyInfo, DszyZzInfo dszyZzInfo, DszyExtInfo dszyExtInfo,
-			CustomOperateLog log) throws ServiceException;;
+			CustomOperateLog log) throws ServiceException;
+   
+   DataResult<List<DszyZzInfoExtend>> selectDisplayByCondition(QueryCondition<DszyZzInfoExtend> condition,
+			CustomOperateLog log) throws ServiceException;
+DataResult<Integer> deleteByDszyId( String dszyId,CustomOperateLog log) throws ServiceException;
+   
+   DataResult<Integer> delete( String dszyId,CustomOperateLog log) throws ServiceException;
 }

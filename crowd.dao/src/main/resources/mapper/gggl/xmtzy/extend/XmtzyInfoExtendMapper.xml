@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.xmtzy.extend.XmtzyInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.xmtzy.extend.XmtzyInfoExtend" 
+  extends="com.pope.advert.dao.gggl.xmtzy.XmtzyInfoMapper.BaseResultMap">
+    
+    <result column="areaDisplay" property="areaDisplay" jdbcType="VARCHAR" />
+    <result column="cityDisplay" property="cityDisplay" jdbcType="VARCHAR" />
+    <result column="tvIdDisplay" property="tvIdDisplay" jdbcType="VARCHAR" />
+    <result column="advertTypeDisplay" property="advertTypeDisplay" jdbcType="VARCHAR" />
+    <result column="shztDisplay" property="shztDisplay" jdbcType="VARCHAR" />
+    <result column="companyName" property="companyName" jdbcType="VARCHAR" />
+    <result column="szrqDisplay" property="szrqDisplay" jdbcType="VARCHAR" />
+    <result column="jycdDisplay" property="jycdDisplay" jdbcType="VARCHAR" />
+    <result column="zyfbDisplay" property="zyfbDisplay" jdbcType="VARCHAR" />
+    <result column="srzkDisplay" property="srzkDisplay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_gggl_xmtzy.WID, 
+    t_advert_gggl_xmtzy.NAME, 
+    t_advert_gggl_xmtzy.AREA, 
+    t_advert_gggl_xmtzy.CITY, 
+    t_advert_gggl_xmtzy.TV_ID, 
+    t_advert_gggl_xmtzy.ADVERT_TYPE, 
+    t_advert_gggl_xmtzy.GGJG, 
+    t_advert_gggl_xmtzy.GGGGXS, 
+    t_advert_gggl_xmtzy.SZRQ, 
+    t_advert_gggl_xmtzy.JYCD, 
+    t_advert_gggl_xmtzy.ZYFB, 
+    t_advert_gggl_xmtzy.SRZK, 
+    t_advert_gggl_xmtzy.XMTJJ, 
+    t_advert_gggl_xmtzy.CJSJ, 
+    t_advert_gggl_xmtzy.CJIP, 
+    t_advert_gggl_xmtzy.REGISTER_ID, 
+    t_advert_gggl_xmtzy.DATASTATUS, 
+    t_advert_gggl_xmtzy.SHZT,
+     t_advert_gggl_xmtzy.ZYTP
+  </sql>
+  <sql id="sqlWhere">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_gggl_xmtzy.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.shzt!=null and query.shzt!=""'>
+  			AND t_advert_gggl_xmtzy.SHZT=#{query.shzt,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.companyName!=null and query.companyName!=""'>
+  			AND t_advert_yhjbxx_company.name like concat('%',#{query.companyName,jdbcType=VARCHAR},'%')
+  		</if>
+  		
+  </sql>
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		SELECT
+		<include refid="Base_Column_List" />
+		,area.lbmc as areaDisplay
+		,city.lbmc as cityDisplay
+		,T_ADVERT_SJZD_XMTLX.lbmc as advertTypeDisplay
+		,t_advert_sjzd_shzt.lbmc as shztDisplay
+		,t_advert_yhjbxx_company.name as companyName
+		FROM t_advert_gggl_xmtzy
+		LEFT JOIN T_ADVERT_SJZD_XZQH area ON t_advert_gggl_xmtzy.AREA=area.LBDM
+  		LEFT JOIN T_ADVERT_SJZD_XZQH city ON t_advert_gggl_xmtzy.CITY=city.LBDM
+  		LEFT JOIN T_ADVERT_SJZD_XMTLX ON T_ADVERT_SJZD_XMTLX.LBDM=t_advert_gggl_xmtzy.ADVERT_TYPE
+  		LEFT JOIN t_advert_sjzd_shzt ON t_advert_sjzd_shzt.LBDM=t_advert_gggl_xmtzy.SHZT
+  		
+  		LEFT JOIN t_advert_yhjbxx_company on t_advert_yhjbxx_company.REGISTER_ID=t_advert_gggl_xmtzy.register_id
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  	</select>
+</mapper>

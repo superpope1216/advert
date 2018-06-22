@@ -3,8 +3,8 @@ package com.pope.advert.service.dto;
 import java.io.Serializable;
 
 import com.github.pagehelper.Page;
+import com.pope.advert.common.code.HttpCodeEnum;
 import com.pope.advert.entity.dto.PageInfo;
-import com.wisedu.crowd.common.code.HttpCodeEnum;
 
 public class DataResult<T> implements Serializable {
 

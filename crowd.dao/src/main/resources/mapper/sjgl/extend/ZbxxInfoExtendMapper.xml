@@ -12,8 +12,8 @@
     t_advert_sjgl_zbxx.KSSJ, t_advert_sjgl_zbxx.JSSJ, 
     t_advert_sjgl_zbxx.IMGID, t_advert_sjgl_zbxx.ZTNR, 
     t_advert_sjgl_zbxx.MTFL,
-     t_advert_sjgl_zbxx.CJSJ, t_advert_sjgl_zbxx.YHID, t_advert_sjgl_zbxx.XGSJ
-     ,t_advert_sjgl_zbxx.SHZT, t_advert_sjgl_zbxx.SHSJ
+    t_advert_sjgl_zbxx.CJSJ, t_advert_sjgl_zbxx.YHID, t_advert_sjgl_zbxx.XGSJ
+    ,t_advert_sjgl_zbxx.SHZT, t_advert_sjgl_zbxx.SHSJ
   </sql>
   <sql id="Blob_Column_List" >
     t_advert_sjgl_zbxx.CONTENT
@@ -41,12 +41,15 @@
   		<if test='query.shzt!=null and query.shzt!=""'>
   			AND t_advert_sjgl_zbxx.shzt=#{query.shzt,jdbcType=VARCHAR}
   		</if>
+  		<if test='query.companyName!=null and query.companyName!=""'>
+  			AND t_advert_yhjbxx_company.name like concat('%',#{query.companyName,jdbcType=VARCHAR},'%')
+  		</if>
   	</if>
   </sql>
   <sql id="sqlOrder">
   	order by 
   	<choose>
-  		<when test="orderBy!=null">
+  		<when test="orderBy!=null and orderBy.size>0">
   			<foreach collection="orderBy" item="item" open=" " close=" " separator=",">
   				${item}
   			</foreach>

@@ -8,25 +8,30 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.pope.advert.common.exception.ServiceException;
 import com.pope.advert.dao.gggl.DszyInfoMapper;
 import com.pope.advert.dao.gggl.extend.DszyInfoExtendMapper;
 import com.pope.advert.entity.dto.QueryCondition;
 import com.pope.advert.entity.gggl.DszyInfo;
 import com.pope.advert.entity.gggl.DszySdInfo;
 import com.pope.advert.entity.gggl.SupplyCondition;
+import com.pope.advert.entity.gggl.extend.DszyInfoExtend;
 import com.pope.advert.entity.log.CustomOperateLog;
 import com.pope.advert.service.dto.DataResult;
 import com.pope.advert.service.supply.DszyInfoService;
-import com.wisedu.crowd.common.exception.ServiceException;
+import com.pope.advert.service.supply.SupplyInfoService;
 import com.wisedu.crowd.common.util.PageUtil;
 
 @Service("dszyInfoService")
-public class DszyInfoServiceImpl implements DszyInfoService {
+public class DszyInfoServiceImpl extends BaseSupplyInfoService implements DszyInfoService {
 
 	@Autowired
 	private DszyInfoMapper dszyInfoMapper;
 	@Autowired
 	private DszyInfoExtendMapper dszyInfoExtendMapper;
+	
+	@Autowired
+	private SupplyInfoService supplyInfoService;
 	@Override
 	public DataResult<Integer> deleteByPrimaryKey(String wid, CustomOperateLog log) throws ServiceException {
 		return DataResult.success(dszyInfoMapper.deleteByPrimaryKey(wid));
@@ -48,27 +53,43 @@ public class DszyInfoServiceImpl implements DszyInfoService {
 		return DataResult.success(dszyInfoMapper.updateByPrimaryKeySelective(record));
 	}
 
-	@Override
-	public DataResult<List<Map<String, Object>>> selectDisplayViewByCondition(String condition, String registerId,
-			CustomOperateLog log) throws ServiceException {
-		return DataResult.success(dszyInfoExtendMapper.selectDisplayViewByCondition(condition, registerId));
-	}
 
 	@Override
-	public DataResult<List<Map<String, Object>>> selectDisplayByCondtion(QueryCondition<SupplyCondition> condition,
+	public DataResult<List<DszyInfoExtend>> selectDisplayByCondition(QueryCondition<DszyInfoExtend> condition,
 			CustomOperateLog log) throws ServiceException {
 		if (condition.getPageInfo() != null) {
-			Page<List<Map<String, Object>>> page = PageHelper.startPage(condition.getPageInfo().getPageNum(),
+			Page<List<DszyInfoExtend>> page = PageHelper.startPage(condition.getPageInfo().getPageNum(),
 					condition.getPageInfo().getPageSize());
-			List<Map<String,Object>> datas = dszyInfoExtendMapper.selectDisplayByCondtion(condition);
+			List<DszyInfoExtend> datas = dszyInfoExtendMapper.selectDisplayByCondition(condition);
 
-			DataResult<List<Map<String,Object>>> dataResult = DataResult.success(datas);
+			DataResult<List<DszyInfoExtend>> dataResult = DataResult.success(datas);
 			dataResult.setPageInfo(PageUtil.changePageInfo(page));
 			return dataResult;
 		} else {
-			return DataResult.success(dszyInfoExtendMapper.selectDisplayByCondtion(condition));
+			return DataResult.success(dszyInfoExtendMapper.selectDisplayByCondition(condition));
 
 		}
+	}
+
+	@Override
+	public DataResult<Integer> sh(String wid, String shzt, CustomOperateLog log) throws ServiceException {
+		this.shSupply(wid, shzt, log);
+		DszyInfo saveDszyInfo=new DszyInfo();
+		saveDszyInfo.setWid(wid);
+		saveDszyInfo.setShzt(shzt);
+		DataResult<Integer> datas=this.updateByPrimaryKeySelective(saveDszyInfo, log);
+		supplyInfoService.sendMsg(wid, shzt, log);
+		return datas;
+	}
+
+	@Override
+	protected String getUserIdByWid(String wid, CustomOperateLog log) throws ServiceException {
+		return this.selectByPrimaryKey(wid, log).getDatas().getRegisterId();
+	}
+
+	@Override
+	protected String getShztByWid(String wid, CustomOperateLog log) throws ServiceException {
+		return this.selectByPrimaryKey(wid, log).getDatas().getShzt();
 	}
 	
 

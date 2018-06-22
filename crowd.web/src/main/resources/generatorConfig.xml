@@ -10,7 +10,7 @@
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
           <commentGenerator type="com.wisedu.crowd.web.util.MyCommentGenerator">
          </commentGenerator>
-          <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/advert" userId="root" password="123456"> 
+          <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/advert" userId="root" password="zly1234567890zly"> 
          <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://172.16.7.160:3306/crowd2" userId="root" password="123456">-->
           <property name="useInformationSchema" value="true"></property>
              <!--  oracle <property name="remarksReporting" value="true"></property>-->
@@ -25,19 +25,21 @@
          <javaTypeResolver>
              <property name="forceBigDecimals" value="false"/>
          </javaTypeResolver>
-         <javaModelGenerator targetPackage="com.pope.advert.entity.yhgl" targetProject="src">
+         <javaModelGenerator targetPackage="com.stylefeng.guns.modular.course.model" targetProject="src">
              <property name="enableSubPackages" value="true"/>
              <property name="trimStrings" value="true"/>
          </javaModelGenerator>
-      <sqlMapGenerator targetPackage="com.pope.advert.mapping.yhgl" targetProject="src">
+      <sqlMapGenerator targetPackage="com.stylefeng.guns.modular.course.dao.mapping" targetProject="src">
              <property name="enableSubPackages" value="true"/>
          </sqlMapGenerator>
-      <javaClientGenerator type="XMLMAPPER" targetPackage="com.pope.advert.dao.yhgl" targetProject="src">
+      <javaClientGenerator type="XMLMAPPER" targetPackage="com.stylefeng.guns.modular.course.dao" targetProject="src">
              <property name="enableSubPackages" value="true"/>
          </javaClientGenerator>
          
          
-         <table  tableName="t_advert_yhgl_company_zz" domainObjectName="CompanyZzInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table  tableName="dp_teacher" domainObjectName="Teacher" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         
+         
          
      </context>
  </generatorConfiguration>

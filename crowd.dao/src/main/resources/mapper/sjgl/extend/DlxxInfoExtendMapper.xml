@@ -39,15 +39,19 @@
   		<if test='query.yhid!=null and query.yhid!=""'>
   			AND t_advert_sjgl_dlxx.yhid=#{query.yhid,jdbcType=VARCHAR}
   		</if>
-  			<if test='query.shzt!=null and query.shzt!=""'>
+  		<if test='query.shzt!=null and query.shzt!=""'>
   			AND t_advert_sjgl_dlxx.shzt=#{query.shzt,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.companyName!=null and query.companyName!=""'>
+  			AND t_advert_yhjbxx_company.name like concat('%',#{query.companyName,jdbcType=VARCHAR},'%')
   		</if>
   	</if>
   </sql>
   <sql id="sqlOrder">
   	order by 
   	<choose>
-  		<when test="orderBy!=null">
+  	
+  		<when test="orderBy!=null and orderBy.size>0">
   			<foreach collection="orderBy" item="item" open=" " close=" " separator=",">
   				${item}
   			</foreach>

@@ -83,12 +83,13 @@
 	font-size: 14px;
 }
 
-.mytable2{
-	font-size:13px;
+.mytable2 {
+	font-size: 13px;
 }
-.mytable2 thead{
-    font-weight:bold;
-	background:rgb(238, 238, 238);
+
+.mytable2 thead {
+	font-weight: bold;
+	background: rgb(238, 238, 238);
 }
 </style>
 <body>
@@ -103,58 +104,55 @@
 				</div>
 
 				<div class="col-lg-9">
+					<%@include file="/jsp/supply/yhdj_header.jsp"%>
 					<div class="panel m-b-0">
 						<div class="panel-body">
 							<div class="row" style="border-bottom: 1px solid #999">
-								<h3>
+								<h3 style="font-size: 18px;">
 									<i class="fa fa-gear my-text-color" aria-hidden="true"
 										style="margin-right: 10px;"></i>管理广告资源
 									<div class="pull-right">
-									<button type="button" id="btnSupply" class="btn btn-link"><i class="fa fa-edit my-text-color" aria-hidden="true"
-										style="margin-right: 10px;"></i>发布新广告资源</button>
+										<button type="button" id="btnSupply" class="btn btn-link">
+											<i class="fa fa-edit my-text-color" aria-hidden="true"
+												style="margin-right: 10px;"></i>发布新广告资源
+										</button>
 									</div>
 								</h3>
+								
 							</div>
 							<div class="row my-mt-20">
-								<div class="mygglx-parent">
-									<div class="mygglx-active">
-										<a href="#">全部广告</a> <br> <strong>1</strong>
+								<div class="mygglx-parent" id="headerGg"></div>
+							</div>
+
+							<div class="row " style="margin-top: 20px;">
+								<div class="row ">
+									<div class="col-sm-12 pull-right">
+										<button type="button"
+											class="btn btn-primary btn-sm  pull-right" id="btnSearch">搜索</button>
+										<input type="text" id="txtSearch"
+											style="width: 150px; height: 30px;"
+											class="form-control pull-right">
+
 									</div>
-									<c:forEach items="${gglx}" var="data">
-										<div class="mygglx">
-											<a>${data.lbmc}</a> <br> <strong>1</strong>
-										</div>
-									</c:forEach>
 								</div>
-							</div>
-							
-							<div class="row " style="margin-top:20px;">
-							<div class="row ">
-								<div class="col-sm-12 pull-right">
-									<button type="button" class="btn btn-primary btn-sm  pull-right"
-										id="btnSearch">搜索</button>
-									<input type="text" style="width:150px;height:30px;" class="form-control pull-right">
-									
-								</div> 
-							</div>
-							<table class="table table-hover mytable2">
-								<thead>
-									<tr>
-										<th>类别</th>
-										<th>资源标题</th>
-										<th>价格(元)</th>
-										<th>发布/刷新时间</th>
-										<th>媒体名称/类别</th>
-										<th>广告形式</th>
-										<th>显示状态</th>
-										<th>点击量</th>
-										<th>操作</th>
-									</tr>
-								</thead>
-								<tbody id="tblData">
-									
-								</tbody>
-							</table>
+								<table class="table table-hover mytable2">
+									<thead>
+										<tr>
+											<th>类别</th>
+											<th>资源标题</th>
+											<th>价格(元)</th>
+											<th>发布/刷新时间</th>
+											<th>媒体名称/类别</th>
+											<th>广告形式</th>
+											<th>显示状态</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody id="tblData">
+
+									</tbody>
+								</table>
+								<div  class="mypaging2 clearfix"></div>
 							</div>
 						</div>
 					</div>
@@ -169,6 +167,7 @@
 	</button>
 	<script>
 		var page_type = "supplyIndex";
+		var key = "${key}";
 	</script>
 	<%@ include file="/jsp/bottom.jsp"%>
 </body>

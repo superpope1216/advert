@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.gbzy.extend.GbzySdInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.gbzy.extend.GbzySdInfoExtend" 
+  extends="com.pope.advert.dao.gggl.gbzy.GbzySdInfoMapper.BaseResultMap">
+  <result column="gbpdBmDisplay" property="gbpdBmDisplay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_gggl_gbzy_sd.WID, 
+    t_advert_gggl_gbzy_sd.GBPD_BM, 
+    t_advert_gggl_gbzy_sd.NAME, 
+    t_advert_gggl_gbzy_sd.ZK, 
+    t_advert_gggl_gbzy_sd.GBZY_BM
+  </sql>
+ <sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND t_advert_gggl_gbzy_sd.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.gbzyBm!=null and query.gbzyBm!=""'>
+				AND t_advert_gggl_gbzy_sd.GBZY_BM=#{query.gbzyBm,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<select id="selectByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_gggl_gbzy_sd
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+	<delete id="deleteByGbzyId">
+		DELETE FROM t_advert_gggl_gbzy_sd WHERE GBZY_BM=#{gbzyId,jdbcType=VARCHAR}
+	</delete>
+	
+	 <select id="selectDisplayByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_SDPD.lbmc as gbpdBmDisplay
+		from t_advert_gggl_gbzy_sd
+		left join T_CROWD_SJZD_SDPD on T_CROWD_SJZD_SDPD.lbdm=t_advert_gggl_gbzy_sd.GBPD_BM
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+	</select>
+</mapper>

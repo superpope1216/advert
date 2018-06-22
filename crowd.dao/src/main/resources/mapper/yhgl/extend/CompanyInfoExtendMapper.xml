@@ -6,6 +6,12 @@
   	  <result column="areaDisplay" property="areaDisplay" jdbcType="VARCHAR" />
   	  <result column="cityDisplay" property="cityDisplay" jdbcType="VARCHAR" />
   	  <result column="xianDisplay" property="xianDisplay" jdbcType="VARCHAR" />
+  	  <result column="xianDisplay" property="xianDisplay" jdbcType="VARCHAR" />
+  	  <result column="nyyeDisplay" property="nyyeDisplay" jdbcType="VARCHAR" />
+  	  <result column="gsxzDisplay" property="gsxzDisplay" jdbcType="VARCHAR" />
+  	  <result column="sfybzDisplay" property="sfybzDisplay" jdbcType="VARCHAR" />  	  
+  	  <result column="buyShztDisplay" property="buyShztDisplay" jdbcType="VARCHAR" />
+  	  
   </resultMap>
   <sql id="Base_Column_List" >
  	t_advert_yhjbxx_company.WID, t_advert_yhjbxx_company.NAME, 
@@ -31,6 +37,21 @@
   		<if test='query.registerId!=null and query.registerId!=""'>
   			AND t_advert_yhjbxx_company.REGISTER_ID=#{query.registerId,jdbcType=VARCHAR}
   		</if>
+  		<if test='query.supplyShzt!=null and query.supplyShzt!=""'>
+  			AND t_advert_yhjbxx_company.SUPPLY_SHZT=#{query.supplyShzt,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.buyShzt!=null and query.buyShzt!=""'>
+  			AND t_advert_yhjbxx_company.BUY_SHZT=#{query.buyShzt,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.name!=null and query.name!=""'>
+  			AND t_advert_yhjbxx_company.NAME LIKE concat('%',#{query.name,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test='query.flags!=null and query.flags.size>0'>
+  			AND t_advert_yhjbxx_company.flag in 
+  			<foreach collection="query.flags" item="item" close=")" open="(" separator=",">
+  				#{item,jdbcType=VARCHAR}
+  			</foreach>
+  		</if>
   	</if>
   </sql>
   <select id="selectByCondition" parameterType="com.pope.advert.entity.dto.QueryCondition" 
@@ -40,12 +61,33 @@
   		,area.lbmc as areaDisplay
   		,city.lbmc as cityDisplay
   		,xian.lbmc as xianDisplay
+  		,supplyShzt.lbmc as supplyShztDisplay
+  		,buyShzt.lbmc as buyShztDisplay
+  		,T_ADVERT_SJZD_COMPANYXZ.lbmc as gsxzDisplay
+  		,T_ADVERT_SJZD_COMPANY_NYYE.lbmc as nyyeDisplay
+  		,T_ADVERT_SJZD_SF.lbmc as sfybzDisplay
   		FROM t_advert_yhjbxx_company
+  		
   		LEFT JOIN t_ADVERT_sjzd_xzqh area ON t_advert_yhjbxx_company.area= area.lbdm
   		LEFT JOIN t_ADVERT_sjzd_xzqh city ON t_advert_yhjbxx_company.city= city.lbdm
   		LEFT JOIN t_ADVERT_sjzd_xzqh xian ON t_advert_yhjbxx_company.xian= xian.lbdm
+  		LEFT JOIN T_ADVERT_SJZD_SHZT supplyShzt on supplyShzt.lbdm=t_advert_yhjbxx_company.supply_Shzt
+  		LEFT JOIN T_ADVERT_SJZD_SHZT buyShzt on buyShzt.lbdm=t_advert_yhjbxx_company.buy_Shzt
+  		LEFT JOIN T_ADVERT_SJZD_COMPANYXZ ON T_ADVERT_SJZD_COMPANYXZ.LBDM=t_advert_yhjbxx_company.gsxz
+  		LEFT JOIN T_ADVERT_SJZD_COMPANY_NYYE ON T_ADVERT_SJZD_COMPANY_NYYE.LBDM=t_advert_yhjbxx_company.NYYE
+  		LEFT JOIN T_ADVERT_SJZD_SF ON T_ADVERT_SJZD_SF.LBDM=t_advert_yhjbxx_company.SFYBZ
   		<where>
   			<include refid="sqlWhere"/>
   		</where>
+  		order by 
+  		<choose>
+  			
+  			<when test="orderBy!=null and orderBy.size>0">
+  				<include refid="com.pope.advert.dao.BaseInfoMapper.sqlOrder"/>
+  			</when>
+  			<otherwise>
+  				t_advert_yhjbxx_company.cjsj desc
+  			</otherwise>
+  		</choose>
   </select>
 </mapper>

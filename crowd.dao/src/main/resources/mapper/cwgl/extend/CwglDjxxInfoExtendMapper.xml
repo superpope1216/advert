@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.cwgl.extend.CwglDjxxInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.cwgl.extend.CwglDjxxInfoExtend" 
+  extends="com.pope.advert.dao.cwgl.CwglDjxxInfoMapper.BaseResultMap">
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_cwgl_djxx.WID, 
+    t_advert_cwgl_djxx.NAME, 
+    t_advert_cwgl_djxx.FY, 
+    t_advert_cwgl_djxx.GGZYXZSL, 
+    t_advert_cwgl_djxx.YXJB, 
+    t_advert_cwgl_djxx.BZ
+  </sql>
+  <sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND
+				t_advert_cwgl_djxx.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		order by
+		<choose>
+			<when test="orderBy!=null">
+				<foreach collection="orderBy" item="item" close=" " open=" "
+					separator=",">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				t_advert_cwgl_djxx.YXJB
+			</otherwise>
+		</choose>
+	</sql>
+	<select id="selectByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition" >
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_cwgl_djxx
+		<where>
+			<include refid="sqlWhere" />
+
+		</where>
+		<include refid="sqlOrder" />
+	</select>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.bzzy.extend.BzzyExtInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.bzzy.extend.BzzyExtInfoExtend"
+  extends="com.pope.advert.dao.gggl.bzzy.BzzyExtInfoMapper.BaseResultMap" >
+   <result column="ggdlfsDisplay" property="ggdlfsDisplay" jdbcType="VARCHAR" />
+   <result column="sfxzhyDisplay" property="sfxzhyDisplay" jdbcType="VARCHAR" />
+   <result column="hyDisplay" property="hyDisplay" jdbcType="VARCHAR" />
+  
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_gggl_bzzy_ext.WID, t_advert_gggl_bzzy_ext.BCSM, 
+    t_advert_gggl_bzzy_ext.GGDLFS, 
+    t_advert_gggl_bzzy_ext.DLZSLJ, 
+    t_advert_gggl_bzzy_ext.SCTULJ, 
+    t_advert_gggl_bzzy_ext.BZZY_ID, 
+    t_advert_gggl_bzzy_ext.SFXZHY, 
+    t_advert_gggl_bzzy_ext.HY
+  </sql>
+  <sql id="sqlWhere">
+		<if test='query!=null'>
+			<if test='query.wid!=null and query.wid!=""'>
+				AND t_advert_gggl_bzzy_ext.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.bzzyId!=null and query.bzzyId!=""'>
+				AND t_advert_gggl_bzzy_ext.BZZY_ID=#{query.bzzyId,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</sql>
+	<select id="selectByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_gggl_bzzy_ext
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+	<select id="selectDisplayByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		select
+		<include refid="Base_Column_List" />
+		,T_ADVERT_SJZD_GGDLFS.lbmc as ggdlfsDisplay
+		,t_advert_sjzd_sf.lbmc as sfxzhyDisplay
+		from t_advert_gggl_bzzy_ext
+		LEFT JOIN T_ADVERT_SJZD_GGDLFS ON T_ADVERT_SJZD_GGDLFS.LBDM=t_advert_gggl_bzzy_ext.ggdlfs
+		LEFT JOIN t_advert_sjzd_sf ON t_advert_sjzd_sf.LBDM=t_advert_gggl_bzzy_ext.sfxzhy
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+	<delete id="deleteByBzzyId">
+		DELETE FROM t_advert_gggl_bzzy_ext WHERE BZZY_ID=#{bzzyId,jdbcType=VARCHAR}
+	</delete>
+</mapper>

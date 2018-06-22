@@ -53,12 +53,15 @@
 <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/plugins/vendor/slick/slick-theme.css'>
 <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/plugins/vendor/webui-popover/webui-popover.min.css'>
 <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/plugins/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'>
+<link rel='stylesheet' href='<%=request.getContextPath() %>/statics/plugins/ajaxImageUpload/css/upload.css'>
 
 <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/fonts/glyphicons/glyphicons.min.css'>
 <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/plugins/vendor/jQuery-pingfen/starts.css'>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/static/ueditor/themes/default/css/ueditor.css">
  <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/css/main.css'>
  <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/css/crowd.css'>
+ <link rel='stylesheet' href='<%=request.getContextPath() %>/statics/css/advert.css'>
+ 
  
  <script>
  var jsonurl="";

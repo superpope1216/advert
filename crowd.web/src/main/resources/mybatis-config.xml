@@ -12,6 +12,9 @@
         <!--开启驼峰命名转换Table:create_time到 Entity(createTime)-->
         <!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
         
+        <!--解决，查询返回结果含null没有对应字段值问题-->  
+  <setting name="callSettersOnNulls" value="true"/>  
+        
     </settings>
      <plugins>
         <plugin interceptor="com.github.pagehelper.PageHelper">

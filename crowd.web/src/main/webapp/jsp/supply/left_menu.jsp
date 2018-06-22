@@ -1,6 +1,6 @@
 <%@page import="com.pope.advert.entity.dictionary.DictionaryInfo"%>
 <%@page import="java.util.List"%>
-<%@page import="com.wisedu.crowd.common.code.DictionaryEnum"%>
+<%@page import="com.pope.advert.common.code.DictionaryEnum"%>
 <%@page import="com.pope.advert.service.dictionary.DictionaryService"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page
@@ -67,7 +67,7 @@
 			.getRequiredWebApplicationContext(getServletContext());
 	DictionaryService dictionaryService = (DictionaryService) wac1.getBean("dictionaryService");
 	List<DictionaryInfo> gglxList = dictionaryService.selectByCondtion(DictionaryEnum.T_ADVERT_SJZD_LX, null);
-	request.setAttribute("gglx", gglxList);
+	request.setAttribute("gglxList", gglxList);
 %>
 <%!public String setActive(String _menuFlag, String flag) {
 
@@ -131,8 +131,8 @@
 					class="panel-collapse collapse mypanel-collapse" role="tabpanel"
 					aria-labelledby="collapseListGroupHeading2">
 					<ul class="list-group" id="ulGglx">
-						<c:if test="${not empty gglx}">
-							<c:forEach items="${gglx}" var="data">
+						<c:if test="${not empty gglxList}">
+							<c:forEach items="${gglxList}" var="data">
 								<li class="list-group-item">
 									<button class="menu-item-left" data-key="${data.lbdm}">
 										<!--<span class="glyphicon glyphicon-triangle-right"></span>-->
@@ -156,24 +156,18 @@
 					aria-labelledby="collapseListGroupHeading2">
 					<ul class="list-group" id="ulSjgl">
 						<li class="list-group-item">
-									<button class="menu-item-left" data-key="1">
-										代理管理
-									</button>
+							<button class="menu-item-left" data-key="1">代理管理</button>
 						</li>
 						<li class="list-group-item">
-									<button class="menu-item-left" data-key="2">
-										合作管理
-									</button>
+							<button class="menu-item-left" data-key="2">合作管理</button>
 						</li>
 						<li class="list-group-item">
-									<button class="menu-item-left" data-key="3">
-										招商管理
-									</button>
+							<button class="menu-item-left" data-key="3">招商管理</button>
 						</li>
 					</ul>
 				</div>
 			</div>
-			
+
 			<div class="panel panel-primary leftMenu">
 				<div class="panel-heading" id="collapseListGroupHeading4"
 					data-toggle="collapse" data-target="#collapseListGroup4" role="tab">
@@ -186,44 +180,28 @@
 					aria-labelledby="collapseListGroupHeading2">
 					<ul class="list-group" id="ulQyzx">
 						<li class="list-group-item">
-									<button class="menu-item-left" data-key="1">
-										企业新闻管理
-									</button>
+							<button class="menu-item-left" data-key="1">企业新闻管理</button>
 						</li>
 						<li class="list-group-item">
-									<button class="menu-item-left" data-key="2">
-										企业公告管理
-									</button>
+							<button class="menu-item-left" data-key="2">企业公告管理</button>
 						</li>
 					</ul>
 				</div>
 			</div>
-			
+
 			<div class="panel panel-primary leftMenu">
 				<div class="panel-heading" id="collapseListGroupHeading5"
 					data-toggle="collapse" data-target="#collapseListGroup5" role="tab">
 					<h4 class="panel-title">
-						财务管理<span class="glyphicon glyphicon-chevron-down right"></span>
+						会员管理<span class="glyphicon glyphicon-chevron-down right"></span>
 					</h4>
 				</div>
 				<div id="collapseListGroup5"
 					class="panel-collapse collapse mypanel-collapse" role="tabpanel"
 					aria-labelledby="collapseListGroupHeading2">
-					<ul class="list-group" id="ulSjgl">
+					<ul class="list-group" id="ulHugl">
 						<li class="list-group-item">
-									<button class="menu-item-left" data-key="1">
-										用户交费管理
-									</button>
-						</li>
-						<li class="list-group-item">
-									<button class="menu-item-left" data-key="1">
-										用户消费管理
-									</button>
-						</li>
-							<li class="list-group-item">
-									<button class="menu-item-left" data-key="1">
-										用户账户管理
-									</button>
+							<button class="menu-item-left" data-key="1">我的充值记录</button>
 						</li>
 					</ul>
 				</div>
@@ -232,48 +210,66 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$(".panel-heading").click(function(e) {
-			/*切换折叠指示图标*/
-			$(this).find("span").toggleClass("glyphicon-chevron-down");
-			$(this).find("span").toggleClass("glyphicon-chevron-up");
-		});
-		
-		$("#ulGglx button").click(function(){
-			var data_key=$(this).attr("data-key");
-			window.location.href=basePath+"/supplyView/index?key="+data_key;
-		})
-		
-		$("#ulYhxx button").click(function(){
-			var data_key=$(this).attr("data-key");
-			if(data_key=="1"){
-				window.location.href=basePath+"/companyInfo/index";	
-			}else if(data_key=="2"){
-				window.location.href=basePath+"/companyZzInfo/index";
-			}else if(data_key=="3"){
-				window.location.href=basePath+"/companyMapInfo/index";
-			}
-			
-		});
-		
-		$("#ulSjgl button").click(function(){
-			var data_key=$(this).attr("data-key");
-			if(data_key=="1"){
-				window.location.href=basePath+"/dlglView/index";	
-			}else if(data_key=="2"){
-				window.location.href=basePath+"/hzglView/index";
-			}else if(data_key=="3"){
-				window.location.href=basePath+"/zbglView/index";
-			}
-		});
-		
-		$("#ulQyzx button").click(function(){
-			var data_key=$(this).attr("data-key");
-			if(data_key=="1"){
-				window.location.href=basePath+"/qyzxNewsView/index";	
-			}else if(data_key=="2"){
-				window.location.href=basePath+"/qyzxGgView/index";
-			}
-		});
-	});
+	$(document).ready(
+			function() {
+				$(".panel-heading").click(function(e) {
+					/*切换折叠指示图标*/
+					$(this).find("span").toggleClass("glyphicon-chevron-down");
+					$(this).find("span").toggleClass("glyphicon-chevron-up");
+
+					$(".mypanel-collapse").removeClass("in");
+				});
+
+				$("#ulGglx button").click(
+						function() {
+							var data_key = $(this).attr("data-key");
+							window.location.href = basePath
+									+ "/supplyView/index?key=" + data_key;
+						})
+
+				$("#ulHugl button").click(function(){
+					var data_key=$(this).attr("data-key");
+					if(data_key=="1"){
+						window.location.href=basePath+"/cwgl/czjl/index?key"+data_key;
+					};
+				});
+				$("#ulYhxx button").click(
+						function() {
+							var data_key = $(this).attr("data-key");
+							if (data_key == "1") {
+								window.location.href = basePath
+										+ "/companyInfo/index?flag=1";
+							} else if (data_key == "2") {
+								window.location.href = basePath
+										+ "/companyZzInfo/index?flag=1";
+							} else if (data_key == "3") {
+								window.location.href = basePath
+										+ "/companyMapInfo/index?flag=1";
+							}
+
+						});
+
+				$("#ulSjgl button").click(function() {
+					var data_key = $(this).attr("data-key");
+					if (data_key == "1") {
+						window.location.href = basePath + "/dlglView/index";
+					} else if (data_key == "2") {
+						window.location.href = basePath + "/hzglView/index";
+					} else if (data_key == "3") {
+						window.location.href = basePath + "/zbglView/index";
+					}
+				});
+
+				$("#ulQyzx button").click(
+						function() {
+							var data_key = $(this).attr("data-key");
+							if (data_key == "1") {
+								window.location.href = basePath
+										+ "/qyzxNewsView/index";
+							} else if (data_key == "2") {
+								window.location.href = basePath
+										+ "/qyzxGgView/index";
+							}
+						});
+			});
 </script>

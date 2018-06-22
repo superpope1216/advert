@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pope.advert.common.exception.ServiceException;
 import com.pope.advert.dao.xtgl.FjxxInfoMapper;
 import com.pope.advert.entity.log.CustomOperateLog;
 import com.pope.advert.entity.xtgl.FjxxInfo;
 import com.pope.advert.service.dto.DataResult;
 import com.pope.advert.service.xtgl.FjxxInfoService;
-import com.wisedu.crowd.common.exception.ServiceException;
 
 @Service("fjxxInfoService")
 @Transactional

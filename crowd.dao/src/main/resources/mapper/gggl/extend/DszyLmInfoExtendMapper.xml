@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.extend.DszyLmInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.extend.DszyLmInfoExtend" 
+  extends="com.pope.advert.dao.gggl.DszyLmInfoMapper.BaseResultMap">
+  	<result column="pdIdDisplay" property="pdIdDisplay" jdbcType="VARCHAR" />
+  	<result column="dllmDisplay" property="dllmDisplay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_gggl_dszy_lm.WID, t_advert_gggl_dszy_lm.NAME, 
+    t_advert_gggl_dszy_lm.PD_ID, 
+    t_advert_gggl_dszy_lm.QSC_ZK, t_advert_gggl_dszy_lm.
+    FIVE_ZK, TEN_ZK, 
+    t_advert_gggl_dszy_lm.FIVETEEN_ZK, t_advert_gggl_dszy_lm.TWENTY_ZK, 
+    t_advert_gggl_dszy_lm.THIRTY_ZK, t_advert_gggl_dszy_lm.DSZY_ID,t_advert_gggl_dszy_lm.dllm
+  </sql>
+  <delete id="deleteByDszyId" >
+  	DELETE FROM t_advert_gggl_dszy_lm WHERE DSZY_ID=#{dszyId,jdbcType=VARCHAR}
+  </delete>
+  <sql id="sqlWhere">
+  	<if test='query!=null'>
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_gggl_dszy_lm.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.name!=null and query.name!=""'>
+  			AND t_advert_gggl_dszy_lm.NAME LIKE CONCAT('%',#{query.name,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test='query.dszyId!=null and query.dszyId!=""'>
+  			AND t_advert_gggl_dszy_lm.DSZY_ID=#{query.dszyId,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_SDPD.lbmc as tvPdDisplay
+		,T_ADVERT_SJZD_DLLM.lbmc as dllmDisplay
+		from t_advert_gggl_dszy_lm
+		left join T_CROWD_SJZD_SDPD on T_CROWD_SJZD_SDPD.lbdm=t_advert_gggl_dszy_lm.PD_ID
+		left join T_ADVERT_SJZD_DLLM on T_ADVERT_SJZD_DLLM.lbdm=t_advert_gggl_dszy_lm.dllm
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+	</select>
+</mapper>

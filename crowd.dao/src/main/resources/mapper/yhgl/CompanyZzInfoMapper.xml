@@ -6,15 +6,18 @@
     <result column="ZZLX" property="zzlx" jdbcType="VARCHAR" />
     <result column="ZZLOG" property="zzlog" jdbcType="VARCHAR" />
     <result column="REGISTER_ID" property="registerId" jdbcType="VARCHAR" />
+    <result column="COMPANY_ID" property="companyId" jdbcType="VARCHAR" />
     <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
     <result column="CJIP" property="cjip" jdbcType="VARCHAR" />
     <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
     <result column="SHZT" property="shzt" jdbcType="VARCHAR" />
     <result column="UPDATE_IP" property="updateIp" jdbcType="VARCHAR" />
     <result column="DATASTATUS" property="datastatus" jdbcType="VARCHAR" />
+    
+    
   </resultMap>
   <sql id="Base_Column_List" >
-    WID, ZZLX, ZZLOG, REGISTER_ID, CJSJ, CJIP, UPDATE_TIME, SHZT, UPDATE_IP, DATASTATUS
+    WID, ZZLX, ZZLOG, REGISTER_ID,COMPANY_ID, CJSJ, CJIP, UPDATE_TIME, SHZT, UPDATE_IP, DATASTATUS
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -30,11 +33,11 @@
     insert into t_advert_yhgl_company_zz (WID, ZZLX, ZZLOG, 
       REGISTER_ID, CJSJ, CJIP, 
       UPDATE_TIME, SHZT, UPDATE_IP, 
-      DATASTATUS)
+      DATASTATUS,COMPANY_ID)
     values (#{wid,jdbcType=VARCHAR}, #{zzlx,jdbcType=VARCHAR}, #{zzlog,jdbcType=VARCHAR}, 
       #{registerId,jdbcType=VARCHAR}, #{cjsj,jdbcType=VARCHAR}, #{cjip,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=VARCHAR}, #{shzt,jdbcType=VARCHAR}, #{updateIp,jdbcType=VARCHAR}, 
-      #{datastatus,jdbcType=VARCHAR})
+      #{datastatus,jdbcType=VARCHAR},#{companyId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pope.advert.entity.yhgl.CompanyZzInfo" >
     insert into t_advert_yhgl_company_zz
@@ -69,6 +72,9 @@
       <if test="datastatus != null" >
         DATASTATUS,
       </if>
+      <if test="companyId!=null">
+      	COMPANY_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="wid != null" >
@@ -100,6 +106,9 @@
       </if>
       <if test="datastatus != null" >
         #{datastatus,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId!=null">
+      	#{companyId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -133,6 +142,10 @@
       <if test="datastatus != null" >
         DATASTATUS = #{datastatus,jdbcType=VARCHAR},
       </if>
+      <if test="companyId!=null">
+      	COMPANY_ID=#{companyId,jdbcType=VARCHAR},
+      </if>
+      
     </set>
     where WID = #{wid,jdbcType=VARCHAR}
   </update>
@@ -146,7 +159,8 @@
       UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
       SHZT = #{shzt,jdbcType=VARCHAR},
       UPDATE_IP = #{updateIp,jdbcType=VARCHAR},
-      DATASTATUS = #{datastatus,jdbcType=VARCHAR}
+      DATASTATUS = #{datastatus,jdbcType=VARCHAR},
+      COMPANY_ID=#{companyId,jdbcType=VARCHAR}
     where WID = #{wid,jdbcType=VARCHAR}
   </update>
 </mapper>

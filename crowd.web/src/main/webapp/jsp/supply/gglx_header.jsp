@@ -163,6 +163,9 @@
 			if(_value=="5"){
 				window.location.href=basePath+"/xmtzyPublishing/index?gglx="+_value;
 			}
+			if(_value=="1"){
+				window.location.href=basePath+"/hwzyPublishing/index?gglx="+_value;
+			}
 		});
 	})
 </script>

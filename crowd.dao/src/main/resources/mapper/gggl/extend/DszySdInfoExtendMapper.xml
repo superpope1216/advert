@@ -3,8 +3,44 @@
 <mapper namespace="com.pope.advert.dao.gggl.extend.DszySdInfoExtendMapper" >
   <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.extend.DszySdInfoExtend"
   extends="com.pope.advert.dao.gggl.DszySdInfoMapper.BaseResultMap" >
+  <result column="tvPdDisplay" property="tvPdDisplay" jdbcType="VARCHAR" />
+  
   </resultMap>
   <sql id="Base_Column_List" >
-   WID, AREA, CITY, TV_ID, ADVERT_TYPE, SHZT, CJSJ, CJIP, REGISTER_ID
+    t_advert_gggl_dszy_sd.WID, 
+    t_advert_gggl_dszy_sd.NAME, 
+    t_advert_gggl_dszy_sd.TV_PD, 
+    t_advert_gggl_dszy_sd.HJSD_ZK, 
+    t_advert_gggl_dszy_sd.FHJSD_ZK, 
+    t_advert_gggl_dszy_sd.CJSJ, 
+    t_advert_gggl_dszy_sd.CJIP, 
+    t_advert_gggl_dszy_sd.DSZY_ID
   </sql>
+    <delete id="deleteByDszyId" >
+  	DELETE FROM t_advert_gggl_dszy_sd WHERE DSZY_ID=#{dszyId,jdbcType=VARCHAR}
+  </delete>
+  <sql id="sqlWhere">
+  	<if test='query!=null'>
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_gggl_dszy_sd.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.name!=null and query.name!=""'>
+  			AND t_advert_gggl_dszy_sd.NAME LIKE CONCAT('%',#{query.name,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test='query.dszyId!=null and query.dszyId!=""'>
+  			AND t_advert_gggl_dszy_sd.DSZY_ID=#{query.dszyId,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_CROWD_SJZD_SDPD.lbmc as tvPdDisplay
+		from t_advert_gggl_dszy_sd
+		left join T_CROWD_SJZD_SDPD on T_CROWD_SJZD_SDPD.lbdm=t_advert_gggl_dszy_sd.TV_PD
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+	</select>
 </mapper>

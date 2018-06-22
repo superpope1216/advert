@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.pope.advert.common.exception.ServiceException;
 import com.pope.advert.entity.log.CustomOperateLog;
 import com.pope.advert.entity.yhgl.extend.CompanyInfoExtend;
 import com.pope.advert.entity.yhgl.extend.RegisterInfoExtend;
@@ -17,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wisedu.crowd.common.exception.ServiceException;
 import com.wisedu.crowd.common.util.ConstantsUtil;
 import com.wisedu.crowd.common.util.DateUtil;
 
@@ -59,6 +60,7 @@ public class BaseController {
 	        //customOperateLog.setRegisterId(this.getRegisterId());
 	        customOperateLog.setUserId(this.getYhId());
 	        customOperateLog.setCompanyId(getCompanyId());
+	        customOperateLog.setIsAdmin(true);
 	      //  customOperateLog.setXqfId(this.getXqfxx()!=null?this.getXqfxx().getWid():null);
 	        //customOperateLog.setKfzId(this.getKfzxx()!=null?this.getKfzxx().getWid():null);
 	        //customOperateLog.setXm((this.getXqfxx()!=null?this.getXqfxx().getXm():(this.getKfzxx()!=null?this.getKfzxx().getXm():this.getSjh())));

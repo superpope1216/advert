@@ -28,6 +28,7 @@
 				</div>
 
 				<div class="col-lg-9">
+					<%@include file="/jsp/supply/yhdj_header.jsp"%>
 					<div class="panel m-b-0">
 						<div class="panel-body">
 							<div class="row" style="border-bottom: 1px solid #999">
@@ -36,46 +37,36 @@
 										style="margin-right: 10px;"></i>发布新广告资源
 								</h3>
 							</div>
-							<div class="row my-mt-20">
-								<div class="col-xs-6 col-sm-3"
-									style="padding-left: 0px; padding-right: 0px;">
-									<button type="button" class="btn btn-primary btn-sm btn-block"
-										id="btnSupply">媒体广告资源</button>
-								</div>
-								<div class="col-xs-6 col-sm-3"
-									style="padding-left: 0px; padding-right: 0px;">
-									<button type="button" class="btn btn-default btn-sm btn-block"
-										id="btnBuy">服务/设备/非广告资源</button>
-								</div>
-							</div>
+
 							<div class="row my-mt-10">
 								<%@ include file="/jsp/supply/gglx_header.jsp"%>
 							</div>
 							<div class="row my-mt-10">
 								<form class="form-register met-form form-horizontal"
 									method="post" action="" role="form" id="formXmtzy">
-									<input type="hidden" name="xmtzyInfo.wid">
+									<input type="hidden" name="wid">
 									<h4>新媒体信息添加</h4>
-									<div class="well well-sm my-padding-12">请选择所要发布的新媒体信息</div>
+									<div class="well well-sm my-padding-12">请输入要发布的新媒体信息</div>
 
 									<input type="hidden" name="flag" value="1" />
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">标题</label>
+											class="col-sm-2 col-md-2 control-label text-right">标题<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-8">
-												<input type="text" name="xmtzyInfo.name"
-													class="form-control" required
+												<input type="text" name="name" class="form-control" required
 													data-fv-notempty-message="此项不能为空">
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">地区</label>
+											class="col-sm-2 col-md-2 control-label text-right">地区<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-4">
-												<select class="form-control " name="xmtzyInfo.area" required
+												<select class="form-control " name="area" required
 													data-fv-notempty-message="此项不能为空">
 													<option value="">--请选择--</option>
 													<c:forEach items="${area}" var="data">
@@ -85,7 +76,7 @@
 												</select>
 											</div>
 											<div class="col-sm-4">
-												<select class="form-control " name="xmtzyInfo.city">
+												<select class="form-control " name="city">
 													<option value="">--请选择--</option>
 
 												</select>
@@ -98,11 +89,12 @@
 
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">新媒体类型</label>
+											class="col-sm-2 col-md-2 control-label text-right">新媒体类型<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-4">
-												<select class="form-control " name="xmtzyInfo.advertType"
-													required data-fv-notempty-message="此项不能为空">
+												<select class="form-control " name="advertType" required
+													data-fv-notempty-message="此项不能为空">
 													<option value="">--请选择--</option>
 													<c:forEach items="${xmtlx}" var="data" varStatus="status">
 														<option value="${data.lbdm}">${data.lbmc}</option>
@@ -113,37 +105,63 @@
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">广告价格</label>
+											class="col-sm-2 col-md-2 control-label text-right">广告价格<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-4">
-												<input type="text" name="xmtzyInfo.ggjg"
-													class="form-control" required
-													data-fv-notempty-message="此项不能为空">
+												<input type="text" name="ggjg" class="form-control" required
+													data-fv-notempty-message="此项不能为空"
+													pattern="^([1-9]\d*(\.\d+)?|0)$"
+													data-fv-regexp-message="请输入正确的数字类型"
+													data-fv-stringlength="true" data-fv-stringlength-min="1"
+													data-fv-stringlength-max="6">
 											</div>
+											<div class="col-sm-4">元/单位</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">广告规格形式</label>
+											class="col-sm-2 col-md-2 control-label text-right">广告规格形式<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-4">
-												<input type="text" name="xmtzyInfo.ggggxs"
-													class="form-control" required
-													data-fv-notempty-message="此项不能为空">
+												<input type="text" name="ggggxs" class="form-control"
+													required data-fv-notempty-message="此项不能为空">
 											</div>
+										</div>
+									</div>
+									<div class="form-group" id="divZytp">
+										<label for="firstname"
+											class="col-sm-2 col-md-2 control-label text-right">资源图片<span
+											style="color: red">*</span></label>
+										<div class="col-sm-10 col-md-10">
+											<div class="col-sm-8">
+												<div class="upload-box" id="sctuljUploadBox">
+													<div class="image-box clear">
+														<section class="upload-section">
+															<div class="upload-btn"></div>
+															<input type="file" name="file" class="upload-input"
+																id='sctuljuploadBtn' value="" />
+														</section>
+													</div>
+												</div>
+												<input type="hidden" value="" name="zytp">
+											</div>
+
 										</div>
 									</div>
 									<div style="clear: both"></div>
 									<div class="well well-sm my-padding-12">描述这个新媒体</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">受众人群：</label>
+											class="col-sm-2 col-md-2 control-label text-right">受众人群<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-12">
 												<c:forEach items="${szrq}" var="data">
 													<div class="col-sm-4">
-														<input type="checkbox" name="xmtzyInfo.szrq"
-															value="${data.lbdm}">${data.lbmc}
+														<input type="checkbox" name="szrq" required
+															data-fv-notempty-message="此项不能为空" value="${data.lbdm}">${data.lbmc}
 													</div>
 
 												</c:forEach>
@@ -153,13 +171,14 @@
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">教育程度：</label>
+											class="col-sm-2 col-md-2 control-label text-right">教育程度<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-12">
 												<c:forEach items="${jycd}" var="data">
 													<div class="col-sm-4">
-														<input type="checkbox" name="xmtzyInfo.jycd"
-															value="${data.lbdm}">${data.lbmc}
+														<input type="checkbox" name="jycd" required
+															data-fv-notempty-message="此项不能为空" value="${data.lbdm}">${data.lbmc}
 													</div>
 
 												</c:forEach>
@@ -169,13 +188,14 @@
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">职业分布：</label>
+											class="col-sm-2 col-md-2 control-label text-right">职业分布<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-12">
 												<c:forEach items="${zyfb}" var="data">
 													<div class="col-sm-4">
-														<input type="checkbox" name="xmtzyInfo.zyfb"
-															value="${data.lbdm}">${data.lbmc}
+														<input type="checkbox" name="zyfb" required
+															data-fv-notempty-message="此项不能为空" value="${data.lbdm}">${data.lbmc}
 													</div>
 
 												</c:forEach>
@@ -185,13 +205,14 @@
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">收入状况：</label>
+											class="col-sm-2 col-md-2 control-label text-right">收入状况<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-12">
 												<c:forEach items="${srzk}" var="data">
 													<div class="col-sm-4">
-														<input type="checkbox" name="xmtzyInfo.srzk"
-															value="${data.lbdm}">${data.lbmc}
+														<input type="checkbox" name="srzk" required
+															data-fv-notempty-message="此项不能为空" value="${data.lbdm}">${data.lbmc}
 													</div>
 
 												</c:forEach>
@@ -201,15 +222,22 @@
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">新媒体简介：</label>
+											class="col-sm-2 col-md-2 control-label text-right">新媒体简介<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-8">
-												<textarea class="form-control" name="xmtzyInfo.xmtjj"></textarea>
+												<textarea class="form-control" name="xmtjj" required
+													data-fv-notempty-message="此项不能为空"></textarea>
 											</div>
 										</div>
 									</div>
-									<button class="btn btn-lg btn-primary btn-block" type="button"
-										id="btnPublishingSd">马上发布</button>
+									<div class="form-group">
+										<div style="margin-left: 25%; width: 75%;">
+											<button class="btn btn-lg btn-primary btn-block"
+												type="button" id="btnPublishingSd" style="width: 200px;">马上发布</button>
+										</div>
+									</div>
+
 								</form>
 							</div>
 
@@ -229,6 +257,9 @@
 	</button>
 	<script>
 		var page_type = "xmtzyPublishing";
+		var wid = "${wid}";
+		var gglx = "${gglx}";
+		var ggfl = "${ggfl}";
 	</script>
 	<%@ include file="/jsp/bottom.jsp"%>
 </body>

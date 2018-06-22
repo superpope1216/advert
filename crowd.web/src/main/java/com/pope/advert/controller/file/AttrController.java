@@ -26,13 +26,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.alibaba.fastjson.JSONObject;
+import com.pope.advert.common.code.XtcsEnum;
 import com.pope.advert.controller.BaseController;
 import com.pope.advert.entity.xtgl.FjxxInfo;
 import com.pope.advert.entity.xtgl.extend.XtcsbInfoExtend;
 import com.pope.advert.service.dto.DataResult;
 import com.pope.advert.service.xtgl.FjxxInfoService;
 import com.pope.advert.service.xtgl.XtcsbInfoService;
-import com.wisedu.crowd.common.code.XtcsEnum;
 import com.wisedu.crowd.common.util.CommonUtil;
 import com.wisedu.crowd.common.util.ConstantsUtil;
 import com.wisedu.crowd.common.util.DateUtil;
@@ -129,6 +129,8 @@ public class AttrController extends BaseController {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("code", "200");
+			jsonObject.put("src", request.getContextPath()+"/image/preView?wid="+r_fileWids);
 			jsonObject.put("fileWids", r_fileWids);
 			jsonObject.put("fileNames", r_fileViewNames);
 			out.print(jsonObject);

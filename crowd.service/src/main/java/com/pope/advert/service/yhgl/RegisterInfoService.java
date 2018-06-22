@@ -2,12 +2,12 @@ package com.pope.advert.service.yhgl;
 
 import java.util.List;
 
+import com.pope.advert.common.exception.ServiceException;
 import com.pope.advert.entity.dto.QueryCondition;
 import com.pope.advert.entity.log.CustomOperateLog;
 import com.pope.advert.entity.yhgl.RegisterInfo;
 import com.pope.advert.entity.yhgl.extend.RegisterInfoExtend;
 import com.pope.advert.service.dto.DataResult;
-import com.wisedu.crowd.common.exception.ServiceException;
 
 public interface RegisterInfoService {
 
@@ -44,6 +44,6 @@ public interface RegisterInfoService {
    
    DataResult<RegisterInfoExtend> loginAdmin(String userName,String password,CustomOperateLog log) throws ServiceException;
    
-   
+   DataResult<Integer> resetPwd(String phone,String password,String confirmPassword,CustomOperateLog log) throws ServiceException;
   
 }

@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.wlzy.WlzyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.wlzy.WlzyInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="ADDR" property="addr" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="GGWZ" property="ggwz" jdbcType="VARCHAR" />
+    <result column="WZMS" property="wzms" jdbcType="VARCHAR" />
+    <result column="ZYTP1" property="zytp1" jdbcType="VARCHAR" />
+    <result column="ZYTP2" property="zytp2" jdbcType="VARCHAR" />
+    <result column="ZYTP3" property="zytp3" jdbcType="VARCHAR" />
+    <result column="ZYTP4" property="zytp4" jdbcType="VARCHAR" />
+    <result column="ZYTP5" property="zytp5" jdbcType="VARCHAR" />
+    <result column="ZYTP6" property="zytp6" jdbcType="VARCHAR" />
+    <result column="ZYTP7" property="zytp7" jdbcType="VARCHAR" />
+    <result column="ZYTP8" property="zytp8" jdbcType="VARCHAR" />
+    <result column="ZSXT" property="zsxt" jdbcType="VARCHAR" />
+    <result column="ZSFS" property="zsfs" jdbcType="VARCHAR" />
+    <result column="ZSCC" property="zscc" jdbcType="VARCHAR" />
+    <result column="JFFS" property="jffs" jdbcType="VARCHAR" />
+    <result column="HOUR_KLJ" property="hourKlj" jdbcType="DECIMAL" />
+    <result column="HOUR_XSJ" property="hourXsj" jdbcType="DECIMAL" />
+    <result column="DAY_KLJ" property="dayKlj" jdbcType="DECIMAL" />
+    <result column="DAY_XSJ" property="dayXsj" jdbcType="DECIMAL" />
+    <result column="WEEK_KLJ" property="weekKlj" jdbcType="DECIMAL" />
+    <result column="WEEK_XSJ" property="weekXsj" jdbcType="DECIMAL" />
+    <result column="HALF_MONTH_KLJ" property="halfMonthKlj" jdbcType="DECIMAL" />
+    <result column="HALF_MONTH_XSJ" property="halfMonthXsj" jdbcType="DECIMAL" />
+    <result column="MONTH_KLJ" property="monthKlj" jdbcType="DECIMAL" />
+    <result column="MONTH_XSJ" property="monthXsj" jdbcType="DECIMAL" />
+    <result column="JD_KLJ" property="jdKlj" jdbcType="DECIMAL" />
+    <result column="JD_XSJ" property="jdXsj" jdbcType="DECIMAL" />
+    <result column="HALF_YEAR_KLJ" property="halfYearKlj" jdbcType="DECIMAL" />
+    <result column="HALF_YEAF_XSJ" property="halfYeafXsj" jdbcType="DECIMAL" />
+    <result column="YEAR_KLJ" property="yearKlj" jdbcType="DECIMAL" />
+    <result column="YEAF_XSJ" property="yeafXsj" jdbcType="DECIMAL" />
+    <result column="CPM_KLJ" property="cpmKlj" jdbcType="DECIMAL" />
+    <result column="CPC_XSJ" property="cpcXsj" jdbcType="DECIMAL" />
+    <result column="CPC_KLJ" property="cpcKlj" jdbcType="DECIMAL" />
+    <result column="CPM_XSJ" property="cpmXsj" jdbcType="DECIMAL" />
+    <result column="KTKFRQ" property="ktkfrq" jdbcType="VARCHAR" />
+    <result column="KTJSRQ" property="ktjsrq" jdbcType="VARCHAR" />
+    <result column="SHZT" property="shzt" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+    <result column="CJIP" property="cjip" jdbcType="VARCHAR" />
+    <result column="REGISTER_ID" property="registerId" jdbcType="VARCHAR" />
+    <result column="DATASTATUS" property="datastatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, ADDR, NAME, GGWZ, WZMS, ZYTP1, ZYTP2, ZYTP3, ZYTP4, ZYTP5, ZYTP6, ZYTP7, ZYTP8, 
+    ZSXT, ZSFS, ZSCC, JFFS, HOUR_KLJ, HOUR_XSJ, DAY_KLJ, DAY_XSJ, WEEK_KLJ, WEEK_XSJ, 
+    HALF_MONTH_KLJ, HALF_MONTH_XSJ, MONTH_KLJ, MONTH_XSJ, JD_KLJ, JD_XSJ, HALF_YEAR_KLJ, 
+    HALF_YEAF_XSJ, YEAR_KLJ, YEAF_XSJ, CPM_KLJ, CPC_XSJ, CPC_KLJ, CPM_XSJ, KTKFRQ, KTJSRQ, 
+    SHZT, CJSJ, CJIP, REGISTER_ID, DATASTATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_wlzy
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_wlzy
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.wlzy.WlzyInfo" >
+    insert into t_advert_gggl_wlzy (WID, ADDR, NAME, 
+      GGWZ, WZMS, ZYTP1, 
+      ZYTP2, ZYTP3, ZYTP4, 
+      ZYTP5, ZYTP6, ZYTP7, 
+      ZYTP8, ZSXT, ZSFS, 
+      ZSCC, JFFS, HOUR_KLJ, 
+      HOUR_XSJ, DAY_KLJ, DAY_XSJ, 
+      WEEK_KLJ, WEEK_XSJ, HALF_MONTH_KLJ, 
+      HALF_MONTH_XSJ, MONTH_KLJ, MONTH_XSJ, 
+      JD_KLJ, JD_XSJ, HALF_YEAR_KLJ, 
+      HALF_YEAF_XSJ, YEAR_KLJ, YEAF_XSJ, 
+      CPM_KLJ, CPC_XSJ, CPC_KLJ, 
+      CPM_XSJ, KTKFRQ, KTJSRQ, 
+      SHZT, CJSJ, CJIP, REGISTER_ID, 
+      DATASTATUS)
+    values (#{wid,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{ggwz,jdbcType=VARCHAR}, #{wzms,jdbcType=VARCHAR}, #{zytp1,jdbcType=VARCHAR}, 
+      #{zytp2,jdbcType=VARCHAR}, #{zytp3,jdbcType=VARCHAR}, #{zytp4,jdbcType=VARCHAR}, 
+      #{zytp5,jdbcType=VARCHAR}, #{zytp6,jdbcType=VARCHAR}, #{zytp7,jdbcType=VARCHAR}, 
+      #{zytp8,jdbcType=VARCHAR}, #{zsxt,jdbcType=VARCHAR}, #{zsfs,jdbcType=VARCHAR}, 
+      #{zscc,jdbcType=VARCHAR}, #{jffs,jdbcType=VARCHAR}, #{hourKlj,jdbcType=DECIMAL}, 
+      #{hourXsj,jdbcType=DECIMAL}, #{dayKlj,jdbcType=DECIMAL}, #{dayXsj,jdbcType=DECIMAL}, 
+      #{weekKlj,jdbcType=DECIMAL}, #{weekXsj,jdbcType=DECIMAL}, #{halfMonthKlj,jdbcType=DECIMAL}, 
+      #{halfMonthXsj,jdbcType=DECIMAL}, #{monthKlj,jdbcType=DECIMAL}, #{monthXsj,jdbcType=DECIMAL}, 
+      #{jdKlj,jdbcType=DECIMAL}, #{jdXsj,jdbcType=DECIMAL}, #{halfYearKlj,jdbcType=DECIMAL}, 
+      #{halfYeafXsj,jdbcType=DECIMAL}, #{yearKlj,jdbcType=DECIMAL}, #{yeafXsj,jdbcType=DECIMAL}, 
+      #{cpmKlj,jdbcType=DECIMAL}, #{cpcXsj,jdbcType=DECIMAL}, #{cpcKlj,jdbcType=DECIMAL}, 
+      #{cpmXsj,jdbcType=DECIMAL}, #{ktkfrq,jdbcType=VARCHAR}, #{ktjsrq,jdbcType=VARCHAR}, 
+      #{shzt,jdbcType=VARCHAR}, #{cjsj,jdbcType=VARCHAR}, #{cjip,jdbcType=VARCHAR}, #{registerId,jdbcType=VARCHAR}, 
+      #{datastatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.wlzy.WlzyInfo" >
+    insert into t_advert_gggl_wlzy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="addr != null" >
+        ADDR,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="ggwz != null" >
+        GGWZ,
+      </if>
+      <if test="wzms != null" >
+        WZMS,
+      </if>
+      <if test="zytp1 != null" >
+        ZYTP1,
+      </if>
+      <if test="zytp2 != null" >
+        ZYTP2,
+      </if>
+      <if test="zytp3 != null" >
+        ZYTP3,
+      </if>
+      <if test="zytp4 != null" >
+        ZYTP4,
+      </if>
+      <if test="zytp5 != null" >
+        ZYTP5,
+      </if>
+      <if test="zytp6 != null" >
+        ZYTP6,
+      </if>
+      <if test="zytp7 != null" >
+        ZYTP7,
+      </if>
+      <if test="zytp8 != null" >
+        ZYTP8,
+      </if>
+      <if test="zsxt != null" >
+        ZSXT,
+      </if>
+      <if test="zsfs != null" >
+        ZSFS,
+      </if>
+      <if test="zscc != null" >
+        ZSCC,
+      </if>
+      <if test="jffs != null" >
+        JFFS,
+      </if>
+      <if test="hourKlj != null" >
+        HOUR_KLJ,
+      </if>
+      <if test="hourXsj != null" >
+        HOUR_XSJ,
+      </if>
+      <if test="dayKlj != null" >
+        DAY_KLJ,
+      </if>
+      <if test="dayXsj != null" >
+        DAY_XSJ,
+      </if>
+      <if test="weekKlj != null" >
+        WEEK_KLJ,
+      </if>
+      <if test="weekXsj != null" >
+        WEEK_XSJ,
+      </if>
+      <if test="halfMonthKlj != null" >
+        HALF_MONTH_KLJ,
+      </if>
+      <if test="halfMonthXsj != null" >
+        HALF_MONTH_XSJ,
+      </if>
+      <if test="monthKlj != null" >
+        MONTH_KLJ,
+      </if>
+      <if test="monthXsj != null" >
+        MONTH_XSJ,
+      </if>
+      <if test="jdKlj != null" >
+        JD_KLJ,
+      </if>
+      <if test="jdXsj != null" >
+        JD_XSJ,
+      </if>
+      <if test="halfYearKlj != null" >
+        HALF_YEAR_KLJ,
+      </if>
+      <if test="halfYeafXsj != null" >
+        HALF_YEAF_XSJ,
+      </if>
+      <if test="yearKlj != null" >
+        YEAR_KLJ,
+      </if>
+      <if test="yeafXsj != null" >
+        YEAF_XSJ,
+      </if>
+      <if test="cpmKlj != null" >
+        CPM_KLJ,
+      </if>
+      <if test="cpcXsj != null" >
+        CPC_XSJ,
+      </if>
+      <if test="cpcKlj != null" >
+        CPC_KLJ,
+      </if>
+      <if test="cpmXsj != null" >
+        CPM_XSJ,
+      </if>
+      <if test="ktkfrq != null" >
+        KTKFRQ,
+      </if>
+      <if test="ktjsrq != null" >
+        KTJSRQ,
+      </if>
+      <if test="shzt != null" >
+        SHZT,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="cjip != null" >
+        CJIP,
+      </if>
+      <if test="registerId != null" >
+        REGISTER_ID,
+      </if>
+      <if test="datastatus != null" >
+        DATASTATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ggwz != null" >
+        #{ggwz,jdbcType=VARCHAR},
+      </if>
+      <if test="wzms != null" >
+        #{wzms,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp1 != null" >
+        #{zytp1,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp2 != null" >
+        #{zytp2,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp3 != null" >
+        #{zytp3,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp4 != null" >
+        #{zytp4,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp5 != null" >
+        #{zytp5,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp6 != null" >
+        #{zytp6,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp7 != null" >
+        #{zytp7,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp8 != null" >
+        #{zytp8,jdbcType=VARCHAR},
+      </if>
+      <if test="zsxt != null" >
+        #{zsxt,jdbcType=VARCHAR},
+      </if>
+      <if test="zsfs != null" >
+        #{zsfs,jdbcType=VARCHAR},
+      </if>
+      <if test="zscc != null" >
+        #{zscc,jdbcType=VARCHAR},
+      </if>
+      <if test="jffs != null" >
+        #{jffs,jdbcType=VARCHAR},
+      </if>
+      <if test="hourKlj != null" >
+        #{hourKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="hourXsj != null" >
+        #{hourXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="dayKlj != null" >
+        #{dayKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="dayXsj != null" >
+        #{dayXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="weekKlj != null" >
+        #{weekKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="weekXsj != null" >
+        #{weekXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="halfMonthKlj != null" >
+        #{halfMonthKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="halfMonthXsj != null" >
+        #{halfMonthXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="monthKlj != null" >
+        #{monthKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="monthXsj != null" >
+        #{monthXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="jdKlj != null" >
+        #{jdKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="jdXsj != null" >
+        #{jdXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="halfYearKlj != null" >
+        #{halfYearKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="halfYeafXsj != null" >
+        #{halfYeafXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="yearKlj != null" >
+        #{yearKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="yeafXsj != null" >
+        #{yeafXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="cpmKlj != null" >
+        #{cpmKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="cpcXsj != null" >
+        #{cpcXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="cpcKlj != null" >
+        #{cpcKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="cpmXsj != null" >
+        #{cpmXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="ktkfrq != null" >
+        #{ktkfrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ktjsrq != null" >
+        #{ktjsrq,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="registerId != null" >
+        #{registerId,jdbcType=VARCHAR},
+      </if>
+      <if test="datastatus != null" >
+        #{datastatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.wlzy.WlzyInfo" >
+    update t_advert_gggl_wlzy
+    <set >
+      <if test="addr != null" >
+        ADDR = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ggwz != null" >
+        GGWZ = #{ggwz,jdbcType=VARCHAR},
+      </if>
+      <if test="wzms != null" >
+        WZMS = #{wzms,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp1 != null" >
+        ZYTP1 = #{zytp1,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp2 != null" >
+        ZYTP2 = #{zytp2,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp3 != null" >
+        ZYTP3 = #{zytp3,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp4 != null" >
+        ZYTP4 = #{zytp4,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp5 != null" >
+        ZYTP5 = #{zytp5,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp6 != null" >
+        ZYTP6 = #{zytp6,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp7 != null" >
+        ZYTP7 = #{zytp7,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp8 != null" >
+        ZYTP8 = #{zytp8,jdbcType=VARCHAR},
+      </if>
+      <if test="zsxt != null" >
+        ZSXT = #{zsxt,jdbcType=VARCHAR},
+      </if>
+      <if test="zsfs != null" >
+        ZSFS = #{zsfs,jdbcType=VARCHAR},
+      </if>
+      <if test="zscc != null" >
+        ZSCC = #{zscc,jdbcType=VARCHAR},
+      </if>
+      <if test="jffs != null" >
+        JFFS = #{jffs,jdbcType=VARCHAR},
+      </if>
+      <if test="hourKlj != null" >
+        HOUR_KLJ = #{hourKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="hourXsj != null" >
+        HOUR_XSJ = #{hourXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="dayKlj != null" >
+        DAY_KLJ = #{dayKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="dayXsj != null" >
+        DAY_XSJ = #{dayXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="weekKlj != null" >
+        WEEK_KLJ = #{weekKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="weekXsj != null" >
+        WEEK_XSJ = #{weekXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="halfMonthKlj != null" >
+        HALF_MONTH_KLJ = #{halfMonthKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="halfMonthXsj != null" >
+        HALF_MONTH_XSJ = #{halfMonthXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="monthKlj != null" >
+        MONTH_KLJ = #{monthKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="monthXsj != null" >
+        MONTH_XSJ = #{monthXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="jdKlj != null" >
+        JD_KLJ = #{jdKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="jdXsj != null" >
+        JD_XSJ = #{jdXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="halfYearKlj != null" >
+        HALF_YEAR_KLJ = #{halfYearKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="halfYeafXsj != null" >
+        HALF_YEAF_XSJ = #{halfYeafXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="yearKlj != null" >
+        YEAR_KLJ = #{yearKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="yeafXsj != null" >
+        YEAF_XSJ = #{yeafXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="cpmKlj != null" >
+        CPM_KLJ = #{cpmKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="cpcXsj != null" >
+        CPC_XSJ = #{cpcXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="cpcKlj != null" >
+        CPC_KLJ = #{cpcKlj,jdbcType=DECIMAL},
+      </if>
+      <if test="cpmXsj != null" >
+        CPM_XSJ = #{cpmXsj,jdbcType=DECIMAL},
+      </if>
+      <if test="ktkfrq != null" >
+        KTKFRQ = #{ktkfrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ktjsrq != null" >
+        KTJSRQ = #{ktjsrq,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        CJIP = #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="registerId != null" >
+        REGISTER_ID = #{registerId,jdbcType=VARCHAR},
+      </if>
+      <if test="datastatus != null" >
+        DATASTATUS = #{datastatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.wlzy.WlzyInfo" >
+    update t_advert_gggl_wlzy
+    set ADDR = #{addr,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      GGWZ = #{ggwz,jdbcType=VARCHAR},
+      WZMS = #{wzms,jdbcType=VARCHAR},
+      ZYTP1 = #{zytp1,jdbcType=VARCHAR},
+      ZYTP2 = #{zytp2,jdbcType=VARCHAR},
+      ZYTP3 = #{zytp3,jdbcType=VARCHAR},
+      ZYTP4 = #{zytp4,jdbcType=VARCHAR},
+      ZYTP5 = #{zytp5,jdbcType=VARCHAR},
+      ZYTP6 = #{zytp6,jdbcType=VARCHAR},
+      ZYTP7 = #{zytp7,jdbcType=VARCHAR},
+      ZYTP8 = #{zytp8,jdbcType=VARCHAR},
+      ZSXT = #{zsxt,jdbcType=VARCHAR},
+      ZSFS = #{zsfs,jdbcType=VARCHAR},
+      ZSCC = #{zscc,jdbcType=VARCHAR},
+      JFFS = #{jffs,jdbcType=VARCHAR},
+      HOUR_KLJ = #{hourKlj,jdbcType=DECIMAL},
+      HOUR_XSJ = #{hourXsj,jdbcType=DECIMAL},
+      DAY_KLJ = #{dayKlj,jdbcType=DECIMAL},
+      DAY_XSJ = #{dayXsj,jdbcType=DECIMAL},
+      WEEK_KLJ = #{weekKlj,jdbcType=DECIMAL},
+      WEEK_XSJ = #{weekXsj,jdbcType=DECIMAL},
+      HALF_MONTH_KLJ = #{halfMonthKlj,jdbcType=DECIMAL},
+      HALF_MONTH_XSJ = #{halfMonthXsj,jdbcType=DECIMAL},
+      MONTH_KLJ = #{monthKlj,jdbcType=DECIMAL},
+      MONTH_XSJ = #{monthXsj,jdbcType=DECIMAL},
+      JD_KLJ = #{jdKlj,jdbcType=DECIMAL},
+      JD_XSJ = #{jdXsj,jdbcType=DECIMAL},
+      HALF_YEAR_KLJ = #{halfYearKlj,jdbcType=DECIMAL},
+      HALF_YEAF_XSJ = #{halfYeafXsj,jdbcType=DECIMAL},
+      YEAR_KLJ = #{yearKlj,jdbcType=DECIMAL},
+      YEAF_XSJ = #{yeafXsj,jdbcType=DECIMAL},
+      CPM_KLJ = #{cpmKlj,jdbcType=DECIMAL},
+      CPC_XSJ = #{cpcXsj,jdbcType=DECIMAL},
+      CPC_KLJ = #{cpcKlj,jdbcType=DECIMAL},
+      CPM_XSJ = #{cpmXsj,jdbcType=DECIMAL},
+      KTKFRQ = #{ktkfrq,jdbcType=VARCHAR},
+      KTJSRQ = #{ktjsrq,jdbcType=VARCHAR},
+      SHZT = #{shzt,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=VARCHAR},
+      CJIP = #{cjip,jdbcType=VARCHAR},
+      REGISTER_ID = #{registerId,jdbcType=VARCHAR},
+      DATASTATUS = #{datastatus,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

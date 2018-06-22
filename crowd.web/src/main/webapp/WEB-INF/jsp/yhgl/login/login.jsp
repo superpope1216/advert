@@ -19,7 +19,7 @@
 <body>
 	<%@include file="/jsp/header_not_login.jsp" %>
 
-	<div class="login_index met-member">
+	<div class="login_index met-member" style="padding:30px 0;">
 		<div class="container">
 			<form method="post">
 				<div class="form-group">
@@ -35,7 +35,7 @@
 
 				<div class="login_link">
 					<a
-						href="javascript:void(0)">忘记密码？</a>
+						href="<%=request.getContextPath() %>/resetPwd/index">忘记密码？</a>
 				</div>
 				<button class="btn btn-lg btn-primary btn-block" type="button"
 					id="btnLogin">登录</button>

@@ -5,9 +5,6 @@
 define(function(require, exports, module) {
 
 	var $$ = jQuery$ = require('jquery');
-	require('plugins/vendor/upload/jquery.form');
-	require('plugins/vendor/upload/imageUploader');
-	require('plugins/vendor/upload/uploader');
 	var upload=null;
 	require('plugins/vendor/bootstrap/validator/entrance');
 	$$('#formCompany').bootstrapValidator();
@@ -39,31 +36,48 @@ define(function(require, exports, module) {
 	doGet(basePath+"/companyInfo/queryCompanyInfo","",function(data){
 		if(data && data.datas){
 			var _data=data.datas;
-			$("#formCompany [name='wid']").val(toStr(_data.wid));
-			$("#formCompany [name='name']").val(toStr(_data.name));
-			$("#formCompany [name='area']").val(toStr(_data.area));
+			for(var key in data.datas){
+				var _control=$("#formCompany [name='"+key+"']");
+				if(_control.is('input') && (_control.prop("type")=="checkbox"||_control.prop("type")=="radio")){
+					$("#formCompany [name='"+key+"'][value='"+data.datas[key]+"']").prop("checked",true);
+				}else{
+					_control.val(data.datas[key]);	
+				}
+			};
 			setCity(toStr(_data.area),toStr(_data.city));
 			setXian(toStr(_data.city),toStr(_data.xian));
-			$("#formCompany [name='addr']").val(toStr(_data.addr));
-			$("#formCompany [name='lxr']").val(toStr(_data.lxr));
-			$("#formCompany [name='qq']").val(toStr(_data.qq));
-			$("#formCompany [name='sjh']").val(toStr(_data.sjh));
-			$("#formCompany [name='czh']").val(toStr(_data.czh));
-			$("#formCompany [name='wzdz']").val(toStr(_data.wzdz));
-			$("#formCompany [name='gsxz']").val(toStr(_data.gsxz));
-			$("#formCompany [name='nyye']").val(toStr(_data.nyye));
-			$("#formCompany [name='gsjj']").val(toStr(_data.gsjj));
-			var uploader=new Uploader({id:"sfzzmztjidBrower",maxSize:1024*1024*10,propExplain:"请上传照片",uploadedFunc:function(data){
-				if(true){
-					var imgPath=basePath+"/image/preView?wid="+uploader.params.value;
-					$("#sfzzmztjidImg").attr("src",imgPath);
-					$("#formCompany [name='gslog']").val(uploader.params.value);
-					$("#sfzzmztjidImg").css("width","303px");
-					$("#sfzzmztjidImg").css("z-index","0");
-				}
-			}});
-			$("#sfzzmztjidUpload").click(function(){
-				$("#f_sfzzmztjidBrower").trigger("click");
+//			var uploader=new Uploader({id:"sfzzmztjidBrower",maxSize:1024*1024*10,propExplain:"请上传照片",uploadedFunc:function(data){
+//				if(true){
+//					var imgPath=basePath+"/image/preView?wid="+uploader.params.value;
+//					$("#sfzzmztjidImg").attr("src",imgPath);
+//					$("#formCompany [name='gslog']").val(uploader.params.value);
+//					$("#sfzzmztjidImg").css("width","303px");
+//					$("#sfzzmztjidImg").css("z-index","0");
+//				}
+//			}});
+			//服务端处理没有特殊的限制，只要服务端接受file表单提交的数据处理后返回json格式数据，上传成功返回的json数据里必须含有code和src，其中code必须为200，src是上传后的图片url，上传失败返回的json数据里必须含有code和msg，其中code为错误码(不能是200)，msg为错误信息。
+			$("#js_uploadBtn").ajaxImageUpload({
+				url: basePath+'/attr/upload', //上传的服务器地址
+			    data: { },
+			    id:"img1",
+			    maxNum: 1, //允许上传图片数量
+			    hidenInputName:'', // 上传成功后追加的隐藏input名，注意不要带[]，会自动带[]，不写默认和上传按钮的name相同
+			    zoom: true, //允许上传图片点击放大
+			    allowType: ["gif", "jpeg", "jpg", "bmp",'png'], //允许上传图片的类型
+			    maxSize :2, //允许上传图片的最大尺寸，单位M
+			    wid:data.datas.gslog,
+			    before: function () {
+			      
+			    },
+			    success:function(data){
+			    	$("#formCompany [name='gslog']").val(data.fileWids);
+			        console.log(data);
+			    },
+			    error:function (e) {
+			        
+			        console.log(e);
+			    }
+			    	
 			});
 		}
 	});

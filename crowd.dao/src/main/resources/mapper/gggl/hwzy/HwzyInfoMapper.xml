@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.hwzy.HwzyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.hwzy.HwzyInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="XIAN" property="xian" jdbcType="VARCHAR" />
+    <result column="TV_ID" property="tvId" jdbcType="VARCHAR" />
+    <result column="QY" property="qy" jdbcType="VARCHAR" />
+    <result column="XS" property="xs" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ADVERT_TYPE" property="advertType" jdbcType="VARCHAR" />
+    <result column="MTCZ" property="mtcz" jdbcType="VARCHAR" />
+    <result column="LNG" property="lng" jdbcType="VARCHAR" />
+    <result column="LAT" property="lat" jdbcType="VARCHAR" />
+    <result column="SFYBZ" property="sfybz" jdbcType="VARCHAR" />
+    <result column="GJRLL" property="gjrll" jdbcType="DECIMAL" />
+    <result column="GJCLL" property="gjcll" jdbcType="DECIMAL" />
+    <result column="MTGG_K" property="mtggK" jdbcType="DECIMAL" />
+    <result column="MTGG_G" property="mtggG" jdbcType="DECIMAL" />
+    <result column="MTGG_M" property="mtggM" jdbcType="DECIMAL" />
+    <result column="MTGG_PFM" property="mtggPfm" jdbcType="DECIMAL" />
+    <result column="ZXJG_MONTH" property="zxjgMonth" jdbcType="DECIMAL" />
+    <result column="ZXJG_YEAR" property="zxjgYear" jdbcType="DECIMAL" />
+    <result column="SCXGT" property="scxgt" jdbcType="VARCHAR" />
+    <result column="ZMSJ" property="zmsj" jdbcType="VARCHAR" />
+    <result column="ZCWZT" property="zcwzt" jdbcType="VARCHAR" />
+    <result column="MTZT" property="mtzt" jdbcType="VARCHAR" />
+    <result column="ZXTFZQ" property="zxtfzq" jdbcType="VARCHAR" />
+    <result column="ZZTFRQ" property="zztfrq" jdbcType="VARCHAR" />
+    <result column="SSQDQR" property="ssqdqr" jdbcType="VARCHAR" />
+    <result column="ZXTFSL" property="zxtfsl" jdbcType="DECIMAL" />
+    <result column="GGSYQZK" property="ggsyqzk" jdbcType="VARCHAR" />
+    <result column="HWGLJJ" property="hwgljj" jdbcType="VARCHAR" />
+    <result column="SHZT" property="shzt" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+    <result column="CJIP" property="cjip" jdbcType="VARCHAR" />
+    <result column="REGISTER_ID" property="registerId" jdbcType="VARCHAR" />
+    <result column="DATASTATUS" property="datastatus" jdbcType="VARCHAR" />
+    <result column="SCTPLJ" property="sctplj" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, AREA, CITY, XIAN, TV_ID, QY, XS, NAME, ADVERT_TYPE, MTCZ, LNG, LAT, SFYBZ, GJRLL, 
+    GJCLL, MTGG_K, MTGG_G, MTGG_M, MTGG_PFM, ZXJG_MONTH, ZXJG_YEAR, SCXGT, ZMSJ, ZCWZT, 
+    MTZT, ZXTFZQ, ZZTFRQ, SSQDQR, ZXTFSL, GGSYQZK, HWGLJJ, SHZT, CJSJ, CJIP, REGISTER_ID, 
+    DATASTATUS,sctplj
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_gggl_hwzy
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_gggl_hwzy
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.gggl.hwzy.HwzyInfo" >
+    insert into t_advert_gggl_hwzy (WID, AREA, CITY, 
+      XIAN, TV_ID, QY, XS, 
+      NAME, ADVERT_TYPE, MTCZ, 
+      LNG, LAT, SFYBZ, GJRLL, 
+      GJCLL, MTGG_K, MTGG_G, 
+      MTGG_M, MTGG_PFM, ZXJG_MONTH, 
+      ZXJG_YEAR, SCXGT, ZMSJ, 
+      ZCWZT, MTZT, ZXTFZQ, 
+      ZZTFRQ, SSQDQR, ZXTFSL, 
+      GGSYQZK, HWGLJJ, SHZT, 
+      CJSJ, CJIP, REGISTER_ID, 
+      DATASTATUS,sctplj)
+    values (#{wid,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{xian,jdbcType=VARCHAR}, #{tvId,jdbcType=VARCHAR}, #{qy,jdbcType=VARCHAR}, #{xs,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{advertType,jdbcType=VARCHAR}, #{mtcz,jdbcType=VARCHAR}, 
+      #{lng,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, #{sfybz,jdbcType=VARCHAR}, #{gjrll,jdbcType=DECIMAL}, 
+      #{gjcll,jdbcType=DECIMAL}, #{mtggK,jdbcType=DECIMAL}, #{mtggG,jdbcType=DECIMAL}, 
+      #{mtggM,jdbcType=DECIMAL}, #{mtggPfm,jdbcType=DECIMAL}, #{zxjgMonth,jdbcType=DECIMAL}, 
+      #{zxjgYear,jdbcType=DECIMAL}, #{scxgt,jdbcType=VARCHAR}, #{zmsj,jdbcType=VARCHAR}, 
+      #{zcwzt,jdbcType=VARCHAR}, #{mtzt,jdbcType=VARCHAR}, #{zxtfzq,jdbcType=VARCHAR}, 
+      #{zztfrq,jdbcType=VARCHAR}, #{ssqdqr,jdbcType=VARCHAR}, #{zxtfsl,jdbcType=DECIMAL}, 
+      #{ggsyqzk,jdbcType=VARCHAR}, #{hwgljj,jdbcType=VARCHAR}, #{shzt,jdbcType=VARCHAR}, 
+      #{cjsj,jdbcType=VARCHAR}, #{cjip,jdbcType=VARCHAR}, #{registerId,jdbcType=VARCHAR}, 
+      #{datastatus,jdbcType=VARCHAR},#{sctplj,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.hwzy.HwzyInfo" >
+    insert into t_advert_gggl_hwzy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="xian != null" >
+        XIAN,
+      </if>
+      <if test="tvId != null" >
+        TV_ID,
+      </if>
+      <if test="qy != null" >
+        QY,
+      </if>
+      <if test="xs != null" >
+        XS,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="advertType != null" >
+        ADVERT_TYPE,
+      </if>
+      <if test="mtcz != null" >
+        MTCZ,
+      </if>
+      <if test="lng != null" >
+        LNG,
+      </if>
+      <if test="lat != null" >
+        LAT,
+      </if>
+      <if test="sfybz != null" >
+        SFYBZ,
+      </if>
+      <if test="gjrll != null" >
+        GJRLL,
+      </if>
+      <if test="gjcll != null" >
+        GJCLL,
+      </if>
+      <if test="mtggK != null" >
+        MTGG_K,
+      </if>
+      <if test="mtggG != null" >
+        MTGG_G,
+      </if>
+      <if test="mtggM != null" >
+        MTGG_M,
+      </if>
+      <if test="mtggPfm != null" >
+        MTGG_PFM,
+      </if>
+      <if test="zxjgMonth != null" >
+        ZXJG_MONTH,
+      </if>
+      <if test="zxjgYear != null" >
+        ZXJG_YEAR,
+      </if>
+      <if test="scxgt != null" >
+        SCXGT,
+      </if>
+      <if test="zmsj != null" >
+        ZMSJ,
+      </if>
+      <if test="zcwzt != null" >
+        ZCWZT,
+      </if>
+      <if test="mtzt != null" >
+        MTZT,
+      </if>
+      <if test="zxtfzq != null" >
+        ZXTFZQ,
+      </if>
+      <if test="zztfrq != null" >
+        ZZTFRQ,
+      </if>
+      <if test="ssqdqr != null" >
+        SSQDQR,
+      </if>
+      <if test="zxtfsl != null" >
+        ZXTFSL,
+      </if>
+      <if test="ggsyqzk != null" >
+        GGSYQZK,
+      </if>
+      <if test="hwgljj != null" >
+        HWGLJJ,
+      </if>
+      <if test="shzt != null" >
+        SHZT,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="cjip != null" >
+        CJIP,
+      </if>
+      <if test="registerId != null" >
+        REGISTER_ID,
+      </if>
+      <if test="datastatus != null" >
+        DATASTATUS,
+      </if>
+      <if test="sctplj!=null">
+      	sctplj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="xian != null" >
+        #{xian,jdbcType=VARCHAR},
+      </if>
+      <if test="tvId != null" >
+        #{tvId,jdbcType=VARCHAR},
+      </if>
+      <if test="qy != null" >
+        #{qy,jdbcType=VARCHAR},
+      </if>
+      <if test="xs != null" >
+        #{xs,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="advertType != null" >
+        #{advertType,jdbcType=VARCHAR},
+      </if>
+      <if test="mtcz != null" >
+        #{mtcz,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="sfybz != null" >
+        #{sfybz,jdbcType=VARCHAR},
+      </if>
+      <if test="gjrll != null" >
+        #{gjrll,jdbcType=DECIMAL},
+      </if>
+      <if test="gjcll != null" >
+        #{gjcll,jdbcType=DECIMAL},
+      </if>
+      <if test="mtggK != null" >
+        #{mtggK,jdbcType=DECIMAL},
+      </if>
+      <if test="mtggG != null" >
+        #{mtggG,jdbcType=DECIMAL},
+      </if>
+      <if test="mtggM != null" >
+        #{mtggM,jdbcType=DECIMAL},
+      </if>
+      <if test="mtggPfm != null" >
+        #{mtggPfm,jdbcType=DECIMAL},
+      </if>
+      <if test="zxjgMonth != null" >
+        #{zxjgMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="zxjgYear != null" >
+        #{zxjgYear,jdbcType=DECIMAL},
+      </if>
+      <if test="scxgt != null" >
+        #{scxgt,jdbcType=VARCHAR},
+      </if>
+      <if test="zmsj != null" >
+        #{zmsj,jdbcType=VARCHAR},
+      </if>
+      <if test="zcwzt != null" >
+        #{zcwzt,jdbcType=VARCHAR},
+      </if>
+      <if test="mtzt != null" >
+        #{mtzt,jdbcType=VARCHAR},
+      </if>
+      <if test="zxtfzq != null" >
+        #{zxtfzq,jdbcType=VARCHAR},
+      </if>
+      <if test="zztfrq != null" >
+        #{zztfrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ssqdqr != null" >
+        #{ssqdqr,jdbcType=VARCHAR},
+      </if>
+      <if test="zxtfsl != null" >
+        #{zxtfsl,jdbcType=DECIMAL},
+      </if>
+      <if test="ggsyqzk != null" >
+        #{ggsyqzk,jdbcType=VARCHAR},
+      </if>
+      <if test="hwgljj != null" >
+        #{hwgljj,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="registerId != null" >
+        #{registerId,jdbcType=VARCHAR},
+      </if>
+      <if test="datastatus != null" >
+        #{datastatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sctplj!=null">
+      	#{sctplj,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.hwzy.HwzyInfo" >
+    update t_advert_gggl_hwzy
+    <set >
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="xian != null" >
+        XIAN = #{xian,jdbcType=VARCHAR},
+      </if>
+      <if test="tvId != null" >
+        TV_ID = #{tvId,jdbcType=VARCHAR},
+      </if>
+      <if test="qy != null" >
+        QY = #{qy,jdbcType=VARCHAR},
+      </if>
+      <if test="xs != null" >
+        XS = #{xs,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="advertType != null" >
+        ADVERT_TYPE = #{advertType,jdbcType=VARCHAR},
+      </if>
+      <if test="mtcz != null" >
+        MTCZ = #{mtcz,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        LNG = #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        LAT = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="sfybz != null" >
+        SFYBZ = #{sfybz,jdbcType=VARCHAR},
+      </if>
+      <if test="gjrll != null" >
+        GJRLL = #{gjrll,jdbcType=DECIMAL},
+      </if>
+      <if test="gjcll != null" >
+        GJCLL = #{gjcll,jdbcType=DECIMAL},
+      </if>
+      <if test="mtggK != null" >
+        MTGG_K = #{mtggK,jdbcType=DECIMAL},
+      </if>
+      <if test="mtggG != null" >
+        MTGG_G = #{mtggG,jdbcType=DECIMAL},
+      </if>
+      <if test="mtggM != null" >
+        MTGG_M = #{mtggM,jdbcType=DECIMAL},
+      </if>
+      <if test="mtggPfm != null" >
+        MTGG_PFM = #{mtggPfm,jdbcType=DECIMAL},
+      </if>
+      <if test="zxjgMonth != null" >
+        ZXJG_MONTH = #{zxjgMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="zxjgYear != null" >
+        ZXJG_YEAR = #{zxjgYear,jdbcType=DECIMAL},
+      </if>
+      <if test="scxgt != null" >
+        SCXGT = #{scxgt,jdbcType=VARCHAR},
+      </if>
+      <if test="zmsj != null" >
+        ZMSJ = #{zmsj,jdbcType=VARCHAR},
+      </if>
+      <if test="zcwzt != null" >
+        ZCWZT = #{zcwzt,jdbcType=VARCHAR},
+      </if>
+      <if test="mtzt != null" >
+        MTZT = #{mtzt,jdbcType=VARCHAR},
+      </if>
+      <if test="zxtfzq != null" >
+        ZXTFZQ = #{zxtfzq,jdbcType=VARCHAR},
+      </if>
+      <if test="zztfrq != null" >
+        ZZTFRQ = #{zztfrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ssqdqr != null" >
+        SSQDQR = #{ssqdqr,jdbcType=VARCHAR},
+      </if>
+      <if test="zxtfsl != null" >
+        ZXTFSL = #{zxtfsl,jdbcType=DECIMAL},
+      </if>
+      <if test="ggsyqzk != null" >
+        GGSYQZK = #{ggsyqzk,jdbcType=VARCHAR},
+      </if>
+      <if test="hwgljj != null" >
+        HWGLJJ = #{hwgljj,jdbcType=VARCHAR},
+      </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjip != null" >
+        CJIP = #{cjip,jdbcType=VARCHAR},
+      </if>
+      <if test="registerId != null" >
+        REGISTER_ID = #{registerId,jdbcType=VARCHAR},
+      </if>
+      <if test="datastatus != null" >
+        DATASTATUS = #{datastatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sctplj!=null">
+      	sctplj=#{sctplj,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.gggl.hwzy.HwzyInfo" >
+    update t_advert_gggl_hwzy
+    set AREA = #{area,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      XIAN = #{xian,jdbcType=VARCHAR},
+      TV_ID = #{tvId,jdbcType=VARCHAR},
+      QY = #{qy,jdbcType=VARCHAR},
+      XS = #{xs,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      ADVERT_TYPE = #{advertType,jdbcType=VARCHAR},
+      MTCZ = #{mtcz,jdbcType=VARCHAR},
+      LNG = #{lng,jdbcType=VARCHAR},
+      LAT = #{lat,jdbcType=VARCHAR},
+      SFYBZ = #{sfybz,jdbcType=VARCHAR},
+      GJRLL = #{gjrll,jdbcType=DECIMAL},
+      GJCLL = #{gjcll,jdbcType=DECIMAL},
+      MTGG_K = #{mtggK,jdbcType=DECIMAL},
+      MTGG_G = #{mtggG,jdbcType=DECIMAL},
+      MTGG_M = #{mtggM,jdbcType=DECIMAL},
+      MTGG_PFM = #{mtggPfm,jdbcType=DECIMAL},
+      ZXJG_MONTH = #{zxjgMonth,jdbcType=DECIMAL},
+      ZXJG_YEAR = #{zxjgYear,jdbcType=DECIMAL},
+      SCXGT = #{scxgt,jdbcType=VARCHAR},
+      ZMSJ = #{zmsj,jdbcType=VARCHAR},
+      ZCWZT = #{zcwzt,jdbcType=VARCHAR},
+      MTZT = #{mtzt,jdbcType=VARCHAR},
+      ZXTFZQ = #{zxtfzq,jdbcType=VARCHAR},
+      ZZTFRQ = #{zztfrq,jdbcType=VARCHAR},
+      SSQDQR = #{ssqdqr,jdbcType=VARCHAR},
+      ZXTFSL = #{zxtfsl,jdbcType=DECIMAL},
+      GGSYQZK = #{ggsyqzk,jdbcType=VARCHAR},
+      HWGLJJ = #{hwgljj,jdbcType=VARCHAR},
+      SHZT = #{shzt,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=VARCHAR},
+      CJIP = #{cjip,jdbcType=VARCHAR},
+      REGISTER_ID = #{registerId,jdbcType=VARCHAR},
+      DATASTATUS = #{datastatus,jdbcType=VARCHAR},
+      sctplj=#{sctplj,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

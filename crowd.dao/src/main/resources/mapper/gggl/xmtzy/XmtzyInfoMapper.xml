@@ -5,6 +5,7 @@
     <id column="WID" property="wid" jdbcType="VARCHAR" />
     <result column="NAME" property="name" jdbcType="VARCHAR" />
     <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
     <result column="TV_ID" property="tvId" jdbcType="VARCHAR" />
     <result column="ADVERT_TYPE" property="advertType" jdbcType="VARCHAR" />
     <result column="GGJG" property="ggjg" jdbcType="DECIMAL" />
@@ -18,10 +19,12 @@
     <result column="CJIP" property="cjip" jdbcType="VARCHAR" />
     <result column="REGISTER_ID" property="registerId" jdbcType="VARCHAR" />
     <result column="DATASTATUS" property="datastatus" jdbcType="VARCHAR" />
+    <result column="SHZT" property="shzt" jdbcType="VARCHAR" />
+     <result column="zytp" property="zytp" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    WID, NAME, AREA, TV_ID, ADVERT_TYPE, GGJG, GGGGXS, SZRQ, JYCD, ZYFB, SRZK, XMTJJ, 
-    CJSJ, CJIP, REGISTER_ID, DATASTATUS
+    WID, NAME, AREA, CITY, TV_ID, ADVERT_TYPE, GGJG, GGGGXS, SZRQ, JYCD, ZYFB, SRZK, 
+    XMTJJ, CJSJ, CJIP, REGISTER_ID, DATASTATUS, SHZT,ZYTP
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -35,17 +38,17 @@
   </delete>
   <insert id="insert" parameterType="com.pope.advert.entity.gggl.xmtzy.XmtzyInfo" >
     insert into t_advert_gggl_xmtzy (WID, NAME, AREA, 
-      TV_ID, ADVERT_TYPE, GGJG, 
-      GGGGXS, SZRQ, JYCD, 
-      ZYFB, SRZK, XMTJJ, 
+      CITY, TV_ID, ADVERT_TYPE, 
+      GGJG, GGGGXS, SZRQ, 
+      JYCD, ZYFB, SRZK, XMTJJ, 
       CJSJ, CJIP, REGISTER_ID, 
-      DATASTATUS)
+      DATASTATUS, SHZT,ZYTP)
     values (#{wid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
-      #{tvId,jdbcType=VARCHAR}, #{advertType,jdbcType=VARCHAR}, #{ggjg,jdbcType=DECIMAL}, 
-      #{ggggxs,jdbcType=VARCHAR}, #{szrq,jdbcType=VARCHAR}, #{jycd,jdbcType=VARCHAR}, 
-      #{zyfb,jdbcType=VARCHAR}, #{srzk,jdbcType=VARCHAR}, #{xmtjj,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{tvId,jdbcType=VARCHAR}, #{advertType,jdbcType=VARCHAR}, 
+      #{ggjg,jdbcType=DECIMAL}, #{ggggxs,jdbcType=VARCHAR}, #{szrq,jdbcType=VARCHAR}, 
+      #{jycd,jdbcType=VARCHAR}, #{zyfb,jdbcType=VARCHAR}, #{srzk,jdbcType=VARCHAR}, #{xmtjj,jdbcType=VARCHAR}, 
       #{cjsj,jdbcType=VARCHAR}, #{cjip,jdbcType=VARCHAR}, #{registerId,jdbcType=VARCHAR}, 
-      #{datastatus,jdbcType=VARCHAR})
+      #{datastatus,jdbcType=VARCHAR}, #{shzt,jdbcType=VARCHAR}, #{zytp,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pope.advert.entity.gggl.xmtzy.XmtzyInfo" >
     insert into t_advert_gggl_xmtzy
@@ -58,6 +61,9 @@
       </if>
       <if test="area != null" >
         AREA,
+      </if>
+      <if test="city != null" >
+        CITY,
       </if>
       <if test="tvId != null" >
         TV_ID,
@@ -98,6 +104,12 @@
       <if test="datastatus != null" >
         DATASTATUS,
       </if>
+      <if test="shzt != null" >
+        SHZT,
+      </if>
+      <if test="zytp != null" >
+        zytp,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="wid != null" >
@@ -108,6 +120,9 @@
       </if>
       <if test="area != null" >
         #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
       </if>
       <if test="tvId != null" >
         #{tvId,jdbcType=VARCHAR},
@@ -148,6 +163,12 @@
       <if test="datastatus != null" >
         #{datastatus,jdbcType=VARCHAR},
       </if>
+      <if test="shzt != null" >
+        #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp != null" >
+        #{zytp,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.gggl.xmtzy.XmtzyInfo" >
@@ -158,6 +179,9 @@
       </if>
       <if test="area != null" >
         AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
       </if>
       <if test="tvId != null" >
         TV_ID = #{tvId,jdbcType=VARCHAR},
@@ -198,6 +222,12 @@
       <if test="datastatus != null" >
         DATASTATUS = #{datastatus,jdbcType=VARCHAR},
       </if>
+      <if test="shzt != null" >
+        SHZT = #{shzt,jdbcType=VARCHAR},
+      </if>
+      <if test="zytp != null" >
+        zytp = #{zytp,jdbcType=VARCHAR},
+      </if>
     </set>
     where WID = #{wid,jdbcType=VARCHAR}
   </update>
@@ -205,6 +235,7 @@
     update t_advert_gggl_xmtzy
     set NAME = #{name,jdbcType=VARCHAR},
       AREA = #{area,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
       TV_ID = #{tvId,jdbcType=VARCHAR},
       ADVERT_TYPE = #{advertType,jdbcType=VARCHAR},
       GGJG = #{ggjg,jdbcType=DECIMAL},
@@ -217,7 +248,9 @@
       CJSJ = #{cjsj,jdbcType=VARCHAR},
       CJIP = #{cjip,jdbcType=VARCHAR},
       REGISTER_ID = #{registerId,jdbcType=VARCHAR},
-      DATASTATUS = #{datastatus,jdbcType=VARCHAR}
+      DATASTATUS = #{datastatus,jdbcType=VARCHAR},
+      SHZT = #{shzt,jdbcType=VARCHAR},
+      zytp = #{zytp,jdbcType=VARCHAR}
     where WID = #{wid,jdbcType=VARCHAR}
   </update>
 </mapper>

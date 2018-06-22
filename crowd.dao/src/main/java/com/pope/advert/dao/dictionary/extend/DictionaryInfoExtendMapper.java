@@ -41,5 +41,15 @@ public interface DictionaryInfoExtendMapper {
 	
 	List<DictionaryInfo> selectByAreaBm(@Param("tableName") String tableName,@Param("areaBm") String areaBm);
 	
+	
+	List<DictionaryInfo>  selectZsfsByZsxt(@Param("zsxt") String zsxt);
+	
+	List<DictionaryInfo>  selectZsccByZsxt(@Param("zsxt") String zsxt);
+	
+	List<DictionaryInfo>  selectHwzyQyByGglx(@Param("gglx") String gglx);
+	
+	List<DictionaryInfo>  selectHwzyXsByGglx(@Param("gglx") String gglx);
+	
+	List<DictionaryInfo> selectHwzyGgxx(@Param("gglx") String gglx,@Param("area") String area,@Param("city") String city,@Param("xian") String xian);
 
 }

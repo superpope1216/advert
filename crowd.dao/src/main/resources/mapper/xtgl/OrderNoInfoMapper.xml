@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.xtgl.OrderNoInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.xtgl.OrderNoInfo" >
+    <id column="WID" property="wid" jdbcType="VARCHAR" />
+    <result column="orderNo" property="orderno" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="CSJS" property="csjs" jdbcType="VARCHAR" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WID, orderNo, month, type, CSJS, IP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert_xtgl_orderno
+    where WID = #{wid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_advert_xtgl_orderno
+    where WID = #{wid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.pope.advert.entity.xtgl.OrderNoInfo" >
+    insert into t_advert_xtgl_orderno (WID, orderNo, month, 
+      type, CSJS, IP)
+    values (#{wid,jdbcType=VARCHAR}, #{orderno,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{csjs,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pope.advert.entity.xtgl.OrderNoInfo" >
+    insert into t_advert_xtgl_orderno
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="orderno != null" >
+        orderNo,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="csjs != null" >
+        CSJS,
+      </if>
+      <if test="ip != null" >
+        IP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="csjs != null" >
+        #{csjs,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pope.advert.entity.xtgl.OrderNoInfo" >
+    update t_advert_xtgl_orderno
+    <set >
+      <if test="orderno != null" >
+        orderNo = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="csjs != null" >
+        CSJS = #{csjs,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pope.advert.entity.xtgl.OrderNoInfo" >
+    update t_advert_xtgl_orderno
+    set orderNo = #{orderno,jdbcType=VARCHAR},
+      month = #{month,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      CSJS = #{csjs,jdbcType=VARCHAR},
+      IP = #{ip,jdbcType=VARCHAR}
+    where WID = #{wid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -23,6 +23,8 @@ public class DateUtil {
 	
 	public static final String TIMESTAMP_FORMATTER = "yyyyMMddHHmmssSSS";
 	
+	
+	
 	public static final String YEAR_FORMATTER = "yyyy";
 	
 	public static final String MONTH_FORMATTER = "yyyy-MM";
@@ -185,6 +187,18 @@ public class DateUtil {
         Date dt1 = rightNow.getTime();  
         String reStr = DateUtil.format(dt1, MONTH_FORMATTER) ;
   
+        return reStr;  
+    }  
+    
+    public static String addYear(String date,int value)  {  
+    	  
+        Date dt = DateUtil.parseDate(date);
+        Calendar rightNow = Calendar.getInstance();  
+        rightNow.setTime(dt);  
+  
+        rightNow.add(Calendar.YEAR, value);  
+        Date dt1 = rightNow.getTime();  
+        String reStr = DateUtil.format(dt1, DATE_FORMATTER) ;
         return reStr;  
     }  
     

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.zzzy.extend.ZzzyInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.zzzy.extend.ZzzyInfoExtend" 
+  extends="com.pope.advert.dao.gggl.zzzy.ZzzyInfoMapper.BaseResultMap">
+  	<result column="areaDisplay" property="areaDisplay" jdbcType="VARCHAR" />
+		<result column="cityDisplay" property="cityDisplay" jdbcType="VARCHAR" />
+		<result column="tvIdDisplay" property="tvIdDisplay" jdbcType="VARCHAR" />
+		<result column="advertTypeDisplay" property="advertTypeDisplay"
+			jdbcType="VARCHAR" />
+		<result column="shztDisplay" property="shztDisplay" jdbcType="VARCHAR" />
+		<result column="companyName" property="companyName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_gggl_zzzy.WID, 
+    t_advert_gggl_zzzy.AREA, 
+    t_advert_gggl_zzzy.CITY, 
+    t_advert_gggl_zzzy.TV_ID, 
+    t_advert_gggl_zzzy.ADVERT_TYPE, 
+    t_advert_gggl_zzzy.SHZT, 
+    t_advert_gggl_zzzy.CJSJ, 
+    t_advert_gggl_zzzy.CJIP, 
+    t_advert_gggl_zzzy.REGISTER_ID, 
+    t_advert_gggl_zzzy.DATASTATUS
+  </sql>
+  
+  <sql id="sqlWhere">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_gggl_zzzy.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.shzt!=null and query.shzt!=""'>
+  			AND t_advert_gggl_zzzy.SHZT=#{query.shzt,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.companyName!=null and query.companyName!=""'>
+  			AND t_advert_yhjbxx_company.name like concat('%',#{query.companyName,jdbcType=VARCHAR},'%')
+  		</if>
+  		
+  </sql>
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap" parameterType="com.pope.advert.entity.dto.QueryCondition">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		,area.LBMC AS areaDisplay
+  		,city.lbmc as cityDisplay
+  		
+  		,T_ADVERT_SJZD_ZZXX.LBMC AS tvIdDisplay
+  		,t_advert_sjzd_zzzylx.lbmc as advertTypeDisplay
+  		,t_advert_sjzd_shzt.lbmc as shztDisplay
+  		,t_advert_yhjbxx_company.name as companyName
+  		FROM t_advert_gggl_zzzy
+  		LEFT JOIN T_ADVERT_SJZD_XZQH area ON t_advert_gggl_zzzy.AREA=area.LBDM
+  		LEFT JOIN T_ADVERT_SJZD_XZQH city ON t_advert_gggl_zzzy.CITY=city.LBDM
+  		LEFT JOIN T_ADVERT_SJZD_ZZXX ON T_ADVERT_SJZD_ZZXX.LBDM=t_advert_gggl_zzzy.TV_ID
+  		LEFT JOIN t_advert_sjzd_zzzylx ON t_advert_sjzd_zzzylx.LBDM=t_advert_gggl_zzzy.ADVERT_TYPE
+  		LEFT JOIN t_advert_sjzd_shzt ON t_advert_sjzd_shzt.LBDM=t_advert_gggl_zzzy.SHZT
+  		
+  		LEFT JOIN t_advert_yhjbxx_company on t_advert_yhjbxx_company.REGISTER_ID=t_advert_gggl_zzzy.register_id
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  </select>
+</mapper>

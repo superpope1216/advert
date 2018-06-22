@@ -125,7 +125,8 @@
 									method="post" action="" role="form" id="formDlxx">
 									<input type="hidden" name="wid" value="" />
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">公告标题</label>
+										<label for="firstname" class="col-sm-2 control-label">公告标题<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-10">
 												<input type="text" class="form-control" name="title"
@@ -136,7 +137,8 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">公告内容</label>
+										<label for="firstname" class="col-sm-2 control-label">公告内容<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-10">
 												<input type="hidden" name="content">

@@ -14,7 +14,7 @@
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx.xsd
 		">
-
+     <context:property-placeholder location="classpath:zfbinfo.properties" ignore-unresolvable="true"/>
     <!--扫描service包(包含子包)下所有使用注解的类型-->
     <context:component-scan base-package="com.pope.advert.service"/>
 	<!--1、配置数据库相关参数-->
@@ -27,5 +27,5 @@
 
     <!--配置基于注解的声明式事务,默认使用注解来管理事务行为-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
-
+	
 </beans>

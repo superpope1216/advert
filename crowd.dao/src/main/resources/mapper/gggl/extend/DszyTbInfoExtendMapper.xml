@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.extend.DszyTbInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.extend.DszyTbInfoExtend"
+  extends="com.pope.advert.dao.gggl.DszyTbInfoMapper.BaseResultMap" >
+  <result column="bhpdDisplay" property="bhpdDisplay" jdbcType="VARCHAR" />
+  <result column="bcsmBmDisplay" property="bcsmBmDisplay" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_gggl_dszy_tb.wid, t_advert_gggl_dszy_tb.NAME, 
+    t_advert_gggl_dszy_tb.BHPD, t_advert_gggl_dszy_tb.BCSM_BM, 
+    t_advert_gggl_dszy_tb.BCSM_NUM, 
+    t_advert_gggl_dszy_tb.FIVE_HAS, 
+    t_advert_gggl_dszy_tb.FIVE_MONEY, 
+    t_advert_gggl_dszy_tb.SEVENT_HAS, 
+    t_advert_gggl_dszy_tb.SEVENT_MONEY, 
+    t_advert_gggl_dszy_tb.TEN_HAS, 
+    t_advert_gggl_dszy_tb.TEN_MONEY, 
+    t_advert_gggl_dszy_tb.Fifteen_has, 
+    t_advert_gggl_dszy_tb.Fifteen_money, 
+    t_advert_gggl_dszy_tb.Twenty_has, 
+    t_advert_gggl_dszy_tb.Twenty_money, 
+    t_advert_gggl_dszy_tb.Twenty_five_has, 
+    t_advert_gggl_dszy_tb.Twenty_five_money, 
+    t_advert_gggl_dszy_tb.Thirty_has, 
+    t_advert_gggl_dszy_tb.Thirty_money, 
+    t_advert_gggl_dszy_tb.Forty_five_has, 
+    t_advert_gggl_dszy_tb.Forty_five_money, 
+    t_advert_gggl_dszy_tb.sixty_has, 
+    t_advert_gggl_dszy_tb.sixty_money, 
+    t_advert_gggl_dszy_tb.DSZY_ID
+  </sql>
+   <delete id="deleteByDszyId" >
+  	DELETE FROM t_advert_gggl_dszy_tb WHERE DSZY_ID=#{dszyId,jdbcType=VARCHAR}
+  </delete>
+  <sql id="sqlWhere">
+  	<if test='query!=null'>
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_gggl_dszy_tb.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.name!=null and query.name!=""'>
+  			AND t_advert_gggl_dszy_tb.NAME LIKE CONCAT('%',#{query.name,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test='query.dszyId!=null and query.dszyId!=""'>
+  			AND t_advert_gggl_dszy_tb.DSZY_ID=#{query.dszyId,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		SELECT
+		<include refid="Base_Column_List" />
+		,T_ADVERT_SJZD_TBBCCSLX.lbmc as bcsmBmDisplay
+		from t_advert_gggl_dszy_tb
+		
+		left join T_ADVERT_SJZD_TBBCCSLX on T_ADVERT_SJZD_TBBCCSLX.lbdm=t_advert_gggl_dszy_tb.BCSM_BM
+		<where>
+			<include refid="sqlWhere"/>
+		</where>
+	</select>
+</mapper>

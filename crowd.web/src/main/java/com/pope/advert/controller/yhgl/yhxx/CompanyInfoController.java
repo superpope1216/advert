@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pope.advert.common.code.AreaClassifyEnum;
+import com.pope.advert.common.code.DictionaryEnum;
+import com.pope.advert.common.code.ShztEnum;
 import com.pope.advert.controller.BaseController;
 import com.pope.advert.entity.yhgl.CompanyInfo;
 import com.pope.advert.entity.yhgl.extend.CompanyInfoExtend;
@@ -15,10 +18,9 @@ import com.pope.advert.interceptor.AuthSupplyAnnotation;
 import com.pope.advert.service.dictionary.DictionaryService;
 import com.pope.advert.service.dto.DataResult;
 import com.pope.advert.service.yhgl.CompanyInfoService;
-import com.wisedu.crowd.common.code.AreaClassifyEnum;
-import com.wisedu.crowd.common.code.DictionaryEnum;
 import com.wisedu.crowd.common.util.CommonUtil;
 import com.wisedu.crowd.common.util.ConditionUtil;
+import com.wisedu.crowd.common.util.ConstantsUtil;
 import com.wisedu.crowd.common.util.DateUtil;
 
 @Controller
@@ -30,12 +32,37 @@ public class CompanyInfoController extends BaseController{
 	private CompanyInfoService companyInfoService;
 	@RequestMapping("index")
 	@AuthSupplyAnnotation
-	public ModelAndView index() throws Exception{
+	/**
+	 * 
+	 * @param flag1表示售卖2表示购买
+	 * @return
+	 * @throws Exception
+	 */
+	public ModelAndView index(String flag) throws Exception{
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("area", dictionaryService.selectAreaByClassify(AreaClassifyEnum.AREA.getCode(), this.createCustomOperateLog()).getDatas());
 		mv.addObject("gsxz", dictionaryService.selectByCondtion(DictionaryEnum.T_ADVERT_SJZD_COMPANYXZ, null));
 		mv.addObject("yyed", dictionaryService.selectByCondtion(DictionaryEnum.T_ADVERT_SJZD_COMPANY_NYYE, null));
-		mv.setViewName("yhgl/yhxx/companyInfo");
+		CompanyInfo companyInfo=(CompanyInfo)request.getSession().getAttribute(ConstantsUtil.SESSION_COMPANY);
+		if("1".equals(flag)){
+			if(ShztEnum.DSH.getCode().equals(companyInfo.getSupplyShzt())){
+				mv.addObject("msg", "您的广告售卖方身份正在审核中，请稍后！");
+			}else if(ShztEnum.WTG.getCode().equals(companyInfo.getSupplyShzt())){
+				mv.addObject("msg", "抱歉！您的广告售卖方身份申请不通过！");
+			}else if(ShztEnum.YTG.getCode().equals(companyInfo.getSupplyShzt())){
+				mv.addObject("msg", "恭喜您！您的广告售卖方身份已审核通过！");
+			}
+			mv.setViewName("yhgl/yhxx/companyInfo");
+		}else if("2".equals(flag)){
+			if(ShztEnum.DSH.getCode().equals(companyInfo.getBuyShzt())){
+				mv.addObject("msg", "您的广告购买方身份正在审核中，请稍后！");
+			}else if(ShztEnum.WTG.getCode().equals(companyInfo.getBuyShzt())){
+				mv.addObject("msg", "抱歉！您的广告购买方身份申请不通过！");
+			}else if(ShztEnum.YTG.getCode().equals(companyInfo.getBuyShzt())){
+				mv.addObject("msg", "恭喜您！您的广告购买方身份已审核通过！");
+			}
+			mv.setViewName("yhgl/yhxx/buy/companyInfo");
+		}
 		return mv;
 	}
 	

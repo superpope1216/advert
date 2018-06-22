@@ -143,7 +143,7 @@
 		 }
 		 $(obj).html(str);
 		 if(callBack){
-				 callBack();
+				 callBack(data);
 		}
 	 });
  }
@@ -269,9 +269,13 @@
 			    buttonFocus  : "ok"
 			  });
 			};
-	window.alert=function(msg){
+	window.alert=function(msg,callback){
 		resetAlert();
-		alertify.alert(msg);
+		alertify.alert(msg,function(){
+			if(callback){
+				callback();
+			}
+		});
 		
 	}
 	

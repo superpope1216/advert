@@ -29,7 +29,7 @@
     </dependency>
     </dependencies>
   <build>
-		<finalName>crowd</finalName>
+		<finalName>manager</finalName>
 		<resources>
 			<resource>
 				<!--directory: 资源所在的位置 -->

@@ -30,13 +30,13 @@
 	.btn .badge{position:relative;top:-1px}
 </style>
 <div class="head-box">
-	<div class="container">
+	<div style="margin-left: 10px; margin-right: 10px">
 
 		<div class="head-left">
 			<div class="head-left-wrapper">
 				<div class="head-left-slide">
 					<p>
-						欢迎光临某某广告平台！<a style="margin-left:10px;color:#FFFFFF;" href="<%=request.getContextPath()%>/publishing/index">我要求购</a><a style="margin-left:10px;color:#FFFFFF;" href="<%=request.getContextPath() %>/dszyPublishing/index">我要卖广告</a>
+						欢迎光临某某广告平台！<a style="margin-left:10px;color:#FFFFFF;" href="<%=request.getContextPath()%>/buyQgPublishing/index">我要求购</a><a style="margin-left:10px;color:#FFFFFF;" href="<%=request.getContextPath() %>/dszyPublishing/index">我要卖广告</a>
 					</p>
 
 					
@@ -49,7 +49,7 @@
 			<ul>
 				
 						<%@include file="/jsp/user_dropdown.jsp" %>
-					
+					<!-- 
 				<li class="dropdown shopcut"><a href="javascript:void(0)"
 					title="消息中心" data-toggle="dropdown" aria-expanded="false"
 					data-animation="slide-bottom10" role="button"> <i
@@ -76,7 +76,7 @@
 									class="btn btn-squared btn-danger margin-bottom-5 margin-right-10">去购物车结算</a>
 							</div> <span class="red-600 font-size-18 topcarttotal"></span>
 						</li>
-					</ul></li>
+					</ul></li> -->
 			</ul>
 
 		</div>
@@ -89,16 +89,11 @@
 		<div class="container">
 
 			<div class="logo-box">
-				<a href="<%=request.getContextPath() %>/index.jsp" title="智慧校园云工场"
-					target='_self'> <img
-					src="<%=request.getContextPath()%>/statics/images/header/logo.png"
-					alt="智慧校园云工场"> <img
-					src="<%=request.getContextPath()%>/statics/images/header/logo.png"
-					alt="智慧校园云工场">
-				</a>
+				<span style="font-family: 微软雅黑;font-size:30px;">广告资源平台
+				</span>
 			</div>
 
-			<div class="search-box">
+			<!-- <div class="search-box">
 				<div class="search-cut">
 					<p></p>
 
@@ -111,21 +106,21 @@
 
 				</div>
 			</div>
-
+ -->
 			<div class="nav-box ">
 				<div class="nav-cut">
 					<ul class="nav-ul">
 
 						<li class="nav-li "><a
-							href="<%=request.getContextPath()%>/index.jsp" title="首页">首页</a></li>
+							href="<%=request.getContextPath()%>/index" title="首页">首页</a></li>
 
 						<li class="nav-li   margin-left-0"><a
-							href="<%=request.getContextPath()%>/supplyDszyCenter/index?flag=1" title="广告商铺">广告商铺</a></li>
+							href="<%=request.getContextPath()%>/supplyHwzyCenter/index?flag=1" title="广告商铺">广告出售</a></li>
 
 						<li class="nav-li  navs margin-left-0"><a
-							href="javascript:void(0);" title="求购中心">求购中心</a></li>
+							href="<%=request.getContextPath()%>/qgCenter/index?flag=1"title="求购中心">求购中心</a></li>
 						<li class="nav-li  navs margin-left-0"><a
-							href="<%=request.getContextPath()%>/sjglCenter/index?flag=1" title="求购中心">商机广场</a></li>
+							href="<%=request.getContextPath()%>/sjglCenter/index" title="商机广场">商机广场</a></li>
 						<li class="nav-li  navs margin-left-0"><a
 							href="javascript:void(0);" title="行业资讯">行业资讯</a></li>
 						<li class="nav-li  navs margin-left-0"><a

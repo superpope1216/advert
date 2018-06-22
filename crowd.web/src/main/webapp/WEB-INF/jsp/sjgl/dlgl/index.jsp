@@ -119,35 +119,16 @@
 								</h3>
 							</div>
 
-							<div class="row " style="margin-top: 20px;">
-								<ul class="nav nav-tabs nav-tabs-line">
-									<li class="nav-item active">
-										<a class="nav-link" data-toggle="tab" data-key="1" aria-expanded="true">
-											代理列表
-										</a>
-									</li>
-									<li class="nav-item ">
-										<a class="nav-link" data-toggle="tab" data-key="2" aria-expanded="true">
-											我的代理
-										</a>
-									</li>
-								</ul>
-								
-							</div>
-							<div class="row" id="divDllb" style="margin-top:20px;">
-								<div id="divContent">
-								</div>
-								<div class="mypaging2 clearfix" id="pageContent"></div>
-							</div>
-							<div class="row" id="divWddl" style="margin-top:20px;display:none;">
+							
+							
+							<div class="row" id="divWddl" style="margin-top:20px;">
 								<table class="table table-hover mytable2">
 									<thead>
 										<tr>
 											<th>标题</th>
-											<th style="width:100px;">代理开始时间</th>
-											<th style="width:100px;">代理结束时间</th>
-											<th style="width:100px;">状态</th>
-											<th style="width:100px;">点击量</th>
+											<th >代理开始时间</th>
+											<th >代理结束时间</th>
+											<th >状态</th>
 											<th style="width:220px;">操作</th>
 										</tr>
 									</thead>

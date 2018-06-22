@@ -6,15 +6,46 @@ define(function(require, exports, module) {
 	$$('#formRegister').bootstrapValidator();
 	$$('#formCompany').bootstrapValidator();
 	$("#divStep1").show();
-	   $("#divStep2").hide();
+	  $("#divStep2").hide();
 	   if(flag=="1"){
-		   $("#liStep2").removeClass("disabled").addClass("current");
-		   $("#liStep3").removeClass("disabled").addClass("current");
-		   $("#divStep1").hide();
-		   $("#divStep2").hide();
-			$("#divStep3").show();
-		   $("#divSupplygg").show();
-			$("#divBuygg").hide();
+		   $("#divSelect").hide();
+		   if(isBuy){
+			   $("#liStep2").removeClass("disabled").addClass("current");
+			   $("#liStep3").removeClass("disabled").addClass("current");
+			   $("#divStep1").hide();
+			   $("#divStep2").hide();
+			   $("#divStep3").show();
+			   $("#divSupplygg").hide();
+				$("#divBuygg").hide();
+		   }else{
+			   $("#liStep2").removeClass("disabled").addClass("current");
+			   $("#divStep1").hide();
+			   $("#divStep2").show();
+			   $("#divStep3").hide();
+			   $("#divSupplygg").show();
+				$("#divBuygg").hide();
+		   }
+			$$("#formCompany").data('bootstrapValidator').resetForm();
+			$("#formCompany")[0].reset();
+			$("#formCompany [name='flag']").val("1");
+	   }else if (flag=="2"){
+		   $("#divSelect").hide();
+		   if(isSupply){
+			   $("#liStep2").removeClass("disabled").addClass("current");
+			   $("#liStep3").removeClass("disabled").addClass("current");
+			   $("#divStep1").hide();
+			   $("#divStep2").hide();
+			   $("#divStep3").show();
+			   $("#divSupplygg").hide();
+				$("#divBuygg").hide();
+		   }else{
+			   $("#liStep2").removeClass("disabled").addClass("current");
+			   $("#divStep1").hide();
+			   $("#divStep2").show();
+			   $("#divStep3").hide();
+			   $("#divSupplygg").hide();
+				$("#divBuygg").show();
+		   }
 			$$("#formCompany").data('bootstrapValidator').resetForm();
 			$("#formCompany")[0].reset();
 			$("#formCompany [name='flag']").val("1");
@@ -32,7 +63,7 @@ define(function(require, exports, module) {
 	           });
 	       }
 	});
-	
+	setFormData();
 	$("#btnSupply").click(function(){
 		$("#btnSupply").removeClass("btn-default").addClass("btn-primary");
 		$("#btnBuy").removeClass("btn-primary").addClass("btn-default");
@@ -41,15 +72,39 @@ define(function(require, exports, module) {
 		$$("#formCompany").data('bootstrapValidator').resetForm();
 		$("#formCompany")[0].reset();
 		$("#formCompany [name='flag']").val("1");
-		
+		flag="1";
 		$("#btnSaveCompany").html("提交并开通广告商铺");
 	});
 	
+	function setFormData(){
+		if(isBuy || isSupply){
+			doGet(basePath+"/register/select","",function(data){
+				if(data && data.datas){
+					for(var key in data.datas){
+					var _control=$("#formCompany [name='"+key+"']");
+					if(_control.is('input') && (_control.prop("type")=="checkbox"||_control.prop("type")=="radio")){
+						$("#formBzzy [name='"+key+"'][value='"+data.datas[key]+"']").prop("checked",true);
+					}else{
+						_control.val(data.datas[key]);	
+					}
+					}
+					setCity(data.datas.area,data.datas.city);
+					setXian(data.datas.city,data.datas.xian);
+					if(data.datas.sfybz==1){
+						$("#btnBz").html("已标注");
+						$("#btnBz").css("color","green");
+						$("#btnBz i").removeClass("fa-close").addClass("fa-check");
+					}
+				}
+			});
+		}
+		
+	}
 	$("#btnSaveCompany").click(function(){
 		 var bootstrapValidator = $$('#formCompany').data('bootstrapValidator');
 		 bootstrapValidator.validate();
 		 if(bootstrapValidator.isValid()){
-			 doPost(basePath+"/register/saveCompanyInfo",$("#formCompany").serializeArray(),function(data){
+			 doPost(basePath+"/register/saveCompanyInfo?registerFlag="+flag,$("#formCompany").serializeArray(),function(data){
 				 $("#divStep3").hide();
 				 $("#divStep4").show();
 				 $("#liStep4").removeClass("disabled").addClass("current");
@@ -62,6 +117,7 @@ define(function(require, exports, module) {
 		$("#btnSupply").removeClass("btn-primary").addClass("btn-default");
 		$("#divSupplygg").hide();
 		$("#divBuygg").show();
+		flag="2";
 		
 		$$("#formCompany").data('bootstrapValidator').resetForm();
 		$("#formCompany")[0].reset();
@@ -69,54 +125,29 @@ define(function(require, exports, module) {
 		$("#btnSaveCompany").html("提交完善企业信息");
 	});
 	$("#btnKtSupply").click(function(){
+		$("#formCompany [name='flag']").val("1");
 		$("#liStep3").removeClass("disabled").addClass("current");
 		$("#divStep2").hide();
 		$("#divStep3").show();
 		
 	});
 	
+	function setCity(_value,data2){
+		doGetSelect(basePath+"/dictionary/selectCity","parentBm="+_value,"#formCompany [name='city']",data2);
+	}
 	$("#formCompany [name='area']").change(function(){
 		var _value=$(this).val();
-		$("#formCompany [name='xian']").empty();
-		$("#formCompany [name='xian']").append("<option value=''>--请选择--</option>");
-		if(_value==""){
-			$("#formCompany [name='city']").empty();
-			$("#formCompany [name='city']").append("<option value=''>--请选择--</option>");
-			
-		}
-		doGet(basePath+"/dictionary/selectCity","parentBm="+$(this).val(),function(data){
-			if(data && data.datas){
-				
-				var html="";
-				html+="<option value=''>--请选择--</option>";
-				for(var i=0;i<data.datas.length;i++){
-					var _data=data.datas[i];
-					html+="<option value='"+_data.lbdm+"'>"+_data.lbmc+"</option>";
-				}
-				$("#formCompany [name='city']").html(html);
-			}
-		});
+		setCity(_value);
 	});
+	function setXian(_value,data2){
+		doGetSelect(basePath+"/dictionary/selectCity","parentBm="+_value,"#formCompany [name='xian']",data2);
+	}
 	$("#formCompany [name='city']").change(function(){
 		var _value=$(this).val();
-		if(_value==""){
-			$("#formCompany [name='xian']").empty();
-			$("#formCompany [name='xian']").append("<option value=''>--请选择--</option>");
-		}
-		doGet(basePath+"/dictionary/selectCity","parentBm="+$(this).val(),function(data){
-			if(data && data.datas){
-				
-				var html="";
-				html+="<option value=''>--请选择--</option>";
-				for(var i=0;i<data.datas.length;i++){
-					var _data=data.datas[i];
-					html+="<option value='"+_data.lbdm+"'>"+_data.lbmc+"</option>";
-				}
-				$("#formCompany [name='xian']").html(html);
-			}
-		});
+		setXian(_value);
 	});
 	$("#btnKtBuy").click(function(){
+		$("#formCompany [name='flag']").val("2");
 		$("#liStep3").removeClass("disabled").addClass("current");
 		$("#divStep2").hide();
 		$("#divStep3").show();
@@ -125,10 +156,37 @@ define(function(require, exports, module) {
 		$$("#formRegister").data('bootstrapValidator').resetForm();
 		$$('#formRegister').bootstrapValidator("updateStatus","sjh","NOT_VALIDATED");
 		$$("#formRegister").data('bootstrapValidator').validateField("sjh");
-		var _sjh=$("#formRegister [name='sjh']").val();
+		var bootstrapValidator = $$('#formRegister').data('bootstrapValidator');
+		  var _sjh=$("input[name='sjh']").val();
+		  if(_sjh==""||!(/^1[34578]\d{9}$/.test(_sjh))){
+			  return;
+		  }
+		  $("#btnGetVerification").attr("disabled",true);
+		  $("#btnGetVerification").val("正在发送...");
 		if($.trim(_sjh)){
-			doGet(basePath+"/register/sendVerification","phone="+$("#formRegister [name='sjh']").val(),function(data){
-				
+			doPostBack(basePath+"/register/sendVerification",{phone:_sjh},function(data){
+				if(data.success){
+					var times = 60;
+		        	var timer = setInterval(function() {
+		        		if (times < 1) {
+		        			clearInterval(timer); 
+		        			$("#btnGetVerification").val("点击获取验证码"); 
+		        			$("#btnGetVerification").attr("disabled",false); 
+		        			return;
+		        		}
+		        		$("#btnGetVerification").val("已发送 ("+ times +")");
+		        		times --;
+		        	}, 1000);
+				}else{
+					$$("#formRegister").data('bootstrapValidator').resetForm();
+					$("#btnGetVerification").val("点击获取验证码"); 
+        			$("#btnGetVerification").attr("disabled",false);
+        			if(data.code=="-4"){
+		               $("input[name='sjh']").parent("div").after('<small class="help-block" data-bv-validator="regexp" data-bv-for="sjh" data-bv-result="INVALID" style="display: inline;color:#f96868;">'+data.msg+'</small>');
+                    }else{
+ 		               $("input[name='sjh']").parent("div").after('<small class="help-block" data-bv-validator="regexp" data-bv-for="sjh" data-bv-result="INVALID" style="display: inline;color:#f96868;">'+data.msg+'</small>');
+                    }
+				}
 			});
 		}
 	});

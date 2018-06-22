@@ -23975,6 +23975,10 @@ UE.plugin.register('autosave', function (){
 
             'contentchange': function () {
 
+            	//新增加的代码，去除自动保存
+                if (!me.getOpt('enableAutoSave')) {
+                    return;
+                }
                 if ( !saveKey ) {
                     return;
                 }

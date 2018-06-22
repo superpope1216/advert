@@ -6,11 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pope.advert.common.exception.ServiceException;
 import com.pope.advert.dao.xtgl.extend.XtcsbInfoExtendMapper;
 import com.pope.advert.entity.xtgl.extend.XtcsbInfoExtend;
 import com.pope.advert.service.dto.DataResult;
 import com.pope.advert.service.xtgl.XtcsbInfoService;
-import com.wisedu.crowd.common.exception.ServiceException;
 
 @Service("xtcsbInfoService")
 public class XtcsbInfoServiceImpl implements XtcsbInfoService{

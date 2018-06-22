@@ -48,34 +48,6 @@
 	<!--全局异常捕捉 -->
 	<!-- <bean class="com.pope.advert.web.exception.GlobalExceptionResolver" 
 		/> -->
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.pope.advert.interceptor.LoginInterceptor">
-			</bean>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.pope.advert.interceptor.AuthSupplyInterceptor">
-			</bean>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.pope.advert.interceptor.AuthBuyInterceptor">
-			</bean>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.pope.advert.interceptor.AuthIsSupplyInterceptor">
-			</bean>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.pope.advert.interceptor.AuthIsBuyInterceptor">
-			</bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
- 
 	<!-- <bean id="multipartResolver" class="com.pope.contract.web.CommonsMultipartResolver">
 
 		<property name="defaultEncoding" value="utf-8" />

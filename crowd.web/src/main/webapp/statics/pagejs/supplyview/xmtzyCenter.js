@@ -23,18 +23,16 @@ $(document).ready(function(){
 			if($("#ddArea a.queryActive").size()>0){
 				$("#divQueryCity").show();
 			}
-			if($("#ddCity a.queryActive").size()>0){
-				$("#divQueryDst").show();
-			}
 			
 		}else{
 			$("#dlArea").hide();
 			$("#divQueryCity").hide();
-			$("#divQueryDst").hide();
 		}
 	});
 	
 	$("#ddGgxs a").click(function(){
+		$("#ddGgxs a").removeClass("queryActive");
+		$(this).addClass("queryActive");
 		queryRwjbxx(getParam(1));
 	});
 	
@@ -55,49 +53,13 @@ $(document).ready(function(){
 				$("#divQueryCity").show();
 			}
 		});
-		doGet(basePath+"/dictionary/selectDst","areaBm="+_areaBm,function(data){
-			if(data && data.datas){
-				var html="";
-				html+='<span style="width:180px;"><a class="btn queryActive link" href="javascript:void(0);" data-option="dst"  title="全部"	data-key="">全部</a></span>';
-				for(var i=0;i<data.datas.length;i++){
-					var _data=data.datas[i];
-					html+='<span style="width:180px;"><a class="btn link" href="javascript:void(0);"  data-option="dst" title="'+_data.lbmc+'"	data-key="'+_data.lbdm+'">'+_data.lbmc+'</a></span>';
-				}
-				
-				$("#ddDst").html(html);
-				if(html){
-					$("#divQueryDst").show();
-				}else{
-					$("#divQueryDst").hide();
-				}
-			}
-		});
 		queryRwjbxx(getParam(1));
 	});
 	
 	$("#ddCity").on("click","a",function(){
-		var _areaBm=$(this).attr("data-key");
 		$("#divQueryCity a").removeClass("queryActive");
 		$(this).addClass("queryActive");
-		doGet(basePath+"/dictionary/selectDst","areaBm="+_areaBm,function(data){
-			if(data && data.datas){
-				var html="";
-				html+='<span style="width:180px;"><a class="btn queryActive link" href="javascript:void(0);" data-option="dst"  title="全部"	data-key="">全部</a></span>';
-				for(var i=0;i<data.datas.length;i++){
-					var _data=data.datas[i];
-					html+='<span style="width:180px;"><a class="btn link" href="javascript:void(0);"  data-option="dst" title="'+_data.lbmc+'"	data-key="'+_data.lbdm+'">'+_data.lbmc+'</a></span>';
-				}
-				
-				$("#ddDst").html(html);
-				if(html){
-					$("#divQueryDst").show();
-				}else{
-					$("#divQueryDst").hide();
-				}
-			}else{
-				$("#divQueryDst").hide();
-			}
-		});
+		
 		queryRwjbxx(getParam(1));
 	});
 	$("#ddDst").on("click","a",function(){
@@ -108,13 +70,7 @@ $(document).ready(function(){
 		
 	});
 	$("#header_navbar").css("margin-left",($("#mycontainer").width()-$("#header_navbar").width())/2)
-	$("#paralist a").click(function(){
-		var data_option=$(this).attr("data-option");
-		$("#paralist a[data-option='"+data_option+"']").removeClass("queryActive");
-		$(this).addClass("queryActive");
-		
-		//queryRwjbxx(getParam(1));
-	});
+	
 	
 	function getParam(pageNum,pageSize){
 		var param="ggxs="+toStr($("#paralist a[data-option='ggxs'].queryActive").attr("data-key"));
@@ -133,20 +89,25 @@ $(document).ready(function(){
 	function setTimeValue(value){
 		
 	};
+	if(queryGgxs){
+		$("#ddGgxs span a").removeClass("queryActive");
+		$("#ddGgxs span a[data-key='"+queryGgxs+"']").addClass("queryActive");
+		
+	}
 	queryRwjbxx(getParam(1));
 	function queryRwjbxx(param){
-		doGet(basePath+"/supplyDszyCenter/list",param,function(data){
+		doGet(basePath+"/supplyXmtzyCenter/list",param,function(data){
 			var html="";
 			if(data && data.datas){
-//				$('.mypaging2').pagination({
-//					pageCount:data.pageInfo.totalPage,
-//				    showData:data.pageInfo.pageSize,
-//				    coping:true,
-//				    callback:function(api){
-//				    	var _cPage=api.getCurrent();
-//				    	queryRwjbxx(getParam(_cPage));
-//				    }
-//				});
+				$('.mypaging2').pagination({
+					pageCount:data.pageInfo.totalPage,
+				    showData:data.pageInfo.pageSize,
+				    coping:true,
+				    callback:function(api){
+				    	var _cPage=api.getCurrent();
+				    	queryRwjbxx(getParam(_cPage));
+				    }
+				});
 				for(var i=0;i<data.datas.length;i++){
 					var _data=data.datas[i];
 					var jg=getDszyMoney(_data);
@@ -167,18 +128,18 @@ $(document).ready(function(){
 //					}else{
 //						_jd="tsxx-gray";
 //					}
+					var imgSrc=basePath+"/image/preView?wid="+_data.IMGID;
 					html+='<div class="center-left-body-block">';
 					html+='	<div class="child">';
-					html+='		<div class="img-div">';
-					html+='			<a href="'+basePath+'/rwxxDetail/index?rwid='+_data.wid+'" target="_blank">';
-					html+='				<img src="'+basePath+'/statics/images/home/emap.png">';
-					html+='				<img  class="mycover" src="'+basePath+'/statics/images/home/emap.png">';
-					html+='			</a>';
-					html+='		</div>';
-					html+='		<div class="left-bolck">';
+					html+='			<div class="img-div col-xs-2 col-sm-2">';
+					html+='				<a href="'+basePath+'/supplyWlzyDetail/index?wid='+_data.wid+'" target="_blank">';
+					html+='					<img  class="img-responsive" src="'+imgSrc+'">';
+					html+='				</a>';
+					html+='			</div>';
+					html+='		<div class="left-bolck col-xs-10 col-sm-10"">';
 					html+='			<div class="info-body">';
 					html+='				<div class="info-body-title">';
-					html+='					<a href="'+basePath+'/rwxxDetail/index?rwid='+_data.wid+'" target="_blank"	class="info-body-title-name">';
+					html+='					<a href="'+basePath+'/supplyXmtzyDetail/index?wid='+_data.wid+'&ggxs='+_data.advert_type+'" target="_blank"	class="info-body-title-name">';
 				
 					html+='						<span class="number-title">';
 					html+='							<span class="">'+_data.name+'</span>';
@@ -189,7 +150,6 @@ $(document).ready(function(){
 					html+='						<span	class="price"><span>'+jg+'</span></span>';
 					html+='					</span>';
 					html+='				</div>';
-					html+='			<div>';
 					html+='			<div class="content1">';
 					html+='				<label>区域：</label><span>'+toStr(_data.area_display)+toStr(_data.city_display)+'</span>';
 					html+='			</div>';
@@ -201,15 +161,14 @@ $(document).ready(function(){
 					html+='				<span> <!-- react-text: 417 -->'+_data.companyName+'<!-- /react-text -->';
 					html+='				</span>';
 					html+='			</div>';
-					html+='		</div>';
 					html+='		<div class="time-content">';
-					html+='			<span> <!-- react-text: 421 -->'+_data.cjsj+'<!-- /react-text -->';
-					html+='				<!-- react-text: 422 -->发布<!-- /react-text -->';
+					html+='			<span> <!-- react-text: 421 -->发布时间：'+_data.cjsj+'<!-- /react-text -->';
+					html+='				<!-- react-text: 422 --><!-- /react-text -->';
 					html+='			</span>';
-					html+='				<!-- react-text: 423 -->|<!-- /react-text -->';
-					html+='			<span> <!-- react-text: 425 -->'+_data.childKfzCount+'<!-- /react-text -->';
-					html+='				<!-- react-text: 426 --> 人点击<!-- /react-text -->';
-					html+='			</span>';
+//					html+='				<!-- react-text: 423 -->|<!-- /react-text -->';
+//					html+='			<span> <!-- react-text: 425 -->'+_data.childKfzCount+'<!-- /react-text -->';
+//					html+='				<!-- react-text: 426 --> 人点击<!-- /react-text -->';
+//					html+='			</span>';
 					html+=' 	</div>';
 					html+='	</div>';
 					html+='</div>';

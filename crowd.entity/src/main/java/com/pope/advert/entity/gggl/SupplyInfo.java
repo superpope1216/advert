@@ -15,8 +15,18 @@ public class SupplyInfo implements Serializable{
     private String wid;
     
     private String gglx;
+    
+    private Boolean needHy;
 
-    public String getGglx() {
+    public Boolean getNeedHy() {
+		return needHy;
+	}
+
+	public void setNeedHy(Boolean needHy) {
+		this.needHy = needHy;
+	}
+
+	public String getGglx() {
 		return gglx;
 	}
 
@@ -69,6 +79,15 @@ public class SupplyInfo implements Serializable{
     private String name;
     
     private String jg;
+    private String companyName;
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
 	public String getWid() {
 		return wid;

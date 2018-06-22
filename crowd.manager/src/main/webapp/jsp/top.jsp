@@ -9,7 +9,7 @@
     response.setDateHeader("Expires", 0);
     %>
 <head>
-<title>智慧校园云工场</title>
+<title>广告资源平台</title>
 <meta name="renderer" content="webkit">
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,16 +18,20 @@
 <meta name="description" content="智慧校园云工场" />
 <meta name="keywords" content="智慧校园云工场" />
 <link href="<%=request.getContextPath() %>/static/images/favicon1.ico" rel="shortcut icon" type="image/x-icon" />
+<link rel='stylesheet' href='<%=request.getContextPath() %>/static/plugins/alertifyjs/css/alertify.min.css'>
+<link rel='stylesheet' href='<%=request.getContextPath() %>/static/plugins/alertifyjs/css/themes/bootstrap.min.css'>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/static/plugins/AdminLTE-master/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/plugins/AdminLTE-master/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/plugins/AdminLTE-master/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel='stylesheet' href='<%=request.getContextPath() %>/static/plugins/font-awesome/css/font-awesome.min.css'>
   <!-- Theme style -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/plugins/AdminLTE-master/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/static/plugins/AdminLTE-master/dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/static/css/main.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
   <script>
   var basePath="<%=request.getContextPath() %>";
   </script>

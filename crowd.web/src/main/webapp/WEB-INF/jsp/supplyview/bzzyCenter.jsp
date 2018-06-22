@@ -122,7 +122,7 @@
 															data-key="">全部</a></span>
 													<c:forEach items="${ggxs}" var="data" varStatus="status">
 														<span style="width: 180px"><a class="btn link" href="javascript:void(0);"
-															data-option="ywx" title="${data.lbmc}"
+															data-option="ggxs" title="${data.lbmc}"
 															data-key="${data.lbdm}">${data.lbmc}</a></span>
 													</c:forEach>
 												</dd>
@@ -240,26 +240,8 @@
 			<div class="col-xs-3">
 				<div class="panel m-b-0" boxmh-mh>
 					<div class="panel-body shop-order">
-						<div class="center-right-header">
-							<!-- react-text: 127 -->
-							需求工作指南
-							<!-- /react-text -->
-							<a class="center-right-header-more" href="" target="_blank">了解更多</a>
-						</div>
-						<div class="center-right-body">
-							<div>
-								<ul>
-									<li><b><i>1</i></b> <!-- react-text: 358 -->发布需求<!-- /react-text --></li>
-									<li><b><i>2</i></b> <!-- react-text: 362 -->招募开发者<!-- /react-text --></li>
-									<li><b><i>3</i></b> <!-- react-text: 366 -->选择开发者<!-- /react-text --></li>
-									<li><b><i>4</i></b> <!-- react-text: 370 -->冻结项目预算<!-- /react-text --></li>
-									<li><b><i>5</i></b> <!-- react-text: 374 -->验收支付<!-- /react-text --></li>
-									<li><b><i>6</i></b> <!-- react-text: 374 -->售后支付<!-- /react-text --></li>
-								</ul>
-								<a href="<%=request.getContextPath()%>/publishing/index"><button
-										class="button-3791w publish-2ReEl block-1WyYE primary-32yiR">立即发布需求</button></a>
-							</div>
-						</div>
+						<%@include file="/jsp/supply/fbgglc.jsp" %>
+						
 					</div>
 				</div>
 			</div>
@@ -274,6 +256,7 @@
 			var jsonurl = "";
 			var classify = "${param.classify}";
 			var lbdm = "${flag}";
+			var queryGgxs="${queryGgxs}";
 		</script>
 
 		<%@ include file="/jsp/bottom.jsp"%>

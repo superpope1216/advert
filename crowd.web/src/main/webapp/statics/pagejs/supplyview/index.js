@@ -247,6 +247,7 @@ $(document).ready(function() {
     });
     $('.info-cut img[data-original]').lazyload();
 
+    /**
     M['foot_service'] = new Swiper('.foot-service', {
         wrapperClass: 'foot-service-wraper',
         slideClass: 'foot-service-slide',
@@ -257,6 +258,7 @@ $(document).ready(function() {
         observer: true,
         observeParents: true
     });
+    */
 
     M['foot_nav'] = new Swiper('.foot-nav', {
         wrapperClass: 'foot-nav-wraper',

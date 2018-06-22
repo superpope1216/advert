@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.xtgl.extend.OrderNoInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.xtgl.extend.OrderNoInfoExtend"
+  extends="com.pope.advert.dao.xtgl.OrderNoInfoMapper.BaseResultMap" >
+   
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_xtgl_orderno.WID, 
+    t_advert_xtgl_orderno.orderNo, 
+    t_advert_xtgl_orderno.month, 
+    t_advert_xtgl_orderno.type, 
+    t_advert_xtgl_orderno.CSJS, 
+    t_advert_xtgl_orderno.IP
+  </sql>
+   <sql id="sqlWhere">
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_xtgl_orderno.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.month!=null and query.month!=""'>
+  			AND t_advert_xtgl_orderno.month=#{query.month,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.type!=null and query.type!=""'>
+  			AND t_advert_xtgl_orderno.type=#{query.type,jdbcType=VARCHAR}
+  		</if>
+  </sql>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.pope.advert.entity.dto.QueryCondition">
+  		SELECT 
+  		<include refid="Base_Column_List"/>
+  		FROM t_advert_xtgl_orderno
+  		<where>
+  			<include refid="sqlWhere"/>
+  		</where>
+  		ORDER BY CSJS DESC
+  </select>
+</mapper>

@@ -6,7 +6,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>智慧校园</b>云工场</a>
+    <a href="../../index2.html"><b>广告</b>资源平台</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -14,7 +14,7 @@
 
     <form method="post" id="mainForm">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="手机号" name="username">
+        <input type="text" class="form-control" placeholder="手机号" name="userName">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -36,8 +36,6 @@
         <!-- /.col -->
       </div>
     </form>
-
-    <a href="#">忘记密码</a><br>
     
 
   </div>
@@ -45,7 +43,7 @@
 </div>
 <%@ include file="/jsp/bottom.jsp"%>
 <!-- /.login-box -->
-<script  src='<%=request.getContextPath() %>/static/pagejs/login.js'></script>
+<script  src='<%=request.getContextPath() %>/static/pageJs/login.js'></script>
 
 
 </body>

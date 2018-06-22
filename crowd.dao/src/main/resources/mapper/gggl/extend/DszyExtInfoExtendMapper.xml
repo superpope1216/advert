@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.gggl.extend.DszyExtInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.gggl.extend.DszyExtInfoExtend" 
+  extends="com.pope.advert.dao.gggl.DszyExtInfoMapper.BaseResultMap">
+   <result column="ggdlfsDisplay" property="ggdlfsDisplay" jdbcType="VARCHAR" />
+   <result column="sfxzhyDisplay" property="sfxzhyDisplay" jdbcType="VARCHAR" />
+   <result column="hyDisplay" property="hyDisplay" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_gggl_dszy_ext.WID, t_advert_gggl_dszy_ext.BCSM, 
+    t_advert_gggl_dszy_ext.GGDLFS, t_advert_gggl_dszy_ext.DLZSLJ, 
+    t_advert_gggl_dszy_ext.SCTULJ, t_advert_gggl_dszy_ext.DSZY_ID, 
+    t_advert_gggl_dszy_ext.SFXZHY, t_advert_gggl_dszy_ext.HY
+  </sql>
+  <sql id="sqlWhere">
+  	<if test='query!=null'>
+  		<if test='query.wid!=null and query.wid!=""'>
+  			 AND t_advert_gggl_dszy_ext.wid=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.dszyId!=null and query.dszyId!=""'>
+  			 AND t_advert_gggl_dszy_ext.DSZY_ID=#{query.dszyId,jdbcType=VARCHAR}
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByCondition" parameterType="com.pope.advert.entity.dto.QueryCondition"
+  resultMap="BaseResultMap">
+  	SELECT 
+  	<include refid="Base_Column_List"/>
+  	FROM t_advert_gggl_dszy_ext
+  </select>
+  
+  <delete id="deleteByDszyId" >
+  	DELETE FROM t_advert_gggl_dszy_ext WHERE DSZY_ID=#{dszyId,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="selectDisplayByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		select
+		<include refid="Base_Column_List" />
+		,T_ADVERT_SJZD_GGDLFS.lbmc as ggdlfsDisplay
+		,t_advert_sjzd_sf.lbmc as sfxzhyDisplay
+		from t_advert_gggl_dszy_ext
+		LEFT JOIN T_ADVERT_SJZD_GGDLFS ON T_ADVERT_SJZD_GGDLFS.LBDM=t_advert_gggl_dszy_ext.ggdlfs
+		LEFT JOIN t_advert_sjzd_sf ON t_advert_sjzd_sf.LBDM=t_advert_gggl_dszy_ext.sfxzhy
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+	</select>
+</mapper>

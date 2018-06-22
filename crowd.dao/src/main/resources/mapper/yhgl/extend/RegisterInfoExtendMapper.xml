@@ -8,7 +8,7 @@
     t_advert_yhjbxx_register.WID, t_advert_yhjbxx_register.YHM, 
     t_advert_yhjbxx_register.MM, t_advert_yhjbxx_register.SJH, 
     t_advert_yhjbxx_register.EMAIL, t_advert_yhjbxx_register.CZSJ, 
-    t_advert_yhjbxx_register.CZIP
+    t_advert_yhjbxx_register.CZIP,t_advert_yhjbxx_register.admin_Flag
   </sql>
   <sql id="sqlWhere">
   	<if test="query!=null">
@@ -24,6 +24,12 @@
   		<if test='query.sjh!=null and query.sjh!=""'>
   			AND t_advert_yhjbxx_register.SJH=#{query.sjh,jdbcType=VARCHAR}
   		</if>
+  		<if test='query.yhmLike!=null and query.yhmLike!=""'>
+  			AND T_ADVERT_YHJBXX_REGISTER.YHM like concat('%',#{query.yhmLike,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test='query.sjhLike!=null and query.sjhLike!=""'>
+  			AND T_ADVERT_YHJBXX_REGISTER.SJH like concat('%',#{query.sjhLike,jdbcType=VARCHAR},'%')
+  		</if>
   	</if>
   </sql>
   <select id="selectByCondition" parameterType="com.pope.advert.entity.dto.QueryCondition" 
@@ -34,6 +40,15 @@
   	<where>
   		<include refid="sqlWhere"/>
   	</where>
+  	order by 
+  		<choose>
+  			<when test="orderBy!=null and orderBy.size>0">
+  				<include refid="com.pope.advert.dao.BaseInfoMapper.sqlOrder"/>
+  			</when>
+  			<otherwise>
+  				T_ADVERT_YHJBXX_REGISTER.czsj desc
+  			</otherwise>
+  		</choose>
   </select>
  
 </mapper>

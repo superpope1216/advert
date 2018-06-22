@@ -9,6 +9,37 @@ define(function(require, exports, module) {
 	require('plugins/vendor/upload/imageUploader');
 	require('plugins/vendor/upload/uploaderFile');
 	require('plugins/vendor/jquery-bootstrup-newsScroll/js/jquery.bootstrap.newsbox');
+	
+
+	function sctpUploader(wid){
+		$("#sctuljuploadBtn").ajaxImageUpload({
+			url: basePath+'/attr/upload', //上传的服务器地址
+		    data: { },
+		    wid:wid,
+		    id:"sctuljUploadBox",
+		    maxNum: 1, //允许上传图片数量
+		    hidenInputName:'', // 上传成功后追加的隐藏input名，注意不要带[]，会自动带[]，不写默认和上传按钮的name相同
+		    zoom: true, //允许上传图片点击放大
+		    allowType: ["gif", "jpeg", "jpg", "bmp",'png'], //允许上传图片的类型
+		    maxSize :2, //允许上传图片的最大尺寸，单位M
+		    deleteCallBack:function(){
+		    	$("#formDlxx [name='imgid']").val("");
+		    },
+		    before: function () {
+		      
+		    },
+		    success:function(data){
+		    	$("#formDlxx [name='imgid']").val(data.fileWids);
+		        console.log(data);
+		    },
+		    error:function (e) {
+		        
+		        console.log(e);
+		    }
+		    	
+		});
+	}
+	
 	var xqwdfjidUploader=new Uploader({id:"imgidDiv",maxSize:1024*1024*10,propExplain:"(请上传需求文档附件)",uploadedFunc:function(data){
         if(true){
       //  $("#xqwdfjid").val(xqwdfjidUploader.params.value);
@@ -82,12 +113,13 @@ define(function(require, exports, module) {
 					 $("#formDlxx [name='ztnr']").val(toStr(_data.ztnr));
 					 UE.getEditor('txtContent').setContent(toStr(_data.content));
 					 $("#formDlxx [name='imgid']").val(toStr(_data.imgid));
-					 if(_data.imgid){
-						 xqwdfjidUploader.setValue(_data.imgid);
-					 }
+					 
+					 sctpUploader(_data.imgid);
 					 
 				 } 
 			  });
+		  }else{
+			  sctpUploader(null)
 		  }
 	  }
 

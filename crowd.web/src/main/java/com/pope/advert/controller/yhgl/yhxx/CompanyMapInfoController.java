@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pope.advert.common.code.AreaClassifyEnum;
+import com.pope.advert.common.code.YesNoEnum;
 import com.pope.advert.controller.BaseController;
 import com.pope.advert.entity.yhgl.CompanyInfo;
 import com.pope.advert.entity.yhgl.extend.CompanyInfoExtend;
@@ -13,8 +15,6 @@ import com.pope.advert.interceptor.AuthSupplyAnnotation;
 import com.pope.advert.service.dictionary.DictionaryService;
 import com.pope.advert.service.dto.DataResult;
 import com.pope.advert.service.yhgl.CompanyInfoService;
-import com.wisedu.crowd.common.code.AreaClassifyEnum;
-import com.wisedu.crowd.common.code.YesNoEnum;
 import com.wisedu.crowd.common.util.ConstantsUtil;
 import com.wisedu.crowd.common.util.StringUtil;
 
@@ -29,9 +29,14 @@ public class CompanyMapInfoController extends BaseController {
 	private CompanyInfoService companyInfoService;
 	@RequestMapping("index")
 	@AuthSupplyAnnotation
-	public ModelAndView index() throws Exception{
+	public ModelAndView index(String flag) throws Exception{
 		ModelAndView mv=new ModelAndView();
-		mv.setViewName("yhgl/yhxx/companyMapInfo");
+		if("1".equals(flag)){
+			mv.setViewName("yhgl/yhxx/companyMapInfo");
+		}else{
+			mv.setViewName("yhgl/yhxx/buy/companyMapInfo");
+		}
+		
 		mv.addObject("areaSelect", dictionaryService.selectAreaByClassify(AreaClassifyEnum.AREA.getCode(), this.createCustomOperateLog()).getDatas());
 		mv.addObject("area", StringUtil.toStr(this.getCompanyInfo().getArea()));
 		mv.addObject("areaDisplay", StringUtil.toStr(this.getCompanyInfo().getAreaDisplay()));

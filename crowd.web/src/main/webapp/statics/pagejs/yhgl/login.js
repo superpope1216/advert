@@ -13,7 +13,7 @@ define(function(require, exports, module) {
 	        	   if(backurl){
 	        		   window.location.href=backurl;
 	        	   }else{
-	        		   window.location.href=basePath+"/index.jsp";
+	        		   window.location.href=basePath+"/index";
 	        	   }
 	           });
 	       }

@@ -14,7 +14,25 @@
 </div>
 <![endif]-->
 
+
 <style>
+.myTable {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+}
+
+.myTable th, .myTable td {
+	border: 1px solid #ccc;
+}
+
+.mytable2 {
+	font-size: 13px;
+}
+
+.mytable2 thead {
+	font-weight: bold;
+	background: rgb(238, 238, 238);
+}
 </style>
 <body>
 	<%@include file="/jsp/header.jsp"%>
@@ -28,6 +46,7 @@
 				</div>
 
 				<div class="col-lg-9">
+					<%@include file="/jsp/supply/yhdj_header.jsp"%>
 					<div class="panel m-b-0">
 						<div class="panel-body">
 							<div class="row" style="border-bottom: 1px solid #999">
@@ -36,59 +55,59 @@
 										style="margin-right: 10px;"></i>发布新广告资源
 								</h3>
 							</div>
-							<div class="row my-mt-20">
-								<div class="col-xs-6 col-sm-3"
-									style="padding-left: 0px; padding-right: 0px;">
-									<button type="button" class="btn btn-primary btn-sm btn-block"
-										id="btnSupply">媒体广告资源</button>
-								</div>
-								<div class="col-xs-6 col-sm-3"
-									style="padding-left: 0px; padding-right: 0px;">
-									<button type="button" class="btn btn-default btn-sm btn-block"
-										id="btnBuy">服务/设备/非广告资源</button>
-								</div>
-							</div>
+
 							<div class="row my-mt-10">
 								<%@ include file="/jsp/supply/gglx_header.jsp"%>
 							</div>
 							<div class="row my-mt-10">
 								<form class="form-register met-form form-horizontal"
-									method="post" action="" role="form" id="formZzzy">
-									<input type="hidden" name="zzzyInfo.wid">
+									method="post" action="" role="form" id="formWlzy">
+									<input type="hidden" name="wid">
 									<h4>网络广告资源信息添加</h4>
 									<div class="well well-sm my-padding-12">广告基本信息</div>
 
 									<input type="hidden" name="flag" value="1" />
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">输入网站</label>
+											class="col-sm-2 col-md-2 control-label text-right">网站地址<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-8">
-												<input type="text" class="form-control " name="wlzyInfo.wz"
+												<input type="text" class="form-control " name="addr"
 													required data-fv-notempty-message="此项不能为空">
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">版面</label>
+											class="col-sm-2 col-md-2 control-label text-right">广告标题<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-8">
-												<input type="text" class="form-control " name="wlzyInfo.wz"
+												<input type="text" class="form-control " name="name"
 													required data-fv-notempty-message="此项不能为空">
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">广告位置</label>
+											class="col-sm-2 col-md-2 control-label text-right">广告位置<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-8">
 												<table style="width: 100%">
 													<tr>
-														<c:forEach var="data" items="${zywz}">
-															<td><input type="radio" name="wlzywz"
-																value="${data.lbdm}">${data.lbmc}</td>
+														<c:forEach var="data" items="${zywz}"
+															varStatus="dataStatus">
+															<td><c:choose>
+																	<c:when test="${dataStatus.index==0}">
+																		<input type="radio" name="ggwz" checked
+																			value="${data.lbdm}">
+																	</c:when>
+																	<c:otherwise>
+																		<input type="radio" name="ggwz" value="${data.lbdm}">
+																	</c:otherwise>
+																</c:choose> ${data.lbmc}</td>
 														</c:forEach>
 													</tr>
 												</table>
@@ -100,64 +119,32 @@
 											class="col-sm-2 col-md-2 control-label text-right">位置描述</label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-8">
-												<textarea cols="5" class="form-control " name="wlzyInfo.wz"
-													required data-fv-notempty-message="此项不能为空">
+												<textarea cols="5" rows="5" class="form-control "
+													name="wzms" required data-fv-notempty-message="此项不能为空">
 													
 												</textarea>
 											</div>
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group" id="divZytp1">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">资源图片</label>
+											class="col-sm-2 col-md-2 control-label text-right">资源图片<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-8">
-												<div class="fileImg" id="fileImg2">
-													<ul>
-														<li><input name="FileImage1" type="file"
-															id="FileImage1" class="upfile">
-															<div>
-																<span></span>
-															</div></li>
-														<li><input name="FileImage2" type="file"
-															id="FileImage2" class="upfile">
-															<div>
-																<span></span>
-															</div></li>
-														<li><input name="FileImage3" type="file"
-															id="FileImage3" class="upfile">
-															<div>
-																<span></span>
-															</div></li>
-														<li><input name="FileImage4" type="file"
-															id="FileImage4" class="upfile">
-															<div>
-																<span></span>
-															</div></li>
-														<li><input name="FileImage5" type="file"
-															id="FileImage5" class="upfile">
-															<div>
-																<span></span>
-															</div></li>
-														<li><input name="FileImage6" type="file"
-															id="FileImage6" class="upfile">
-															<div>
-																<span></span>
-															</div></li>
-														<li><input name="FileImage7" type="file"
-															id="FileImage7" class="upfile">
-															<div>
-																<span></span>
-															</div></li>
-														<li><input name="FileImage8" type="file"
-															id="FileImage8" class="upfile">
-															<div>
-																<span></span>
-															</div></li>
-													</ul>
+													<div class="upload-box" id="sctuljUploadBox">
+													<div class="image-box clear">
+														<section class="upload-section">
+															<div class="upload-btn"></div>
+															<input type="file" name="file" class="upload-input"
+																id='sctuljuploadBtn' value="" />
+														</section>
+													</div>
 												</div>
+												<input type="hidden" value="" name="zytp1">
 											</div>
+											
 										</div>
 									</div>
 									<div class="form-group">
@@ -166,28 +153,36 @@
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">展示形态</label>
+											class="col-sm-2 col-md-2 control-label text-right">展示形态<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-4">
-												<select  class="form-control " name="wlzyInfo.wz"
-													required data-fv-notempty-message="此项不能为空">
-													</select>
+												<select class="form-control " name="zsxt" required
+													data-fv-notempty-message="此项不能为空">
+													<option value="">---请选择---</option>
+													<c:forEach items="${zsxt}" var="data">
+														<option value="${data.lbdm}">${data.lbmc}</option>
+													</c:forEach>
+												</select>
 											</div>
 											<div class="col-sm-4">
-												<select  class="form-control " name="wlzyInfo.wz"
-													required data-fv-notempty-message="此项不能为空">
-													</select>
+												<select class="form-control " name="zsfs" required
+													data-fv-notempty-message="此项不能为空">
+													<option value="">---请选择---</option>
+												</select>
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group" id="divZscc">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">尺寸</label>
+											class="col-sm-2 col-md-2 control-label text-right">尺寸<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-4">
-												<select  class="form-control " name="wlzyInfo.wz"
-													required data-fv-notempty-message="此项不能为空">
-													</select>
+												<select class="form-control " name="zscc" required
+													data-fv-notempty-message="此项不能为空">
+													<option value="">---请选择---</option>
+												</select>
 											</div>
 										</div>
 									</div>
@@ -197,214 +192,195 @@
 									</div>
 									<div class="form-group">
 										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">尺寸</label>
+											class="col-sm-2 col-md-2 control-label text-right">计费方式<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10 col-md-10">
 											<div class="col-sm-8">
-												<table style="width:100%;">
+												<table style="width: 100%;">
 													<tr>
-														<td>
-															<input type="radio" >时长计费
-														</td>
+														<c:forEach items="${jffs}" var="data"
+															varStatus="dataStatus">
+															<td><c:choose>
+																	<c:when test="${dataStatus.index==0}">
+																		<input type="radio" name="jffs" checked
+																			value="${data.lbdm}">
+																	</c:when>
+																	<c:otherwise>
+																		<input type="radio" name="jffs" value="${data.lbdm}">
+																	</c:otherwise>
+																</c:choose>${data.lbmc}</td>
+														</c:forEach>
+
 													</tr>
 												</table>
 											</div>
 										</div>
 									</div>
-								</form>
-								<form class="form-register met-form form-horizontal"
-									method="post" action="" role="form" id="formZzzyGsyg"
-									enctype="multipart/form-data">
-									<input type="hidden" name="zzzyGsygInfo.wid">
-									<div class="form-group">
-										<label for="firstname"
-											class="well well-sm my-padding-12 col-sm-12 col-md-12 control-label text-left">发布报纸工商硬广广告代理信息详情</label>
+									<div class="form-group" id="divScjf">
+										<table class="table table-hover mytable2">
+											<thead>
+												<tr>
+													<th class="text-xs-center">投放周期</th>
+													<th class="text-xs-center">刊例价（元）<span
+											style="color: red">*</span></th>
+													<th class="text-xs-center">销售价（元）<span
+											style="color: red">*</span></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td align="center">小时</td>
+													<td><input type="text" class="form-control "
+														name="hourKlj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+													<td><input type="text" class="form-control "
+														name="hourXsj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+												</tr>
+												<tr>
+													<td align="center">天</td>
+													<td><input type="text" class="form-control "
+														name="dayKlj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+													<td><input type="text" class="form-control "
+														name="dayXsj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+												</tr>
+												<tr>
+													<td align="center">周</td>
+													<td><input type="text" class="form-control "
+														name="weekKlj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+													<td><input type="text" class="form-control "
+														name="weekXsj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+												</tr>
+												<tr>
+													<td align="center">半月</td>
+													<td><input type="text" class="form-control "
+														name="halfMonthKlj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+													<td><input type="text" class="form-control "
+														name="halfMonthXsj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+												</tr>
+												<tr>
+													<td align="center">月</td>
+													<td><input type="text" class="form-control "
+														name="monthKlj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+													<td><input type="text" class="form-control "
+														name="monthXsj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+												</tr>
+												<tr>
+													<td align="center">季度</td>
+													<td><input type="text" class="form-control "
+														name="jdKlj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+													<td><input type="text" class="form-control "
+														name="jdXsj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+												</tr>
+												<tr>
+													<td align="center">半年</td>
+													<td><input type="text" class="form-control "
+														name="halfYearKlj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+													<td><input type="text" class="form-control "
+														name="halfYeafXsj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+												</tr>
+												<tr>
+													<td align="center">年</td>
+													<td><input type="text" class="form-control "
+														name="yearKlj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+													<td><input type="text" class="form-control "
+														name="yeafXsj" pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"></td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
-									<div class="form-group">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">标题</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-8">
-												<input type="text" name="zzzyGsygInfo.name"
-													class="form-control" required
-													data-fv-notempty-message="此项不能为空">
+									<div id="divCpm" style="display: none;">
+										<div class="form-group">
+											<label for="firstname"
+												class="col-sm-2 col-md-2 control-label text-right">刊例价<span
+											style="color: red">*</span></label>
+											<div class="col-sm-10 col-md-10">
+												<div class="col-sm-4">
+													<input type="text" name="cpmKlj" value=""
+														class="form-control" required
+														data-fv-notempty-message="此项不能为空"
+														pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"
+														data-fv-stringlength="true" data-fv-stringlength-min="1"
+														data-fv-stringlength-max="6">
+												</div>
+												<div class="col-sm-4">每千次展示</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="firstname"
+												class="col-sm-2 col-md-2 control-label text-right">销售价<span
+											style="color: red">*</span></label>
+											<div class="col-sm-10 col-md-10">
+												<div class="col-sm-4">
+													<input type="text" name="cpmXsj" value=""
+														class="form-control" required
+														data-fv-notempty-message="此项不能为空"
+														pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"
+														data-fv-stringlength="true" data-fv-stringlength-min="1"
+														data-fv-stringlength-max="6">
+												</div>
+												<div class="col-sm-4">每千次展示</div>
+											</div>
+										</div>
+									</div>
+									<div id="divCpc" style="display: none;">
+										<div class="form-group">
+											<label for="firstname"
+												class="col-sm-2 col-md-2 control-label text-right">刊例价<span
+											style="color: red">*</span></label>
+											<div class="col-sm-10 col-md-10">
+												<div class="col-sm-4">
+													<input type="text" name="cpcKlj" value=""
+														class="form-control" required
+														data-fv-notempty-message="此项不能为空"
+														pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"
+														data-fv-stringlength="true" data-fv-stringlength-min="1"
+														data-fv-stringlength-max="6">
+												</div>
+												<div class="col-sm-4">每有效点击</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="firstname"
+												class="col-sm-2 col-md-2 control-label text-right">销售价<span
+											style="color: red">*</span></label>
+											<div class="col-sm-10 col-md-10">
+												<div class="col-sm-4">
+													<input type="text" name="cpcXsj" value=""
+														class="form-control" required
+														data-fv-notempty-message="此项不能为空"
+														pattern="^([1-9]\d*(\.\d+)?|0)$"
+														data-fv-regexp-message="请输入正确的数字类型"
+														data-fv-stringlength="true" data-fv-stringlength-min="1"
+														data-fv-stringlength-max="6">
+												</div>
+												<div class="col-sm-4">每有效点击</div>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">折扣</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-4">
-												<input type="text" name="zzzyGsygInfo.zk"
-													class="form-control" required
-													data-fv-notempty-message="此项不能为空">
-											</div>
-											<div class="col-sm-4">折</div>
-										</div>
-									</div>
-
-								</form>
-
-
-								<form class="form-register met-form form-horizontal"
-									method="post" action="" role="form" style="display: none;"
-									id="formZzzyRw" enctype="multipart/form-data">
-									<input type="hidden" name="zzzyRwInfo.wid">
-									<div class="form-group">
-										<label for="firstname"
-											class="well well-sm my-padding-12 col-sm-12 col-md-12 control-label text-left">发布报纸软文广告代理信息详情</label>
-									</div>
-									<div class="form-group">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">标题</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-8">
-												<input type="text" name="zzzyRwInfo.name"
-													class="form-control" required
-													data-fv-notempty-message="此项不能为空">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">报价</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-12">
-												<table>
-													<tr>
-														<td><input type="radio" name="zzzyRwInfo.bjlx"
-															value="1"></td>
-														<td>价格</td>
-														<td><input type="text" name="zzzyRwInfo.jg"
-															style="width: 150px"></td>
-														<td>元/篇</td>
-													</tr>
-													<tr>
-														<td><input type="radio" name="zzzyRwInfo.bjlx"
-															value="2"></td>
-														<td>折扣</td>
-														<td><input type="text" name="zzzyRwInfo.zk"
-															style="width: 150px"></td>
-														<td>折</td>
-													</tr>
-												</table>
-											</div>
-										</div>
-									</div>
-
-								</form>
-
-								<form class="form-register met-form form-horizontal"
-									method="post" action="" role="form" style="display: none;"
-									id="formZzzyJy" enctype="multipart/form-data">
-									<input type="hidden" name="zzzyJyInfo.wid">
-									<div class="form-group">
-										<label for="firstname"
-											class="well well-sm my-padding-12 col-sm-12 col-md-12 control-label text-left">发布报纸软文广告代理信息详情</label>
-									</div>
-									<div class="form-group">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">标题</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-8">
-												<input type="text" name="zzzyJyInfo.name"
-													class="form-control" required
-													data-fv-notempty-message="此项不能为空">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">单页价格</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-4">
-												<input type="text" name="zzzyJyInfo.dyjg"
-													class="form-control" required
-													data-fv-notempty-message="此项不能为空">
-											</div>
-											<div class="col-sm-4">元/份</div>
-										</div>
-									</div>
-
-								</form>
-
-								<form class="form-register met-form form-horizontal"
-									method="post" action="" role="form" id="formZzzyExt">
-									<div class="form-group">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">行业</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-4">
-												<input type="radio" name="zzzyExtInfo.sfxzhy" required
-													data-fv-notempty-message="此项不能为空" value=0 checked>不限行业
-												<input type="radio" name="zzzyExtInfo.sfxzhy" required
-													data-fv-notempty-message="此项不能为空" value=1>限制行业
-
-											</div>
-										</div>
-									</div>
-									<div class="form-group" name="divHy" style="display: none;">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">&nbsp;</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-8">
-												<c:forEach items="${hy}" var="data">
-													<input type="checkbox" name='zzzyExtInfo.hy'
-														value="${data.lbdm}" />${data.lbmc}
-												</c:forEach>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">补充说明</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-8">
-												<textarea rows="5" class="form-control"
-													name="zzzyExtInfo.bcsm">
-													</textarea>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">广告代理方式</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-4">
-												<select class="form-control " name="zzzyExtInfo.ggdlfs"
-													required data-fv-notempty-message="此项不能为空">
-													<option value="">--请选择--</option>
-													<c:forEach items="${ggdlfs}" var="data">
-														<option value="${data.lbdm}">${data.lbmc}</option>
-													</c:forEach>
-												</select>
-											</div>
-											<div class="col-sm-4">
-												<a href="javascript:void(0);" name="aScdlzs">上传代理证书</a>
-											</div>
-										</div>
-									</div>
-									<div class="form-group" name="divScdlzs" style="display: none;">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">上传代理证书</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-4">
-												<input type="file">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="firstname"
-											class="col-sm-2 col-md-2 control-label text-right">上传图片</label>
-										<div class="col-sm-10 col-md-10">
-											<div class="col-sm-4">
-												<input type="file">
-											</div>
-											<div class="col-sm-4"></div>
-										</div>
-									</div>
+										<div style="margin-left: 25%; width: 75%;">
 									<button class="btn btn-lg btn-primary btn-block" type="button"
-										id="btnPublishingSd">马上发布</button>
+										id="btnPublishingSd" style="width: 200px;">马上发布</button>
+										</div>
+										</div>
 								</form>
 							</div>
 
@@ -423,7 +399,10 @@
 		<i class="icon wb-chevron-up" aria-hidden="true"></i>
 	</button>
 	<script>
-		var page_type = "";
+		var page_type = "wlzyPublishing";
+		var wid = "${wid}";
+		var gglx = "${gglx}";
+		var ggfl = "${ggfl}";
 	</script>
 	<%@ include file="/jsp/bottom.jsp"%>
 </body>

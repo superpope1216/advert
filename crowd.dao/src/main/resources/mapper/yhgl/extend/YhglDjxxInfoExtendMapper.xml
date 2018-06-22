@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.pope.advert.dao.yhgl.extend.YhglDjxxInfoExtendMapper">
+	<resultMap id="BaseResultMap"
+		type="com.pope.advert.entity.yhgl.extend.YhglDjxxInfoExtend"
+		extends="com.pope.advert.dao.yhgl.YhglDjxxInfoMapper.BaseResultMap">
+		
+		<result column="yhztDisplay" property="yhztDisplay" jdbcType="VARCHAR" />
+		<association property="djxx"
+			javaType="com.pope.advert.entity.cwgl.extend.CwglDjxxInfoExtend">
+			<result column="DJ_NAME" property="name" jdbcType="VARCHAR" />
+			<result column="DJ_FY" property="fy" jdbcType="DECIMAL" />
+			<result column="DJ_GGZYXZSL" property="ggzyxzsl"
+				jdbcType="INTEGER" />
+			<result column="DJ_YXJB" property="yxjb" jdbcType="INTEGER" />
+			<result column="DJ_BZ" property="bz" jdbcType="VARCHAR" />
+		</association>
+		<association property="companyInfo"
+			javaType="com.pope.advert.entity.yhgl.extend.CompanyInfoExtend">
+			 <result column="C_NAME" property="name" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		t_advert_yhjbxx_djxx.WID,
+		t_advert_yhjbxx_djxx.YHID,
+		t_advert_yhjbxx_djxx.DJ,
+		t_advert_yhjbxx_djxx.KSSJ,
+		t_advert_yhjbxx_djxx.JSSJ,
+		t_advert_yhjbxx_djxx.SYTS,
+		t_advert_yhjbxx_djxx.ZTS,
+		t_advert_yhjbxx_djxx.version,
+		t_advert_yhjbxx_djxx.yhzt
+	</sql>
+	<sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND
+				t_advert_yhjbxx_djxx.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.yhid!=null and query.yhid!=""'>
+				AND
+				t_advert_yhjbxx_djxx.YHID=#{query.yhid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.yhzt!=null and query.yhzt!=""'>
+				AND
+				t_advert_yhjbxx_djxx.yhzt=#{query.yhzt,jdbcType=VARCHAR}
+			</if>
+			<if test='query.dj!=null and query.dj!=""'>
+				AND
+				t_advert_yhjbxx_djxx.dj=#{query.dj,jdbcType=VARCHAR}
+			</if>
+			<if test='query.companyInfo!=null'>
+				<if test='query.companyInfo.name!=null and query.companyInfo.name!=""'>
+					AND t_advert_yhjbxx_company.NAME LIKE CONCAT('%',#{query.companyInfo.name,jdbcType=VARCHAR},'%')
+				</if>
+			</if>
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		order by
+		<choose>
+			<when test="orderBy!=null">
+				<foreach collection="orderBy" item="item" close=" " open=" "
+					separator=",">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				t_advert_yhjbxx_djxx.DJ desc
+			</otherwise>
+		</choose>
+	</sql>
+	<select id="selectByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_yhjbxx_djxx
+		<where>
+			<include refid="sqlWhere" />
+
+		</where>
+		<include refid="sqlOrder" />
+	</select>
+
+	<select id="selectDisplayByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition">
+		select
+		<include refid="Base_Column_List" />
+		,t_advert_yhjbxx_company.NAME AS C_NAME
+		,t_advert_cwgl_djxx.NAME AS DJ_NAME
+		,T_ADVERT_SJZD_YHGL_HYZT.lbmc as yhztDisplay
+		from t_advert_yhjbxx_djxx
+		LEFT JOIN t_advert_yhjbxx_company ON
+		t_advert_yhjbxx_company.REGISTER_ID=t_advert_yhjbxx_djxx.YHID
+		LEFT JOIN
+		t_advert_cwgl_djxx ON t_advert_yhjbxx_djxx.DJ=t_advert_cwgl_djxx.WID
+		LEFT JOIN T_ADVERT_SJZD_YHGL_HYZT on
+		t_advert_yhjbxx_djxx.yhzt=T_ADVERT_SJZD_YHGL_HYZT.lbdm
+		<where>
+			<include refid="sqlWhere" />
+
+		</where>
+		<include refid="sqlOrder" />
+	</select>
+	<update id="updateByVersion"
+		parameterType="com.pope.advert.entity.yhgl.YhglDjxxInfo">
+		update t_advert_yhjbxx_djxx
+		<set>
+			<if test="yhid != null">
+				YHID = #{yhid,jdbcType=VARCHAR},
+			</if>
+			<if test="dj != null">
+				DJ = #{dj,jdbcType=VARCHAR},
+			</if>
+			<if test="kssj != null">
+				KSSJ = #{kssj,jdbcType=VARCHAR},
+			</if>
+			<if test="jssj != null">
+				JSSJ = #{jssj,jdbcType=VARCHAR},
+			</if>
+			<if test="syts != null">
+				SYTS = #{syts,jdbcType=INTEGER},
+			</if>
+			<if test="zts != null">
+				ZTS = #{zts,jdbcType=INTEGER},
+			</if>
+			<if test="yhzt != null">
+				yhzt = #{yhzt,jdbcType=VARCHAR},
+			</if>
+			version = #{version,jdbcType=INTEGER}+1,
+		</set>
+		where WID = #{wid,jdbcType=VARCHAR}
+		and version =
+		#{version,jdbcType=INTEGER}
+	</update>
+
+</mapper>

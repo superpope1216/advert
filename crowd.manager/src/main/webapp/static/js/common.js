@@ -2,6 +2,56 @@
  * 
  */
 
+
+var DictionaryEnum={
+		T_ADVERT_SJZD_GGXS:1,
+		T_ADVERT_SJZD_XZQH:2,
+		T_ADVERT_SJZD_DST:3,
+		T_ADVERT_SJZD_HY:4,
+		T_ADVERT_SJZD_GGDLFS:5,
+		T_ADVERT_SJZD_LX:6,
+		T_CROWD_SJZD_SDPD:7,
+		T_ADVERT_SJZD_SHZT:8,
+		T_ADVERT_SJZD_DLLM:9,
+		T_ADVERT_SJZD_TBBCCSLX:10,
+		T_ADVERT_SJZD_ZTSJD:11,
+		T_ADVERT_SJZD_GMGGJGPC:12,
+		T_ADVERT_SJZD_GBLX:13,
+		T_ADVERT_SJZD_GBDST:14,
+		T_ADVERT_SJZD_GBDSTPD:15,
+		T_ADVERT_SJZD_BZXX:16,
+		T_ADVERT_SJZD_BZLX:17,
+		T_ADVERT_SJZD_XBMGGLX:18,
+		T_ADVERT_SJZD_BZYS:19,
+		T_ADVERT_SJZD_ZZZYLX:20,
+		T_ADVERT_SJZD_ZZXX:21,
+		T_ADVERT_SJZD_WLGZWZ:22,
+		T_ADVERT_SJZD_GGLX:23,
+		T_ADVERT_SJZD_XMTLX:24,
+		T_ADVERT_SJZD_XMTZY_SZRQ:25,
+		T_ADVERT_SJZD_XMTZY_JYCD:26,
+		T_ADVERT_SJZD_XMTZY_ZYFB:27,
+		T_ADVERT_SJZD_XMTZY_SRZK:28,
+		T_ADVERT_SJZD_COMPANYXZ:29,
+		T_ADVERT_SJZD_COMPANY_NYYE:30,
+		T_ADVERT_SJZD_COMPANY_ZZLX:31,
+		T_ADVERT_SJZD_SJLX:32,
+		T_ADVERT_SJZD_SF:33
+};
+
+
+function toStr(value,replace){
+	var rtuValue="";
+	if(value==undefined|| value==null){
+		rtuValue="";
+	}else{
+		rtuValue=value;
+	}
+	if(rtuValue=="" && replace!=undefined){
+		return replace;
+	}
+	return rtuValue;
+}
 function doSyncGet(url, params, callback) {
 	$.ajax({
 		type : "GET",
@@ -165,61 +215,141 @@ function isNotEmpty(obj){
 	return true;
 }
 
-//DATATABLE
-var DATATABLE_CONSTANT = {  
-        DATA_TABLES : {  
-            DEFAULT_OPTION : { //DataTables初始化选项  
-                language: {  
-                    "sProcessing":   "处理中...",  
-                    "sLengthMenu":   "每页 _MENU_ 项",  
-                    "sZeroRecords":  "没有匹配结果",  
-                    "sInfo":         "当前显示第 _START_ 至 _END_ 项，共 _TOTAL_ 项。",  
-                    "sInfoEmpty":    "当前显示第 0 至 0 项，共 0 项",  
-                    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",  
-                    "sInfoPostFix":  "",  
-                    "sSearch":       "搜索:",  
-                    "sUrl":          "",  
-                    "sEmptyTable":     "表中数据为空",  
-                    "sLoadingRecords": "载入中...",  
-                    "sInfoThousands":  ",",  
-                    "oPaginate": {  
-                        "sFirst":    "首页",  
-                        "sPrevious": "上页",  
-                        "sNext":     "下页",  
-                        "sLast":     "末页",  
-                        "sJump":     "跳转"  
-                    },  
-                    "oAria": {  
-                        "sSortAscending":  ": 以升序排列此列",  
-                        "sSortDescending": ": 以降序排列此列"  
-                    }  
-                },  
-                autoWidth: false,   //禁用自动调整列宽  
-                stripeClasses: ["odd", "even"],//为奇偶行加上样式，兼容不支持CSS伪类的场合  
-                order: [],          //取消默认排序查询,否则复选框一列会出现小箭头  
-                processing: true,  //隐藏加载提示,自行处理  
-                serverSide: true,   //启用服务器端分页  
-                searching: false    //禁用原生搜索  
-            },  
-            COLUMN: {  
-                CHECKBOX: { //复选框单元格  
-                    className: "td-checkbox",  
-                    orderable: false,  
-                    width: "30px",  
-                    data: null,  
-                    render: function (data, type, row, meta) {  
-                        return '<input type="checkbox" class="iCheck">';  
-                    }  
-                }  
-            },  
-            RENDER: {   //常用render可以抽取出来，如日期时间、头像等  
-                ELLIPSIS: function (data, type, row, meta) {  
-                    data = data||"";  
-                    return '<span title="' + data + '">' + data + '</span>';  
-                }  
-            }  
-        }  
-};  
+window.alert=function(msg,title){
+	if(title==undefined ||title=="" ||title==null){
+		title="提示信息";
+	}
+	//resetAlert();
+	return alertify.alert(title,msg).setting({
+	    "label":"关闭",
+		  buttonReverse : false,
+		    buttonFocus  : "ok"
+	}).set('resizable',false);
+};
+
+window.confirm=function(msg,callBack){
+	//resetConfirm();
+		
+	return alertify.confirm("确认信息",msg, function(){
+		if(callBack){
+   		 callBack();
+   	 }
+		}, function(){ 
+			
+		}).setting({
+		    labels : {
+			      ok   : "确认",
+			      cancel : "取消"
+			    },
+			    
+			    buttonReverse : false,
+			    buttonFocus  : "ok"
+		});
+	  
+}
+
+alertify.genericDialog || alertify.dialog('genericDialog',function(){
+    return {
+        main:function(content){
+            this.setContent(content);
+        },
+        setup:function(){
+            return {
+                focus:{
+                    element:function(){
+                        return this.elements.body.querySelector(this.get('selector'));
+                    },
+                    select:true
+                },
+                options:{
+                    basic:true,
+                    maximizable:false,
+                    resizable:false,
+                    padding:false
+                }
+            };
+        },
+        settings:{
+            selector:undefined
+        }
+    };
+});
+function openDialog(content){
+	alertify.genericDialog(content);
+}
+
+function createQueryForm(config,control){
+	
+	if(config){
+		$(control).append("<form id='queryForm' class='queryForm'></form>");
+		$("#queryForm").append("<table>");
+		for(var i=0;i<config.length;i++){
+			var _config=config[i];
+			if(i%3==0){
+				$("#queryForm").append("<tr>");
+			}
+			if(_config.type=="text"){
+				$("#queryForm").append("<td>"+toStr(_config.label,"&nbsp;")+"</td>");
+				$("#queryForm").append("<td><input class='form-control' type='text' placeholder='"+toStr(_config.placeholder)+"' name='"+_config.name+"' style='width:150px;'></td>");
+			}else if(_config.type=="select"){
+				$("#queryForm").append("<td>"+toStr(_config.label,"&nbsp;")+"</td>");
+				$("#queryForm").append("<td><select class='form-control' name='"+_config.name+"' style='width:150px;'><option value=''>--请选择--</option></select></td>");
+				doGet(basePath+"/dictionary/selectList","flag="+_config.table,function(data){
+					if(data &&data.datas){
+						for(var j=0;j<data.datas.length;j++){
+							var _data1=data.datas[j];
+							$("#queryForm [name='"+_config.name+"']").append("<option value='"+_data1.lbdm+"'>"+_data1.lbmc+"</option>");
+						}
+					}
+				});
+			}
+			if(i==config.length-1){
+				$("#queryForm").append("<td><button type='button' class='btn btn-primary btn-sm' id='btnQuery'><i class='fa fa-search'></i> 查询</button></td>");
+			}
+			if((i%3==2) ||(i==config.length-1)){
+				$("#queryForm").append("</tr>");
+			}
+		}
+		$("#queryForm").append("</table>");
+		
+	}
+}
+function createModal(options){
+	var defaultOption={
+			id:"",
+			title:"标题",
+			content:"",
+			btnName:"确定",
+			needBtn:true
+	};
+	var settings = $.extend(defaultOption, options);
+	
+	var html="";
+	html+='<div class="modal fade" id="'+settings.id+'" >';
+	html+='   <div class="modal-dialog modal-lg">';
+	html+='	     <div class="modal-content">';
+	html+='	       <div class="modal-header">';
+	html+='	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+	html+='	        	<span aria-hidden="true">×</span></button>';
+	html+='		        <h4 class="modal-title">'+settings.title+'</h4>';
+	html+='        </div>';
+	html+='        <div class="modal-body">';
+	if(settings.content){
+		html+=settings.content;
+	}
+	html+='        </div>';
+	html+='        <div class="modal-footer">';
+	
+	html+='          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
+	if(settings.needBtn==true){
+		html+='	         <button type="button" class="btn btn-primary" id="btnSh">'+config.btnName+'</button>';
+	}
+    html+='		   </div>';
+    html+='    </div>';
+    html+='	</div>';
+    html+='</div>';
+    return html;
+}
 
 
 

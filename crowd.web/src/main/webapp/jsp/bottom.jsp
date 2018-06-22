@@ -32,12 +32,18 @@
 		<script
 		src="<%=request.getContextPath()%>/statics/plugins/vendor/jQuery-pingfen/js/starScore.js"></script>
 		<script
+		src="<%=request.getContextPath()%>/statics/plugins/ajaxImageUpload/js/upload.js"></script>
+		<script
 		src="<%=request.getContextPath()%>/statics/plugins/vendor/jquery.datastatistics_js/js/jquery.dataStatistics.js"></script>
 		<script  src='<%=request.getContextPath() %>/statics/plugins/vendor/webui-popover/jquery.webui-popover.min.js'></script>
 		<script  src='<%=request.getContextPath() %>/statics/plugins/vendor/echart/echarts.common.min.js'></script>
 		<script  src='<%=request.getContextPath() %>/statics/plugins/vendor/pagination/jquery.pagination.js'></script>
 		<script type="text/javascript" src="<%=request.getContextPath() %>/static/ueditor/ueditor.config.js"></script>
-	    <script type="text/javascript" src="<%=request.getContextPath() %>/static/ueditor/ueditor.all.min.js"></script>
+	    <script type="text/javascript" src="<%=request.getContextPath() %>/static/ueditor/ueditor.all.js"></script>
+	    <script type="text/javascript" src="<%=request.getContextPath() %>/statics/js/static_form.js"></script>
+	    <script type="text/javascript" src="<%=request.getContextPath() %>/statics/plugins/vendor/upload/jquery.form.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/statics/plugins/vendor/upload/imageUploader.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/statics/plugins/vendor/upload/uploaderFile.js"></script>
 		<script src="<%=request.getContextPath()%>/statics/js/common.js"></script>
 <script
 	src="<%=request.getContextPath()%>/statics/plugins/vendor/jquery/seajs.js"></script>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pope.advert.common.code.SjztEnum;
 import com.pope.advert.controller.BaseController;
 import com.pope.advert.entity.dto.PageInfo;
 import com.pope.advert.entity.qyzx.extend.QyzxGgInfoExtend;
@@ -15,7 +16,6 @@ import com.pope.advert.entity.qyzx.extend.QyzxNewsInfoExtend;
 import com.pope.advert.service.dto.DataResult;
 import com.pope.advert.service.qyzx.QyzxGgInfoService;
 import com.pope.advert.service.qyzx.QyzxNewsInfoService;
-import com.wisedu.crowd.common.code.SjztEnum;
 import com.wisedu.crowd.common.util.ConditionUtil;
 
 @Controller
@@ -35,7 +35,7 @@ public class QyzxGgController extends BaseController{
 	public DataResult<List<QyzxGgInfoExtend>> getList(Integer pageNum) throws Exception{
 		QyzxGgInfoExtend queryQyzxGgInfoExtend=new QyzxGgInfoExtend();
 		queryQyzxGgInfoExtend.setShzt(SjztEnum.YTG.getCode());
-		
+		queryQyzxGgInfoExtend.setNeedCompanyInfo(true);
 		return qyzxGgInfoService.selectDisplayByCondition(ConditionUtil.createCondition(queryQyzxGgInfoExtend,new PageInfo(null,pageNum)), this.createCustomOperateLog());
 		
 	}

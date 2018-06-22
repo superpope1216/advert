@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.buy.qg.extend.QgInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.buy.qg.extend.QgInfoExtend" 
+  extends="com.pope.advert.dao.buy.qg.QgInfoMapper.BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_advert_buy_qg.WID, 
+    t_advert_buy_qg.NAME, 
+    t_advert_buy_qg.JG, 
+    t_advert_buy_qg.CONTENT, 
+    t_advert_buy_qg.CJSJ, 
+    t_advert_buy_qg.XGSJ, 
+    t_advert_buy_qg.SHZT, 
+    t_advert_buy_qg.CJIP, 
+    t_advert_buy_qg.REGISTER_ID
+  </sql>
+  <sql id="sqlWhere">
+  	<if test='query!=null'>
+  		<if test='query.wid!=null and query.wid!=""'>
+  			AND t_advert_buy_qg.WID=#{query.wid,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.name!=null and query.name!=""'>
+  			AND t_advert_buy_qg.NAME like concat('%',#{query.name,jdbcType=VARCHAR},'%')
+  		</if>
+  		<if test='query.shzt!=null and query.shzt!=""'>
+  			AND t_advert_buy_qg.SHZT=#{query.shzt,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.registerId!=null and query.registerId!=""'>
+  			AND t_advert_buy_qg.REGISTER_ID=#{query.registerId,jdbcType=VARCHAR}
+  		</if>
+  		<if test='query.companyName!=null and query.companyName!=""'>
+  			AND t_advert_yhjbxx_company.name like concat('%',#{query.companyName,jdbcType=VARCHAR},'%')
+  		</if>
+  	</if>
+  </sql>
+  <sql id="sqlOrder">
+  		ORDER BY
+  		<choose>
+  			<when test="orderBy!=null and orderBy.size>0">
+  				<foreach collection="orderBy" item="item" close=" " open=" " separator=",">
+  					${item}
+				</foreach>
+  			</when>
+  			<otherwise>
+  				t_advert_buy_qg.xgsj desc
+  			</otherwise>
+  		</choose>
+  </sql>
+  <select id="selectByCondition" parameterType="com.pope.advert.entity.dto.QueryCondition"
+  resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"/>
+  	FROM t_advert_buy_qg
+  	<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  	<include refid="sqlOrder"/>
+  </select>
+  <select id="selectDisplayByCondition" parameterType="com.pope.advert.entity.dto.QueryCondition"
+  resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List"/>
+  	,T_ADVERT_SJZD_SHZT.lbmc as shztDisplay
+  	,t_advert_yhjbxx_company.name as companyName
+  	FROM t_advert_buy_qg
+  	LEFT JOIN T_ADVERT_SJZD_SHZT ON T_ADVERT_SJZD_SHZT.LBDM= t_advert_buy_qg.shzt
+  	LEFT JOIN t_advert_yhjbxx_company on t_advert_yhjbxx_company.REGISTER_ID=t_advert_buy_qg.register_id
+  	<where>
+  		<include refid="sqlWhere"/>
+  	</where>
+  	<include refid="sqlOrder"/>
+  </select>
+</mapper>

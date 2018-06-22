@@ -125,18 +125,20 @@
 									method="post" action="" role="form" id="formDlxx">
 									<input type="hidden" name="wid" value="" />
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">新闻标题</label>
+										<label for="firstname" class="col-sm-2 control-label">新闻标题<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-10">
 												<input type="text" class="form-control" name="title"
-													placeholder="请输入代理信息标题"
+													placeholder="请输入新闻标题"
 													data-bv-notempty="true" data-bv-notempty-message="此项不能为空">
 											</div>
 
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="firstname" class="col-sm-2 control-label">新闻内容</label>
+										<label for="firstname" class="col-sm-2 control-label">新闻内容<span
+											style="color: red">*</span></label>
 										<div class="col-sm-10">
 											<div class="col-sm-10">
 												<input type="hidden" name="content">

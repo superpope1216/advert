@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pope.advert.dao.cwgl.extend.CwglCzjlInfoExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.pope.advert.entity.cwgl.extend.CwglCzjlInfoExtend"
+  extends="com.pope.advert.dao.cwgl.CwglCzjlInfoMapper.BaseResultMap" >
+  	 <result column="zfztDisplay" property="zfztDisplay" jdbcType="VARCHAR" />
+  	 <result column="djDisplay" property="djDisplay" jdbcType="VARCHAR" />
+  	 <result column="yxj" property="yxj" jdbcType="VARCHAR" />
+  	 <result column="companyName" property="companyName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+   t_advert_cwgl_czjl.WID, 
+   t_advert_cwgl_czjl.YHID, 
+   t_advert_cwgl_czjl.DJ, 
+   t_advert_cwgl_czjl.KSSJ, 
+   t_advert_cwgl_czjl.JSSJ, 
+   t_advert_cwgl_czjl.CJSJ, 
+   t_advert_cwgl_czjl.IP, 
+   t_advert_cwgl_czjl.ZFZT, 
+   t_advert_cwgl_czjl.ZFBBH, 
+   t_advert_cwgl_czjl.DDBH, 
+   t_advert_cwgl_czjl.NX, 
+   t_advert_cwgl_czjl.JE
+  </sql>
+  <sql id="Base_Display_Column_List">
+  	T_ADVERT_SJZD_CwGL_CZZT.LBMC AS zfztDisplay,
+  	t_advert_cwgl_djxx.name as djDisplay,
+  	t_advert_cwgl_djxx.yxjb as yxj,
+  	t_advert_yhjbxx_company.NAME AS companyName
+  	
+  </sql>
+  <sql id="sqlWhere">
+		<if test="query!=null">
+			<if test='query.wid!=null and query.wid!=""'>
+				AND
+				t_advert_cwgl_czjl.WID=#{query.wid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.yhid!=null and query.yhid!=""'>
+				AND
+				t_advert_cwgl_czjl.YHID=#{query.yhid,jdbcType=VARCHAR}
+			</if>
+			<if test='query.ddbh!=null and query.ddbh!=""'>
+				AND t_advert_cwgl_czjl.DDBH=#{query.ddbh,jdbcType=VARCHAR}
+			</if>
+			<if test='query.zfzt!=null and query.zfzt!=""'>
+				AND t_advert_cwgl_czjl.ZFZT=#{query.zfzt,jdbcType=VARCHAR}
+			</if>
+			<if test='query.companyName!=null and query.companyName!=""'>
+				AND t_advert_cwgl_czjl.companyName LIKE CONCAT('%',#{query.companyName,jdbcType=VARCHAR},'%')
+			</if>
+		</if>
+	</sql>
+	<sql id="sqlOrder">
+		order by
+		<choose>
+			<when test="orderBy!=null">
+				<foreach collection="orderBy" item="item" close=" " open=" "
+					separator=",">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				t_advert_cwgl_czjl.JSSJ desc
+			</otherwise>
+		</choose>
+	</sql>
+	<select id="selectByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition" >
+		select
+		<include refid="Base_Column_List" />
+		from t_advert_cwgl_czjl
+		<where>
+			<include refid="sqlWhere" />
+
+		</where>
+		<include refid="sqlOrder" />
+	</select>
+	
+	<select id="selectDisplayByCondition" resultMap="BaseResultMap"
+		parameterType="com.pope.advert.entity.dto.QueryCondition" >
+		select
+		<include refid="Base_Column_List" />
+		,<include refid="Base_Display_Column_List" />
+		from t_advert_cwgl_czjl
+		LEFT JOIN T_ADVERT_SJZD_CwGL_CZZT on T_ADVERT_SJZD_CwGL_CZZT.lbdm=t_advert_cwgl_czjl.ZFZT
+		LEFT JOIN t_advert_cwgl_djxx on t_advert_cwgl_djxx.WID=t_advert_cwgl_czjl.dj
+		LEFT JOIN t_advert_yhjbxx_company ON t_advert_yhjbxx_company.REGISTER_ID=t_advert_cwgl_czjl.YHID
+		<where>
+			<include refid="sqlWhere" />
+		</where>
+		<include refid="sqlOrder" />
+	</select>
+</mapper>

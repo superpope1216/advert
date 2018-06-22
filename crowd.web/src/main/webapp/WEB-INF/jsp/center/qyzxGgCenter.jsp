@@ -91,6 +91,18 @@
 	<header>
 		<%@include file="/jsp/header.jsp"%>
 	</header>
+	<div class="met-position  pattern-show">
+		<div class="container">
+			<div class="row">
+			<ol class="breadcrumb">
+					<li><a href="<%=request.getContextPath()%>/index"
+						title="首页"> <i class="icon wb-home" aria-hidden="true"></i>首页
+					</a></li>
+					<li><a href="<%=request.getContextPath()%>/qyzxGg/index" title="公告信息">公告信息</a></li>
+				</ol>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<div class="col-xs-12">
 			<div class="panel m-b-0" boxmh-mh style="margin-top: 20px; ">
@@ -129,6 +141,6 @@
 		<script
 			src="<%=request.getContextPath()%>/statics/pagejs/supplyview/index.js"></script>
 		<script
-		src="<%=request.getContextPath()%>/statics/pagejs/center/qyzxNewsCenter.js"></script>
+		src="<%=request.getContextPath()%>/statics/pagejs/center/qyzxGgCenter.js"></script>
 </body>
 </html>

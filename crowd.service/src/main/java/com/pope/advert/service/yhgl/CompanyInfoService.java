@@ -2,12 +2,12 @@ package com.pope.advert.service.yhgl;
 
 import java.util.List;
 
+import com.pope.advert.common.exception.ServiceException;
 import com.pope.advert.entity.dto.QueryCondition;
 import com.pope.advert.entity.log.CustomOperateLog;
 import com.pope.advert.entity.yhgl.CompanyInfo;
 import com.pope.advert.entity.yhgl.extend.CompanyInfoExtend;
 import com.pope.advert.service.dto.DataResult;
-import com.wisedu.crowd.common.exception.ServiceException;
 
 public interface CompanyInfoService {
 	 /**
@@ -37,4 +37,7 @@ public interface CompanyInfoService {
    DataResult<CompanyInfo> saveCompanyInfo(CompanyInfo companyInfo,CustomOperateLog log) throws ServiceException;
    
    DataResult<List<CompanyInfoExtend>> selectByCondition(QueryCondition<CompanyInfoExtend> records,CustomOperateLog log) throws ServiceException;
+   
+   
+   DataResult<Integer> shSupply(String wid,String state,CustomOperateLog log) throws ServiceException;
 }

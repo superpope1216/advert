@@ -91,11 +91,23 @@
 	<header>
 		<%@include file="/jsp/header.jsp"%>
 	</header>
+	<div class="met-position  pattern-show">
+		<div class="container">
+			<div class="row">
+				<ol class="breadcrumb">
+					<li><a href="<%=request.getContextPath()%>/index"
+						title="首页"> <i class="icon wb-home" aria-hidden="true"></i>首页
+					</a></li>
+					<li><a href="<%=request.getContextPath()%>/sjglCenter/index" title="商机信息">商机信息</a></li>
+				</ol>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<div class="col-xs-12">
 			<div class="panel" boxmh-mh>
 				<div class="panel-body shop-order"
-					style="margin-top: 20px; padding-top: 10px; padding-bottom: 10px;">
+					style=" margin-top:5px;padding-top: 10px; padding-bottom: 10px;">
 
 					<div class="column-side ">
 						<div class="container mobile-not-padding">
@@ -163,6 +175,7 @@
 		</button>
 		<script>
 			var jsonurl = "";
+			var sjlx="${sjlx2}";
 		</script>
 
 		<%@ include file="/jsp/bottom.jsp"%>
